@@ -1,0 +1,220 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Basic HTML5 Template</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="A Basic HTML5 Template">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+  <meta property="og:description" content="A simple HTML5 Template for new projects.">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="additionfuncs.js"></script>
+  <script src="multfuncs.js"></script>
+  <script src="subtractionfuncs.js"></script>
+  <script src="trigfuncs.js"></script>
+  <script src="celctoffuncs.js"></script>
+  <script src="monthnumfuncs.js"></script>
+  <script src="themes.js"></script>
+  <script src="script.js"></script>
+  <script src="jquery.min.js"></script>
+
+</head>
+
+<body onload="init()">
+  <!-- your content here... -->
+
+  <div id="iconcontainer">
+    <img src="icon.png" id="iconlogo"></img>
+  </div>
+  <div id="options">
+    <div id = "optionsinner">
+      <div class="option" id="timeoption">
+
+        <p class="optiontext">Time</p>
+        <div class="buttonrow">
+          <button class="zulubutton optionbutton" id="timeselected" onclick="settime(this,15000)">15s</button>
+          <button class="zulubutton optionbutton" onclick="settime(this,60000)">60s</button>
+          <button class="zulubutton optionbutton" onclick="settime(this,120000)">120s</button>
+        </div>
+      </div>
+
+      <div class="option" id="difficultyoption">
+
+        <p class="optiontext">Difficulty</p>
+        <div class="buttonrow">
+          <button class="zulubutton difficultyselected optionbutton" id="easybutton" onclick="setdifficulty(0)">easy</button>
+          <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
+          <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+        </div>
+      </div>
+
+      <div class="option" id="modeoption">
+        <p class="optiontext">Mode</p>
+        <div class="buttonrow">
+          <button class="zulubutton optionbutton" id="modeselectbutton" onclick="showmodeselect()">addition</button>
+        </div>
+      </div>
+
+
+      <div class="option" id="themeoption">
+        <p class="optiontext">Theme</p>
+        <div class="buttonrow">
+          <button class="zulubutton optionbutton" id="themeselectbutton" onclick="showthemeselect()">default</button>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div id="equations">
+    <div id="additionequation">
+
+      <canvas class="timershow" style='left: 0px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="additionproblems">
+          </div>
+        </div>
+        <input class="numinput" id="additioninput" oninput="additiontype(event)" onkeypress="additionenter(event)"></input>
+      </div>
+      <button id="restarttest" class="zulubutton" onclick="additioninit()">↻</button>
+    </div>
+
+    <div id="multequation">
+
+      <canvas class="timershow" style='left: 0px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="multproblems">
+          </div>
+        </div>
+        <input class="numinput" id="multinput" oninput="multtype(event)" onkeypress="multenter(event)"></input>
+      </div>
+      <button id="restarttest" class="zulubutton" onclick="multinit()">↻</button>
+    </div>
+
+
+    <div id="subtractionequation">
+
+      <canvas class="timershow" style='left: 0px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="subtractionproblems">
+          </div>
+        </div>
+        <input class="numinput" id="subtractioninput" oninput="subtractiontype(event)" onkeypress="subtractionenter(event)"></input>
+      </div>
+
+      <button id="restarttest" class="zulubutton" onclick="subtractioninit()">↻</button>
+
+    </div>
+
+    <div id="trigequation">
+
+      <canvas class="timershow" style='left: -30px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="trigproblems">
+          </div>
+        </div>
+        <div>
+          <input class="numinput" id="triginput" oninput="trigtype(event)" onkeypress="trigenter(event)"></input>
+          <p class="inputexample">"inf"<br>"-inf"<br>"-0.5"<br>etc.</p>
+        </div>
+      </div>
+
+      <button id="restarttest" class="zulubutton" onclick="triginit()">↻</button>
+
+      <p class="inputexample">"inf"<br>"-inf"<br>"-0.5"<br>etc.</p>
+
+    </div>
+
+    <div id="celctofequation">
+
+      <canvas class="timershow" style='left: 40px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="celctofproblems">
+          </div>
+        </div>
+        <div>
+          <input class="numinput" id="celctofinput" oninput="celctoftype(event)" onkeypress="celctofenter(event)"></input>
+          <p class="inputexample">"-23.3f"<br>"53f"<br>etc.</p>
+        </div>
+      </div>
+      <button id="restarttest" class="zulubutton" onclick="celctofinit()">↻</button>
+    </div>
+
+    <div id="monthnumequation">
+
+      <canvas class="timershow" style='left: -15px; top:90px; opacity: 0.2'></canvas>
+
+      <div id="problemandinput">
+        <div id="problemscontainer">
+          <div class="problems" id="monthnumproblems">
+          </div>
+        </div>
+        <div>
+          <input class="numinput" id="monthnuminput" oninput="monthnumtype(event)" onkeypress="monthnumenter(event)"></input>
+          <p class="inputexample">"1"<br>"12"<br>etc.</p>
+        </div>
+      </div>
+      <button id="restarttest" class="zulubutton" onclick="monthnuminit()">↻</button>
+    </div>
+
+    <div id="finishscreen">
+
+      <div>
+        <p id="finishcpm" class="finishtext">14 cpm</p>
+        <p id="finishrawcpm" class="finishtext">14 raw cpm</p>
+        <p id="finishcorrect" class="finishtext">23 correct</p>
+        <p id="finishwrong" class="finishtext">5 wrong</p>
+        <p id="finishtime" class="finishtext">time: 60 seconds</p>
+        <p id="finishmode" class="finishtext">mode: addition</p>
+        <p id="finishdifficulty" class="finishtext">difficulty: easy</p>
+        <button id="nexttest" class="zulubutton" onclick="init()">Next test</button>
+      </div>
+
+      <canvas id="cpmchart"></canvas>
+
+
+    </div>
+    </div>
+
+  <div id = "modecontainer" onclick="removemodefocus(event)" style="display:none">
+    <div id = "modeselect">
+
+
+    </div>
+  </div>
+
+  <div id = "themecontainer" onclick="removethemefocus(event)" style="display:none">
+    <div id = "themeselect">
+
+
+    </div>
+  </div>
+
+</body>
+</html>

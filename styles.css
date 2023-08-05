@@ -1,0 +1,407 @@
+:root{
+  --background: rgb(0,0,0);
+  --button_background: rgb(35,35,35);
+  --button_border: rgb(50,50,50);
+  --window_background: rgb(20,20,20);
+  --window_border: rgb(30,30,30);
+  --text_color: rgb(255,255,255);
+  --text_select_color: rgb(255,0,0);
+  --font_family: "Monospace";
+}
+
+body{
+  background-color: var(--background);
+  padding-bottom: 50px;
+}
+
+#iconlogo{
+  mask-image: linear-gradient(rgba(0, 255, 0, 1.0), transparent);
+  background-color: var(--text_select_color);
+}
+
+
+.problem{
+  font-size: 40px;
+  color: var(--text_color);
+  opacity: 0.5;
+  height: 0px;
+  font-family: var(--font_family);
+  margin-top: 0px;
+  text-align: right;
+}
+
+.optiontext{
+  color: var(--text_color);
+  text-align: center;
+  font-size: 20px;
+  margin-top: 5px;
+  font-family: var( --font_family);
+}
+
+#options{
+  display: flex;
+  justify-content: space-around;
+}
+
+#optionsinner{
+  display: flex;
+}
+
+.difficultyselected{
+  color: var(--text_select_color) !important;
+}
+
+#equations{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#modeselectbutton{
+  color: var(--text_select_color);
+}
+
+
+#modecontainer{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
+}
+
+#modeselect{
+  position: relative;
+  width: 500px;
+  height: 600px;
+  overflow-y: scroll;
+  background: var(--window_background);
+  border-radius: 5px;
+  border: solid 5px var(--window_border);
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  position: relative;
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: -1;
+}
+
+
+#themecontainer{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
+}
+
+#themeselect{
+  position: relative;
+  width: 500px;
+  height: 600px;
+  overflow-y: scroll;
+  background: var(--window_background);
+  border-radius: 5px;
+  border: solid 5px var(--window_border);
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  position: relative;
+
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.inputexample{
+  position: absolute;
+  font-family: var( --font_family);
+  color: var(--text_color);
+  font-size: 20px;
+  opacity: 0.25;
+  top: 140px;
+  left: 300px;
+}
+
+.timershow{
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  opacity: 0.7;
+
+}
+
+.modebutton{
+  width: 100% !important;
+  height: 30px;
+  font-size: 20px !important;
+  color: var(--text_color);
+}
+
+.themebutton{
+  width: 100% !important;
+  height: 30px;
+  font-size: 20px !important;
+}
+
+
+#mainproblem{
+  opacity: 1 !important;
+  position: relative;
+}
+
+#problemandinput{
+  width: 500px;
+  display: flex;
+}
+
+#problemtruecontainer{
+  position: relative;
+  top: -267px;
+  border: solid 1px red;
+}
+
+
+#problemscontainer{
+  position: relative;
+  top: 0px;
+  width: 300px;
+  height: 290px;
+  padding-top: 0px;
+  mask-size: 200% 100%;
+  mask-image: linear-gradient(to bottom, black, transparent 100%);
+  padding-top: 100px;
+  overflow-y: hidden;
+}
+
+
+.zulubutton{
+  all: unset;
+  background: var(--button_background);
+  border: solid 1px var(--button_border);
+  text-align: center;
+  user-select: none;
+  opacity: 0.6;
+  font-family: var( --font_family);
+  color: var(--text_color);
+  padding: 10px;
+}
+
+.zulubutton:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.zulubutton:active{
+  opacity: 1;
+}
+
+.zulubutton:focus{
+  opacity: 1
+}
+
+.zulubutton:disabled{
+  opacity: 0.2 !important;
+}
+
+
+#restarttest{
+  position: relative;
+  top: 100px;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  padding: 0px;
+}
+
+
+
+#iconcontainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#iconlogo{
+  width: 400px;
+}
+
+#nexttest{
+  width: 30px;
+  height: 30px;
+}
+
+#finishscreen{
+  width: 700px;
+  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 20px;
+  background: var(--window_background);
+  border: solid 2px var(--window_border);
+  display: flex;
+}
+
+#cpmchart{
+  position: relative;
+  max-width: 500px;
+  max-height: 250px;
+  left: 45px;
+  top: 60px;
+}
+
+#finishcpm{
+  font-size: 40px;
+  color: var(--text_color);
+  margin-bottom: 0px;
+}
+
+#finishcorrect{
+  font-size: 30px;
+  color: green;
+  margin-bottom: 0px;
+  margin-top: 8px
+}
+
+#finishwrong{
+  font-size: 30px;
+  color: red;
+  margin-top: 0px;
+  margin-bottom: 8px
+}
+
+#finishtime{
+  color: var(--text_color);
+  margin: 0px;
+}
+
+#finishrawcpm{
+  margin-top: 0px;
+  color: var(--text_color);
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+#finishmode{
+  margin: 0px;
+  color: var(--text_color);
+}
+
+#finishdifficulty{
+  margin-top: 0px;
+  color: var(--text_color);
+}
+
+#nexttest{
+  width: 100px;
+}
+
+
+.finishtext{
+  font-family: var( --font_family);
+}
+
+
+.timebutton{
+  width: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#timeselected{
+  color: var(--text_select_color);
+}
+
+
+
+.modeselected{
+  color: var(--text_select_color);
+}
+
+
+.option{
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  background: var(--window_background);
+  border-radius: 10px;
+  border: solid 2px var(--window_border)
+
+
+}
+
+.optionbutton{
+  margin: 5px;
+  font-size: 20px;
+}
+
+.buttonrow{
+  display: flex;
+  justify-content: space-around;
+}
+
+.option{
+  margin: 10px;
+}
+
+.problems{
+  position: absolute;
+  right: 0px;
+  padding-top: 100px;
+}
+
+.equation{
+  position: relative;
+  top: 0px;
+  display:flex;
+  width: 600px;
+  justify-content: space-around;
+}
+
+input{
+  all: unset;
+}
+
+.numinput{
+  position: relative;
+  top: 100px;
+  width: 200px;
+  font-family: var( --font_family);
+  font-size: 40px;
+  height: 50px;
+  background: var(--button_background);
+  border: solid 1px var(--button_border);
+  color: gray;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+.numinput:hover{
+  opacity: 0.8;
+}
+
+.numinput:focus{
+  opacity: 1;
+}
+
+
+
+.wronganswer{
+  color: red;
+}
+
+.rightanswer{
+  color: green;
+}
