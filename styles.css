@@ -15,7 +15,7 @@ body{
 }
 
 #iconlogo{
-  mask-image: linear-gradient(rgba(0, 255, 0, 1.0), transparent);
+  -webkit-mask-image: linear-gradient(rgba(0, 255, 0, 1.0), transparent);
   background-color: var(--text_select_color);
 }
 
@@ -175,7 +175,7 @@ body{
   height: 290px;
   padding-top: 0px;
   mask-size: 200% 100%;
-  mask-image: linear-gradient(to bottom, black, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 100%);
   padding-top: 100px;
   overflow-y: hidden;
 }
