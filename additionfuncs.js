@@ -65,6 +65,7 @@ function addaddition(main=false,setproblem=null,difficulty=0){
   let problem = document.createElement("p");
   problem.innerHTML = num1 + "+" + num2 + " " + "="
   problem.classList.add("problem");
+  
   if(main) problem.id = "mainproblem"
 
   let problems = document.getElementById("additionproblems");

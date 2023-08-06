@@ -1,4 +1,4 @@
-function validateanswer(e, validater, addproblem, getanswer, inputid, problemid, press=false){
+function validateanswer(e, validater, addproblem, getanswer, inputid, problemid, press=false, scrollamount=40){
 
     if(press && e.key != "Enter") return;
     if(press) console.log("YAA");
@@ -52,13 +52,16 @@ function validateanswer(e, validater, addproblem, getanswer, inputid, problemid,
       $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
     }, 500)
 
+
+    let oldheight = problems.children[mainproblemindex].getBoundingClientRect().height
+
     problems.children[mainproblemindex].id = "";
     problems.children[mainproblemindex+1].id = "mainproblem";
 
 
     let top = parseInt(window.getComputedStyle(problems).top);
 
-    top -= 40
+    top -= oldheight
 
     $(problems).animate({ top: top + 'px' }, {duration: 0});
 

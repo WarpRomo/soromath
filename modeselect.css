@@ -11,6 +11,7 @@
   height: 100%;
   background: rgba(0,0,0,0.2);
   backdrop-filter: blur(3px);
+  z-index: 2
 }
 
 #modeselect{
@@ -26,7 +27,6 @@
   top: 10%;
   margin-left: auto;
   margin-right: auto;
-  z-index: -1;
 }
 
 .modeselected{

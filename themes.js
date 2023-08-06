@@ -19,9 +19,9 @@ let themes = {
   "matrix": {
     background: 'rgb(0,0,0)',
     button_background: 'rgb(35,35,35)',
-    button_border: 'rgb(50,50,50)',
+    button_border: 'rgb(50,60,50)',
     window_background: 'rgb(20,20,20)',
-    window_border: 'rgb(30,30,30)',
+    window_border: 'rgb(30,40,30)',
     text_color: 'rgb(0,255,0)',
     text_select_color: 'rgb(255,0,0)',
     display_color: 'rgb(0,255,0)',

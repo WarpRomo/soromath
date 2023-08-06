@@ -30,7 +30,7 @@ function triginit(){
 
 
   for(var i = 0; i < 20; i++){
-    addtrig(i==0, (i==0 ? ["sin","0"] : null));
+    addtrig(i==0, (i==0 ? ["sin",[0]] : null));
   }
 
 }
@@ -38,7 +38,7 @@ function triginit(){
 function addtrig(main=false,setproblem=null,difficulty=0){
 
   let funcs = ["sin","cos","tan"];
-  let angles = ["0.5pi", "1pi", "1.5pi"]
+  let angles = [[0],[1,2],[1],[3,2],[1,6],[1,3],[2,3],[5,6],[7,6],[4,3],[5,3],[11,6]]
 
   let func = funcs[Math.floor(Math.random() * funcs.length)];
   let angle = angles[Math.floor(Math.random() * angles.length)];
@@ -52,13 +52,31 @@ function addtrig(main=false,setproblem=null,difficulty=0){
 
 
   let problem = document.createElement("p");
-  problem.innerHTML = `${func}(${angle})`;
+
+  if(angle.length == 2){
+    problem.innerHTML = `\\[\\${func}(\\frac{${angle[0]}{\\pi}}{${angle[1]}})\\]`;
+  }
+  if(angle.length == 1){
+    problem.innerHTML = `\\[\\${func}(${angle[0]}{\\pi})\\]`;
+  }
+
   problem.classList.add("problem");
+  problem.classList.add("trigproblem");
+
   if(main) problem.id = "mainproblem"
 
   let problems = document.getElementById("trigproblems");
   problems.appendChild(problem);
 
+
+
+
+  MathJax.Hub.Config({
+    displayAlign: "right",
+    displayIndent: "0em"
+  })
+  MathJax.Hub.Typeset(problem);
+  
 }
 
 function trigtype(e){
@@ -80,10 +98,9 @@ function trigtype(e){
 
 function triganswer(problem){
 
-  let constant = problem[1].replace("pi", "*Math.PI")
+  let constant = (problem[1][0] / (problem[1].length > 1 ? problem[1][1] : 1)) * Math.PI;
 
   console.log(`Math.${problem[0]}(${constant})`);
-
   let answer = eval(`Math.${problem[0]}(${constant})`);
 
   console.log("le answer", answer);
@@ -124,6 +141,6 @@ function trigvalidate(answer, input){
 
 function trigenter(e, press=false){
 
-  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems", press);
+  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems", press, scrollamount=100);
 
 }

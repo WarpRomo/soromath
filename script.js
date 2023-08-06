@@ -342,19 +342,24 @@ function settimer(){
       let timeportion = ((new Date().getTime()) - starttime) / totaltime;
 
       ctx.beginPath();
+      ctx.arc(60, 60, 50, 0, 2 * Math.PI);
+      ctx.fillStyle = themes[currenttheme].background;
+      ctx.fill();
+
+      ctx.beginPath();
       ctx.arc(60, 60, 50, 0, 2 * Math.PI * timeportion);
 
       ctx.lineTo(60, 60)
       ctx.moveTo(60, 60)
       ctx.lineTo(110, 60)
 
-      ctx.fillStyle = "white";
+      ctx.fillStyle = themes[currenttheme].text_color;
       ctx.fill();
 
       ctx.beginPath()
       ctx.arc(60, 60, 50, 0, 2 * Math.PI);
       ctx.lineWidth = 5
-      ctx.strokeStyle = "white";
+      ctx.strokeStyle = themes[currenttheme].text_color;
       ctx.stroke();
 
 
