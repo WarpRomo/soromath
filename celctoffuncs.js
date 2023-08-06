@@ -96,6 +96,6 @@ function celctofvalidate(answer, inputnumber){
   return answer==parseFloat(inputnumber);
 }
 
-function celctofenter(e){
-  validateanswer(e, celctofvalidate, addcelctof, celctofanswer, "celctofinput", "celctofproblems");
+function celctofenter(e, press=false){
+  validateanswer(e, celctofvalidate, addcelctof, celctofanswer, "celctofinput", "celctofproblems", press);
 }

@@ -97,6 +97,6 @@ function divisionvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function divisionenter(e){
-  validateanswer(e, divisionvalidate, adddivision, divisionanswer, "divisioninput", "divisionproblems");
+function divisionenter(e, press=false){
+  validateanswer(e, divisionvalidate, adddivision, divisionanswer, "divisioninput", "divisionproblems", press);
 }

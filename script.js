@@ -86,6 +86,9 @@ function restarttest(){
 
   let input = document.getElementsByClassName("maininput")[0];
 
+  cpmtrack = [];
+  rawcpmtrack = [];
+
   input.focus();
 
 }
@@ -468,7 +471,7 @@ function makechart(){
   for(var i = 0; i < cpmbuckets.length; i++){
 
     overallcumulative += cpmbuckets[i];
-    overallcpmbuckets[i] = (60*overallcumulative / ((i+1) * timeinterval));
+    overallcpmbuckets[i] = Math.floor(60*overallcumulative / ((i+1) * timeinterval));
 
   }
 

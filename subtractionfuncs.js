@@ -95,6 +95,6 @@ function subtractionvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function subtractionenter(e){
-  validateanswer(e, subtractionvalidate, addsubtraction, subtractionanswer, "subtractioninput", "subtractionproblems");
+function subtractionenter(e, press=false){
+  validateanswer(e, subtractionvalidate, addsubtraction, subtractionanswer, "subtractioninput", "subtractionproblems", press);
 }

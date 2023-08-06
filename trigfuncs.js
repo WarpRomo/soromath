@@ -122,8 +122,8 @@ function trigvalidate(answer, input){
 
 }
 
-function trigenter(e){
+function trigenter(e, press=false){
 
-  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems");
+  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems", press);
 
 }

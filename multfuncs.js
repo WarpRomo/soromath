@@ -97,6 +97,6 @@ function multvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function multenter(e){
-  validateanswer(e, multvalidate, addmult, multanswer, "multinput", "multproblems");
+function multenter(e, press=false){
+  validateanswer(e, multvalidate, addmult, multanswer, "multinput", "multproblems", press);
 }

@@ -1,9 +1,7 @@
-function validateanswer(e, validater, addproblem, getanswer, inputid, problemid){
+function validateanswer(e, validater, addproblem, getanswer, inputid, problemid, press=false){
 
-    console.log(e.key);
-
-
-
+    if(press && e.key != "Enter") return;
+    if(press) console.log("YAA");
 
     let input = document.getElementById(inputid)
     let problems = document.getElementById(problemid);
@@ -24,10 +22,6 @@ function validateanswer(e, validater, addproblem, getanswer, inputid, problemid)
     let problem = problemlist[problemindex]
     let answer = getanswer(problem);
 
-    console.log(answer, inputnumber, getanswer)
-
-    console.log("yo");
-
     let correct = validater(answer, inputnumber);
 
 
@@ -38,12 +32,11 @@ function validateanswer(e, validater, addproblem, getanswer, inputid, problemid)
       starttest();
     }
 
-
-
     if(correct){
       problems.children[mainproblemindex].classList.add("rightanswer");
       problems.children[mainproblemindex].classList.add("completedproblem");
       stats[0]++;
+      console.log("GO", cpmtrack.length);
       problemcomplete(true)
     }
     else{

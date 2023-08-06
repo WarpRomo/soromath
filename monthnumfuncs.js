@@ -84,6 +84,6 @@ function monthnumvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function monthnumenter(e){
-  validateanswer(e, monthnumvalidate, addmonthnum, monthnumanswer, "monthnuminput", "monthnumproblems");
+function monthnumenter(e, press=false){
+  validateanswer(e, monthnumvalidate, addmonthnum, monthnumanswer, "monthnuminput", "monthnumproblems", press);
 }

@@ -87,12 +87,10 @@ function additiontype(e){
   input.value  = nonums;
 
 
+
 }
 
 function additionanswer(problem){
-  console.log("HERE!");
-  console.log(problem);
-
     return problem[0]+problem[1];
 }
 
@@ -100,6 +98,6 @@ function additionvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function additionenter(e){
-  validateanswer(e, additionvalidate, addaddition, additionanswer, "additioninput", "additionproblems");
+function additionenter(e, press=false){
+  validateanswer(e, additionvalidate, addaddition, additionanswer, "additioninput", "additionproblems", press);
 }
