@@ -1,34 +1,6 @@
 function monthnuminit(){
 
-
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
-
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
-
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("monthnuminput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("monthnuminput").classList.add("maininput");
-
-
-  document.getElementById("monthnumproblems").style.top = "0px";
-  document.getElementById("monthnuminput").value = "";
-
-  let currentproblems = document.getElementsByClassName("problem");
-
-  while(currentproblems.length > 0){
-    currentproblems[0].remove();
-  }
-
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   for(var i = 0; i < 20; i++){
     addmonthnum(i==0, (i==0 ? "september" : null));
@@ -54,14 +26,14 @@ function addmonthnum(main=false,setproblem=null){
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("monthnumproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
 
 }
 
 function monthnumtype(e){
 
-  let input = document.getElementById("monthnuminput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "0123456789"
@@ -85,5 +57,5 @@ function monthnumvalidate(answer, inputnumber){
 }
 
 function monthnumenter(e, press=false){
-  validateanswer(e, monthnumvalidate, addmonthnum, monthnumanswer, "monthnuminput", "monthnumproblems", press);
+  validateanswer(e, monthnumvalidate, addmonthnum, monthnumanswer, press);
 }

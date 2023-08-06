@@ -1,6 +1,5 @@
 function triginit(){
 
-
   stats = [0,0];
   problemindex = 0;
   problemlist = [];
@@ -11,16 +10,7 @@ function triginit(){
     testcheckend = null;
   }
 
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("triginput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("triginput").classList.add("maininput");
-
-  document.getElementById("trigproblems").style.top = "0px";
-  document.getElementById("triginput").value = "";
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   let currentproblems = document.getElementsByClassName("problem");
 
@@ -65,10 +55,8 @@ function addtrig(main=false,setproblem=null,difficulty=0){
 
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("trigproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
-
-
 
 
   MathJax.Hub.Config({
@@ -76,12 +64,12 @@ function addtrig(main=false,setproblem=null,difficulty=0){
     displayIndent: "0em"
   })
   MathJax.Hub.Typeset(problem);
-  
+
 }
 
 function trigtype(e){
 
-  let input = document.getElementById("triginput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "-0123456789sqrt()./inf"
@@ -141,6 +129,6 @@ function trigvalidate(answer, input){
 
 function trigenter(e, press=false){
 
-  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems", press, scrollamount=100);
+  validateanswer(e, trigvalidate, addtrig, triganswer, press, scrollamount=100);
 
 }

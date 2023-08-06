@@ -1,33 +1,6 @@
 function multinit(){
 
-
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
-
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
-
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("multinput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("multinput").classList.add("maininput");
-
-  document.getElementById("multproblems").style.top = "0px";
-  document.getElementById("multinput").value = "";
-
-  let currentproblems = document.getElementsByClassName("problem");
-
-  while(currentproblems.length > 0){
-    currentproblems[0].remove();
-  }
-
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   for(var i = 0; i < 20; i++){
     addmult(i==0, (i==0 ? [0,0] : null), currentdifficulty);
@@ -67,14 +40,14 @@ function addmult(main=false,setproblem=null,difficulty=0){
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("multproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
 
 }
 
 function multtype(e){
 
-  let input = document.getElementById("multinput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "0123456789"
@@ -98,5 +71,5 @@ function multvalidate(answer, inputnumber){
 }
 
 function multenter(e, press=false){
-  validateanswer(e, multvalidate, addmult, multanswer, "multinput", "multproblems", press);
+  validateanswer(e, multvalidate, addmult, multanswer, press);
 }

@@ -13,6 +13,7 @@ body{
   background-color: var(--background);
   padding-bottom: 50px;
   margin: 0;
+  transition: opacity 0.2s;
 }
 
 #iconlogo{

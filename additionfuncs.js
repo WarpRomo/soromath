@@ -1,33 +1,6 @@
 function additioninit(){
 
-
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
-
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
-
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("additioninput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("additioninput").classList.add("maininput");
-
-  document.getElementById("additionproblems").style.top = "0px";
-  document.getElementById("additioninput").value = "";
-
-  let currentproblems = document.getElementsByClassName("problem");
-
-  while(currentproblems.length > 0){
-    currentproblems[0].remove();
-  }
-
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   for(var i = 0; i < 20; i++){
     addaddition(i==0, (i==0 ? [0,0] : null), currentdifficulty);
@@ -65,17 +38,17 @@ function addaddition(main=false,setproblem=null,difficulty=0){
   let problem = document.createElement("p");
   problem.innerHTML = num1 + "+" + num2 + " " + "="
   problem.classList.add("problem");
-  
+
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("additionproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
 
 }
 
 function additiontype(e){
 
-  let input = document.getElementById("additioninput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "0123456789"
@@ -86,8 +59,6 @@ function additiontype(e){
   }
 
   input.value  = nonums;
-
-
 
 }
 
@@ -100,5 +71,5 @@ function additionvalidate(answer, inputnumber){
 }
 
 function additionenter(e, press=false){
-  validateanswer(e, additionvalidate, addaddition, additionanswer, "additioninput", "additionproblems", press);
+  validateanswer(e, additionvalidate, addaddition, additionanswer, press);
 }

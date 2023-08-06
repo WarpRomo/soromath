@@ -1,33 +1,6 @@
 function divisioninit(){
 
-
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
-
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
-
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("divisioninput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("divisioninput").classList.add("maininput");
-
-  document.getElementById("divisionproblems").style.top = "0px";
-  document.getElementById("divisioninput").value = "";
-
-  let currentproblems = document.getElementsByClassName("problem");
-
-  while(currentproblems.length > 0){
-    currentproblems[0].remove();
-  }
-
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   for(var i = 0; i < 20; i++){
     adddivision(i==0, (i==0 ? [0,1] : null), currentdifficulty);
@@ -67,14 +40,14 @@ function adddivision(main=false,setproblem=null,difficulty=0){
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("divisionproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
 
 }
 
 function divisiontype(e){
 
-  let input = document.getElementById("divisioninput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "0123456789"
@@ -98,5 +71,5 @@ function divisionvalidate(answer, inputnumber){
 }
 
 function divisionenter(e, press=false){
-  validateanswer(e, divisionvalidate, adddivision, divisionanswer, "divisioninput", "divisionproblems", press);
+  validateanswer(e, divisionvalidate, adddivision, divisionanswer, press);
 }

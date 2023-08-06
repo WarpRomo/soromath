@@ -31,7 +31,7 @@
   <script
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 </script>
-  <script src="validator.js"></script>
+  <script src="template1equation.js"></script>
   <script src="additionfuncs.js"></script>
   <script src="multfuncs.js"></script>
   <script src="subtractionfuncs.js"></script>
@@ -39,13 +39,24 @@
   <script src="trigfuncs.js"></script>
   <script src="celctoffuncs.js"></script>
   <script src="monthnumfuncs.js"></script>
+  <script src="powerfuncs.js"></script>
+
   <script src="themes.js"></script>
+  <script src="options.js"></script>
+  <script src="modemenu.js"></script>
+
+  <script src="finishtest.js"></script>
+  <script src="cpmchart.js"></script>
+  <script src="timer.js"></script>
+
+
+
   <script src="script.js"></script>
   <script src="jquery.min.js"></script>
 
 </head>
 
-<body onload="init()">
+<body onload="init()" style="opacity: 0">
   <!-- your content here... -->
 
   <div id="iconcontainer">
@@ -94,7 +105,8 @@
   </div>
 
   <div id="equations">
-    <div id="additionequation">
+
+    <div class="equation" id="template1equation">
 
       <p class="timercontainer">
         <canvas class="timershow"></canvas>
@@ -103,12 +115,12 @@
       <div id="problemandinput">
         <div id="problemscontainer">
           <div class="problemmask"></div>
-          <div class="problems mainproblems" id="additionproblems"></div>
+          <div class="problems mainproblems" id="template1problems"></div>
         </div>
 
         <div class="inpandexample">
           <div class="numrestart">
-            <input class="numinput maininput" id="additioninput" oninput="additiontype(event); additionenter(event)" onkeypress="additionenter(event,true)" inputmode="numeric"></input>
+            <input class="numinput maininput" id="template1input"></input>
             <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
 
           </div>
@@ -118,153 +130,7 @@
 
     </div>
 
-    <div id="multequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problemmask"></div>
-          <div class="problems" id="multproblems"></div>
-        </div>
-
-        <div class="numrestart">
-          <input class="numinput" id="multinput" oninput="multtype(event); multenter(event)" onkeypress="multenter(event,true)" inputmode="numeric"></input>
-          <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="subtractionequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problemmask"></div>
-          <div class="problems" id="subtractionproblems"></div>
-        </div>
-
-        <div class="inpandexample">
-          <div class="numrestart">
-            <input class="numinput" id="subtractioninput" oninput="subtractiontype(event); subtractionenter(event)" onkeypress="subtractionenter(event,true)"></input>
-            <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-          </div>
-          <p class="inputexample">"-8"<br>"3"<br>etc.</p>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="divisionequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problemmask"></div>
-          <div class="problems" id="divisionproblems">
-          </div>
-        </div>
-
-        <div class="numrestart">
-          <input class="numinput" id="divisioninput" oninput="divisiontype(event); divisionenter(event)" onkeypress="divisionenter(event,true)" inputmode="numeric"></input>
-          <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div id="trigequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer" style="top:-109px">
-          <div class="problemmask"></div>
-          <div class="problems" id="trigproblems">
-          </div>
-        </div>
-
-        <div class="inpandexample">
-
-          <div class="numrestart">
-            <input class="numinput" id="triginput" oninput="trigtype(event); trigenter(event)" onkeypress="trigenter(event,true)"></input>
-            <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-          </div>
-
-          <p class="inputexample">"-inf"<br>"-0.5/sqrt(3)"<br>etc.</p>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="celctofequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problems" id="celctofproblems">
-          </div>
-        </div>
-
-        <div class="inpandexample">
-
-          <div class="numrestart">
-            <input class="numinput" id="celctofinput" oninput="celctoftype(event); celctofenter(event)" onkeypress="celctofenter(event,true)"></input>
-            <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-          </div>
-          <p class="inputexample">"-33.4f"<br>"32f"<br>etc.</p>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="monthnumequation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-      </p>
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problems" id="monthnumproblems">
-          </div>
-        </div>
-
-        <div class="inpandexample">
-          <div class="numrestart">
-            <input class="numinput" id="monthnuminput" oninput="monthnumtype(event); monthnumenter(event)" onkeypress="monthnumenter(event,true)" inputmode="numeric"></input>
-            <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-          </div>
-          <p class="inputexample">"1"<br>"12"<br>etc.</p>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="finishscreen">
+    <div id="finishscreen" style="display:none">
 
       <div>
         <p id="finishcpm" class="finishtext">14 cpm</p>

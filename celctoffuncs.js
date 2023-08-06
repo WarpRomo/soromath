@@ -1,26 +1,6 @@
 function celctofinit(){
 
-
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
-
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
-
-  let currentmain = document.getElementsByClassName("mainproblems")[0];
-  currentmain.classList.remove("mainproblems");
-  document.getElementById("celctofinput").classList.add("mainproblems");
-
-  let currentmaininput = document.getElementsByClassName("maininput")[0];
-  currentmaininput.classList.remove("maininput");
-  document.getElementById("celctofinput").classList.add("maininput");
-
-  document.getElementById("celctofproblems").style.top = "0px";
-  document.getElementById("celctofinput").value = "";
+  settemplate(modes[currentmode].template, modes[currentmode].settings)
 
   let currentproblems = document.getElementsByClassName("problem");
 
@@ -66,14 +46,14 @@ function addcelctof(main=false,setproblem=null,difficulty){
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("celctofproblems");
+  let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
 
 }
 
 function celctoftype(e){
 
-  let input = document.getElementById("celctofinput")
+  let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
   let nums = "-0123456789."
@@ -97,5 +77,5 @@ function celctofvalidate(answer, inputnumber){
 }
 
 function celctofenter(e, press=false){
-  validateanswer(e, celctofvalidate, addcelctof, celctofanswer, "celctofinput", "celctofproblems", press);
+  validateanswer(e, celctofvalidate, addcelctof, celctofanswer, press);
 }
