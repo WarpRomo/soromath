@@ -24,7 +24,10 @@ function settimer(){
 
       ctx.beginPath();
       ctx.arc(60, 60, 50, 0, 2 * Math.PI);
-      ctx.fillStyle = themes[currenttheme].background;
+
+      let background = getComputedStyle(document.body).getPropertyValue('--background');
+
+      ctx.fillStyle = background;
       ctx.fill();
 
       ctx.beginPath();
@@ -34,13 +37,15 @@ function settimer(){
       ctx.moveTo(60, 60)
       ctx.lineTo(110, 60)
 
-      ctx.fillStyle = themes[currenttheme].text_color;
+      let text_color = getComputedStyle(document.body).getPropertyValue('--text_color');
+
+      ctx.fillStyle = text_color;
       ctx.fill();
 
       ctx.beginPath()
       ctx.arc(60, 60, 50, 0, 2 * Math.PI);
       ctx.lineWidth = 5
-      ctx.strokeStyle = themes[currenttheme].text_color;
+      ctx.strokeStyle = text_color;
       ctx.stroke();
 
 
