@@ -77,7 +77,7 @@ function monthnumtype(e){
 }
 function monthnumanswer(problem){
   let months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-  return months.indexOf(problem);
+  return months.indexOf(problem)+1;
 }
 
 function monthnumvalidate(answer, inputnumber){
