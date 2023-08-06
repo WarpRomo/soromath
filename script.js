@@ -433,15 +433,17 @@ function makechart(){
 
   let cpmbuckets = [];
   let rawcpmbuckets = [];
+
+  let overallcpmbuckets = [];
+
   let timeinterval = 3;
   let cumulative = 0;
   let rawcumulative = 0;
 
   for(var i = 0; i <= totaltime / (1000 * timeinterval); i++){
     cpmbuckets.push(0);
-  }
-  for(var i = 0; i <= totaltime / (1000 * timeinterval); i++){
     rawcpmbuckets.push(0);
+    overallcpmbuckets.push(0);
   }
 
   for(var i = 0; i < cpmtrack.length; i++){
@@ -459,6 +461,15 @@ function makechart(){
 
   for(var i = 3; i <= totaltime / 1000; i+=timeinterval){
     xvalues.push(i);
+  }
+
+  let overallcumulative =  0;
+
+  for(var i = 0; i < cpmbuckets.length; i++){
+
+    overallcumulative += cpmbuckets[i];
+    overallcpmbuckets[i] = (60*overallcumulative / ((i+1) * timeinterval));
+
   }
 
   console.log(cpmtrack);
@@ -490,6 +501,13 @@ function makechart(){
       backgroundColor: `rgba(0,0,0,0.5)`,
       borderColor: `rgba(0,0,0,0.5)`,
       data: rawcpmbuckets
+    },{
+      label: 'Overall CPM',
+      fill: false,
+      lineTension: 0.25,
+      backgroundColor: style.getPropertyValue('--text_color'),
+      borderColor: style.getPropertyValue('--text_color'),
+      data: overallcpmbuckets
     }]
   }
   cpmchart.update();
