@@ -74,7 +74,7 @@ let modes = {
     diffs: [0,1,2],
     template: "template1equation",
     settings: {
-      name: "celtof"
+      name: "celctof"
     }
   },
   "month to number":{
