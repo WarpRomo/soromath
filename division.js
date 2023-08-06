@@ -1,4 +1,4 @@
-function additioninit(){
+function divisioninit(){
 
 
   stats = [0,0];
@@ -13,14 +13,14 @@ function additioninit(){
 
   let currentmain = document.getElementsByClassName("mainproblems")[0];
   currentmain.classList.remove("mainproblems");
-  document.getElementById("additioninput").classList.add("mainproblems");
+  document.getElementById("divisioninput").classList.add("mainproblems");
 
   let currentmaininput = document.getElementsByClassName("maininput")[0];
   currentmaininput.classList.remove("maininput");
-  document.getElementById("additioninput").classList.add("maininput");
+  document.getElementById("divisioninput").classList.add("maininput");
 
-  document.getElementById("additionproblems").style.top = "0px";
-  document.getElementById("additioninput").value = "";
+  document.getElementById("divisionproblems").style.top = "0px";
+  document.getElementById("divisioninput").value = "";
 
   let currentproblems = document.getElementsByClassName("problem");
 
@@ -30,27 +30,27 @@ function additioninit(){
 
 
   for(var i = 0; i < 20; i++){
-    addaddition(i==0, (i==0 ? [0,0] : null), currentdifficulty);
+    adddivision(i==0, (i==0 ? [0,1] : null), currentdifficulty);
   }
 
 }
 
-function addaddition(main=false,setproblem=null,difficulty=0){
+function adddivision(main=false,setproblem=null,difficulty=0){
 
   let num1 = 0;
   let num2 = 0;
 
   if(difficulty == 0){
-    num1 = Math.floor(Math.random() * 10)
-    num2 = Math.floor(Math.random() * 10);
+    num2 = Math.floor(Math.random() * 9) + 1;
+    num1 = num2 * Math.floor(Math.random() * 10);
   }
   if(difficulty == 1){
-    num1 = Math.floor(Math.random() * 100)
-    num2 = Math.floor(Math.random() * 100);
+    num2 = Math.floor(Math.random() * 9) + 1;
+    num1 = num2 * Math.floor(Math.random() * 100);
   }
   if(difficulty == 2){
-    num1 = Math.floor(Math.random() * 1000)
-    num2 = Math.floor(Math.random() * 1000);
+    num2 = Math.floor(Math.random() * 99) + 1;
+    num1 = num2 * Math.floor(Math.random() * 100);
   }
 
 
@@ -63,18 +63,18 @@ function addaddition(main=false,setproblem=null,difficulty=0){
 
 
   let problem = document.createElement("p");
-  problem.innerHTML = num1 + "+" + num2 + " " + "="
+  problem.innerHTML = num1 + " / " + num2 + " " + "="
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
-  let problems = document.getElementById("additionproblems");
+  let problems = document.getElementById("divisionproblems");
   problems.appendChild(problem);
 
 }
 
-function additiontype(e){
+function divisiontype(e){
 
-  let input = document.getElementById("additioninput")
+  let input = document.getElementById("divisioninput")
 
   let nonums = "";
   let nums = "0123456789"
@@ -89,17 +89,14 @@ function additiontype(e){
 
 }
 
-function additionanswer(problem){
-  console.log("HERE!");
-  console.log(problem);
-
-    return problem[0]+problem[1];
+function divisionanswer(problem){
+    return problem[0]/problem[1];
 }
 
-function additionvalidate(answer, inputnumber){
+function divisionvalidate(answer, inputnumber){
   return answer==parseInt(inputnumber);
 }
 
-function additionenter(e){
-  validateanswer(e, additionvalidate, addaddition, additionanswer, "additioninput", "additionproblems");
+function divisionenter(e){
+  validateanswer(e, divisionvalidate, adddivision, divisionanswer, "divisioninput", "divisionproblems");
 }

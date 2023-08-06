@@ -1,0 +1,131 @@
+
+
+#problemandinput{
+  display: flex;
+  justify-content: center;
+}
+
+#problemtruecontainer{
+  position: relative;
+  top: -267px;
+  border: solid 1px red;
+}
+
+#problemscontainer{
+  position: relative;
+  top: 0px;
+  height: 290px;
+  mask-size: 200% 100%;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 100%);
+  padding-top: 30px;
+  overflow-y: hidden;
+  display: inline-flex;
+  justify-content: right;
+}
+
+.problems{
+  position: relative;
+  padding-top: 5px;
+  display: inline-table;
+}
+
+.problem{
+  font-size: 40px;
+  color: var(--text_color);
+  opacity: 0.5;
+  height: 0px;
+  font-family: var(--font_family);
+  margin-top: 0px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#mainproblem{
+  opacity: 1 !important;
+  position: relative;
+}
+
+.equation{
+  position: relative;
+  top: 0px;
+  width: 100%;
+  display:block;
+  justify-content: space-around;
+}
+
+.timershow{
+  position: relative;
+  width: 75px;
+  height: 75px;
+  opacity: 0.2;
+  margin: auto;
+}
+
+.timercontainer{
+  text-align: center;
+  margin-top: 40px;
+}
+
+.numrestart{
+  display: flex;
+  position: relative;
+  top: 30px;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .numrestart{
+    flex-direction: column;
+  }
+
+  .numinput{
+    width: 120px !important;
+  }
+
+  #restarttest{
+    width: 120px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+
+
+#restarttest{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  padding: 0px;
+}
+
+.numinput{
+  all: unset;
+  position: relative;
+  width: 150px;
+  font-family: var( --font_family);
+  font-size: 40px;
+  height: 50px;
+  background: var(--button_background);
+  border: solid 1px var(--button_border);
+  color: gray;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+  padding-left: 10px;
+  float: left;
+}
+
+.numinput:hover{
+  opacity: 0.8;
+}
+
+.numinput:focus{
+  opacity: 1;
+}
+
+.wronganswer{
+  color: red;
+}
+
+.rightanswer{
+  color: green;
+}

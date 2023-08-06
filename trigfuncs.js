@@ -3,7 +3,7 @@ function triginit(){
 
   stats = [0,0];
   problemindex = 0;
-  trigproblems = [];
+  problemlist = [];
   teststarted = false;
 
   if(testcheckend != null){
@@ -11,10 +11,17 @@ function triginit(){
     testcheckend = null;
   }
 
+  let currentmain = document.getElementsByClassName("mainproblems")[0];
+  currentmain.classList.remove("mainproblems");
+  document.getElementById("triginput").classList.add("mainproblems");
+
+  let currentmaininput = document.getElementsByClassName("maininput")[0];
+  currentmaininput.classList.remove("maininput");
+  document.getElementById("triginput").classList.add("maininput");
 
   document.getElementById("trigproblems").style.top = "0px";
   document.getElementById("triginput").value = "";
-  document.getElementById("triginput").focus();
+
   let currentproblems = document.getElementsByClassName("problem");
 
   while(currentproblems.length > 0){
@@ -36,9 +43,9 @@ function addtrig(main=false,setproblem=null,difficulty=0){
   let func = funcs[Math.floor(Math.random() * funcs.length)];
   let angle = angles[Math.floor(Math.random() * angles.length)];
 
-  if(setproblem == null) trigproblems.push([func,angle]);
+  if(setproblem == null) problemlist.push([func,angle]);
   else{
-     trigproblems.push(setproblem);
+     problemlist.push(setproblem);
      func = setproblem[0]
      angle = setproblem[1]
   }
@@ -71,113 +78,52 @@ function trigtype(e){
 
 }
 
-function trigenter(e){
-  if(e.key == "Enter" || e.key==" "){
+function triganswer(problem){
 
-    let input = document.getElementById("triginput")
-    let problems = document.getElementById("trigproblems");
+  let constant = problem[1].replace("pi", "*Math.PI")
 
-    if(input.value.length == 0) return;
+  console.log(`Math.${problem[0]}(${constant})`);
 
-    if(problemindex == 0){
+  let answer = eval(`Math.${problem[0]}(${constant})`);
 
+  console.log("le answer", answer);
 
+  if(Math.abs(answer) > 1000) answer = (Math.abs(answer) / answer) * 1000
 
-      starttest();
-
-
-    }
-
-
-    let theinput = input.value;
-    theinput = theinput.replace("sqrt", "Math.sqrt");
-
-    let inputnumber = null
-
-    if(theinput.startsWith("inf")){
-      inputnumber = 1000;
-    }
-    else if(theinput.startsWith("-inf")){
-      inputnumber = -1000
-    }
-    else{
-      try{
-        inputnumber = eval(theinput);
-      }
-      catch(err){
-        inputnumber = null
-      }
-    }
-
-
-    input.value = "";
-
-    let mainproblemindex = 0;
-
-    for(var i = 0; i < problems.children.length; i++){
-      if(problems.children[i].id == "mainproblem"){
-        mainproblemindex = i;
-      }
-    }
-
-    let problem = trigproblems[problemindex]
-
-    console.log(problem[1]);
-
-    problem[1] = problem[1].split("pi").join("*Math.PI");
-
-    let evalstring = `Math.${problem[0]}(${problem[1]})`;
-
-    console.log(evalstring);
-
-    let answer = eval(`Math.${problem[0]}(${problem[1]})`);
-
-
-    if(Math.abs(answer) > 1000) answer = (Math.abs(answer) / answer) * 1000
-
-    let dist = Math.abs(answer - inputnumber)
-
-    if(dist > 0.01){
-      problems.children[mainproblemindex].classList.add("wronganswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[1]++;
-      problemcomplete(false);
-    }
-    else{
-      problems.children[mainproblemindex].classList.add("rightanswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[0]++;
-      problemcomplete(true)
-    }
-
-    let fadeoutelem = problems.children[mainproblemindex];
-
-    setTimeout(() => {
-      $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
-    }, 500)
-
-    problems.children[mainproblemindex].id = "";
-    problems.children[mainproblemindex+1].id = "mainproblem";
-
-
-    let top = parseInt(window.getComputedStyle(problems).top);
-
-    top -= 40
-
-    $(problems).animate({ top: top + 'px' }, {duration: 0, easing:"linear"});
-
-
-    console.log(top);
-
-    problemindex++;
-
-    addtrig();
-
-  }
+  return answer;
 
 }
 
+function trigvalidate(answer, input){
 
-function numonlyinput(){
+  input = input.replace("sqrt", "Math.sqrt");
+
+  let inputnumber = null
+
+  if(input.startsWith("inf")){
+    inputnumber = 1000;
+  }
+  else if(input.startsWith("-inf")){
+    inputnumber = -1000
+  }
+  else{
+    try{
+      inputnumber = eval(input);
+    }
+    catch(err){
+      inputnumber = null
+    }
+  }
+
+  let dist = Math.abs(answer - inputnumber)
+
+  return dist < 0.02;
+
+
+}
+
+function trigenter(e){
+
+  validateanswer(e, trigvalidate, addtrig, triganswer, "triginput", "trigproblems");
 
 }

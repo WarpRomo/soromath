@@ -5,6 +5,7 @@ let totaltime = 15000;
 let teststarted = false;
 let testcheckend = null;
 let stats = [0,0];
+let problemlist = [];
 
 let cpmchart = null;
 
@@ -31,6 +32,11 @@ let modes = {
     init: subtractioninit,
     id: "subtractionequation",
     diffs: [0,1,2],
+  },
+  "division":{
+    init:divisioninit,
+    id: "divisionequation",
+    diffs: [0,1,2]
   },
   "trigonometry":{
     init: triginit,
@@ -74,6 +80,15 @@ function problemcomplete(correct){
 }
 
 
+function restarttest(){
+
+  modes[currentmode].init();
+
+  let input = document.getElementsByClassName("maininput")[0];
+
+  input.focus();
+
+}
 
 
 function setdifficulty(difficulty){
@@ -251,8 +266,6 @@ function init(){
   cpmtrack = [];
   rawcpmtrack = [];
 
-  //finishtest();
-
 }
 
 
@@ -287,7 +300,12 @@ function starttest(){
     let time = new Date().getTime();
     if(time - teststarted >= totaltime){
 
+      console.log("HERE");
+
       finishtest();
+
+      console.log("CLEAR IT");
+
       clearInterval(testcheckend);
 
     }
@@ -349,6 +367,8 @@ function settimer(){
 
 function finishtest(){
 
+  console.log("CALLED!");
+
   document.getElementById("finishcorrect").innerHTML = stats[0] + " correct";
   document.getElementById("finishwrong").innerHTML = stats[1] + " wrong";
 
@@ -399,6 +419,7 @@ function initchart(){
         }]
       },
       options: {
+        responsive:true,
         maintainAspectRatio: false,
         legend: {display: true},
       }

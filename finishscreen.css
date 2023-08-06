@@ -1,0 +1,85 @@
+#finishscreen{
+  width: 700px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 20px;
+  background: var(--window_background);
+  border: solid 2px var(--window_border);
+  display: flex;
+}
+
+#cpmchart{
+  position: relative;
+  max-height: 250px;
+  max-width: 500px;
+  min-width: 500px;
+  left: 45px;
+  top: 30px;
+}
+
+#finishcpm{
+  font-size: 40px;
+  color: var(--text_color);
+  margin-bottom: 0px;
+}
+
+#finishcorrect{
+  font-size: 30px;
+  color: green;
+  margin-bottom: 0px;
+  margin-top: 8px
+}
+
+#finishwrong{
+  font-size: 30px;
+  color: red;
+  margin-top: 0px;
+  margin-bottom: 8px
+}
+
+#finishtime{
+  color: var(--text_color);
+  margin: 0px;
+}
+
+#finishrawcpm{
+  margin-top: 0px;
+  color: var(--text_color);
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+#finishmode{
+  margin: 0px;
+  color: var(--text_color);
+}
+
+#finishdifficulty{
+  margin-top: 0px;
+  color: var(--text_color);
+}
+
+#nexttest{
+  width: 100px;
+  height: 30px;
+}
+
+.finishtext{
+  font-family: var( --font_family);
+}
+
+@media screen and (max-width: 800px) {
+  #finishscreen{
+    flex-direction: column-reverse;
+    width: 70% !important;
+    padding-bottom: 40px;
+  }
+
+  #cpmchart{
+    max-width: 90% !important;
+    min-width: 90% !important;
+    margin-left: -25px;
+    margin-bottom: 30px;
+  }
+}

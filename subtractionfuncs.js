@@ -3,7 +3,7 @@ function subtractioninit(){
 
   stats = [0,0];
   problemindex = 0;
-  subtractionproblems = [];
+  problemlist = [];
   teststarted = false;
 
   if(testcheckend != null){
@@ -11,10 +11,17 @@ function subtractioninit(){
     testcheckend = null;
   }
 
+  let currentmain = document.getElementsByClassName("mainproblems")[0];
+  currentmain.classList.remove("mainproblems");
+  document.getElementById("subtractioninput").classList.add("mainproblems");
+
+  let currentmaininput = document.getElementsByClassName("maininput")[0];
+  currentmaininput.classList.remove("maininput");
+  document.getElementById("subtractioninput").classList.add("maininput");
 
   document.getElementById("subtractionproblems").style.top = "0px";
   document.getElementById("subtractioninput").value = "";
-  document.getElementById("subtractioninput").focus();
+
   let currentproblems = document.getElementsByClassName("problem");
 
   while(currentproblems.length > 0){
@@ -46,9 +53,9 @@ function addsubtraction(main=false,setproblem=null,difficulty=0){
     num2 = Math.floor(Math.random() * 1000);
   }
 
-  if(setproblem == null) subtractionproblems.push([num1,num2]);
+  if(setproblem == null) problemlist.push([num1,num2]);
   else{
-     subtractionproblems.push(setproblem);
+     problemlist.push(setproblem);
      num1 = setproblem[0]
      num2 = setproblem[1]
   }
@@ -80,79 +87,14 @@ function subtractiontype(e){
 
 
 }
+function subtractionanswer(problem){
+    return problem[0]-problem[1];
+}
+
+function subtractionvalidate(answer, inputnumber){
+  return answer==parseInt(inputnumber);
+}
 
 function subtractionenter(e){
-  if(e.key == "Enter" || e.key==" "){
-
-    let input = document.getElementById("subtractioninput")
-    let problems = document.getElementById("subtractionproblems");
-
-    if(input.value.length == 0) return;
-
-    if(problemindex == 0){
-
-      starttest();
-
-
-    }
-
-
-    let inputnumber = parseInt(input.value);
-
-    console.log(problems.children);
-
-    input.value = "";
-
-    let mainproblemindex = 0;
-
-    for(var i = 0; i < problems.children.length; i++){
-      if(problems.children[i].id == "mainproblem"){
-        mainproblemindex = i;
-      }
-    }
-
-    let problem = subtractionproblems[problemindex]
-    let answer = problem[0] - problem[1];
-
-    console.log(answer);
-
-    if(answer != inputnumber){
-      problems.children[mainproblemindex].classList.add("wronganswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[1]++;
-      problemcomplete(false);
-    }
-    else{
-      problems.children[mainproblemindex].classList.add("rightanswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[0]++;
-      problemcomplete(true)
-    }
-
-    let fadeoutelem = problems.children[mainproblemindex];
-
-    setTimeout(() => {
-      $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
-    }, 500)
-
-
-    problems.children[mainproblemindex].id = "";
-    problems.children[mainproblemindex+1].id = "mainproblem";
-
-
-    let top = parseInt(window.getComputedStyle(problems).top);
-
-    top -= 40
-
-    $(problems).animate({ top: top + 'px' }, {duration: 0, easing:"linear"});
-
-
-    console.log(top);
-
-    problemindex++;
-
-    addsubtraction();
-
-  }
-
+  validateanswer(e, subtractionvalidate, addsubtraction, subtractionanswer, "subtractioninput", "subtractionproblems");
 }

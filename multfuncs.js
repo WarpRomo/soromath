@@ -3,7 +3,7 @@ function multinit(){
 
   stats = [0,0];
   problemindex = 0;
-  multproblems = [];
+  problemlist = [];
   teststarted = false;
 
   if(testcheckend != null){
@@ -11,10 +11,17 @@ function multinit(){
     testcheckend = null;
   }
 
+  let currentmain = document.getElementsByClassName("mainproblems")[0];
+  currentmain.classList.remove("mainproblems");
+  document.getElementById("multinput").classList.add("mainproblems");
+
+  let currentmaininput = document.getElementsByClassName("maininput")[0];
+  currentmaininput.classList.remove("maininput");
+  document.getElementById("multinput").classList.add("maininput");
 
   document.getElementById("multproblems").style.top = "0px";
   document.getElementById("multinput").value = "";
-  document.getElementById("multinput").focus();
+
   let currentproblems = document.getElementsByClassName("problem");
 
   while(currentproblems.length > 0){
@@ -47,9 +54,9 @@ function addmult(main=false,setproblem=null,difficulty=0){
   }
 
 
-  if(setproblem == null) multproblems.push([num1,num2]);
+  if(setproblem == null) problemlist.push([num1,num2]);
   else{
-     multproblems.push(setproblem);
+     problemlist.push(setproblem);
      num1 = setproblem[0]
      num2 = setproblem[1]
   }
@@ -82,83 +89,14 @@ function multtype(e){
 
 }
 
-function multenter(e){
-
-  console.log(e.key);
-
-  if(e.key == "Enter" || e.key==" "){
-
-    let input = document.getElementById("multinput")
-    let problems = document.getElementById("multproblems");
-
-    if(input.value.length == 0) return;
-
-    if(problemindex == 0){
-
-      starttest();
-
-
-    }
-
-
-    let inputnumber = parseInt(input.value);
-    input.value = "";
-
-    let mainproblemindex = 0;
-
-    for(var i = 0; i < problems.children.length; i++){
-      if(problems.children[i].id == "mainproblem"){
-        mainproblemindex = i;
-      }
-    }
-
-    let problem = multproblems[problemindex]
-    let answer = problem[0] * problem[1];
-
-    console.log(answer);
-
-    if(answer != inputnumber){
-
-      console.log("WRONG!", answer, inputnumber)
-
-      problems.children[mainproblemindex].classList.add("wronganswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[1]++;
-      problemcomplete(false);
-    }
-    else{
-      problems.children[mainproblemindex].classList.add("rightanswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[0]++;
-      problemcomplete(true)
-    }
-
-    let fadeoutelem = problems.children[mainproblemindex];
-
-    setTimeout(() => {
-      $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
-    }, 500)
-
-    problems.children[mainproblemindex].id = "";
-    problems.children[mainproblemindex+1].id = "mainproblem";
-
-
-    let top = parseInt(window.getComputedStyle(problems).top);
-
-    top -= 40
-
-    $(problems).animate({ top: top + 'px' }, {duration: 0});
-
-
-    problemindex++;
-
-    addmult();
-
-  }
-
+function multanswer(problem){
+    return problem[0]*problem[1];
 }
 
+function multvalidate(answer, inputnumber){
+  return answer==parseInt(inputnumber);
+}
 
-function numonlyinput(){
-
+function multenter(e){
+  validateanswer(e, multvalidate, addmult, multanswer, "multinput", "multproblems");
 }

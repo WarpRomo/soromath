@@ -3,7 +3,7 @@ function monthnuminit(){
 
   stats = [0,0];
   problemindex = 0;
-  monthnumproblems = [];
+  problemlist = [];
   teststarted = false;
 
   if(testcheckend != null){
@@ -11,10 +11,18 @@ function monthnuminit(){
     testcheckend = null;
   }
 
+  let currentmain = document.getElementsByClassName("mainproblems")[0];
+  currentmain.classList.remove("mainproblems");
+  document.getElementById("monthnuminput").classList.add("mainproblems");
+
+  let currentmaininput = document.getElementsByClassName("maininput")[0];
+  currentmaininput.classList.remove("maininput");
+  document.getElementById("monthnuminput").classList.add("maininput");
+
 
   document.getElementById("monthnumproblems").style.top = "0px";
   document.getElementById("monthnuminput").value = "";
-  document.getElementById("monthnuminput").focus();
+
   let currentproblems = document.getElementsByClassName("problem");
 
   while(currentproblems.length > 0){
@@ -34,9 +42,9 @@ function addmonthnum(main=false,setproblem=null){
 
   let quest = months[Math.floor(Math.random() * months.length)];
 
-  if(setproblem == null) monthnumproblems.push(quest);
+  if(setproblem == null) problemlist.push(quest);
   else{
-     monthnumproblems.push(setproblem);
+     problemlist.push(setproblem);
      quest = setproblem
   }
 
@@ -67,81 +75,15 @@ function monthnumtype(e){
 
 
 }
-
-function monthnumenter(e){
-  if(e.key == "Enter" || e.key==" "){
-
-    let months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
-
-    let input = document.getElementById("monthnuminput")
-    let problems = document.getElementById("monthnumproblems");
-
-    if(input.value.length == 0) return;
-
-    if(problemindex == 0){
-
-      starttest();
-
-
-    }
-
-
-    let inputnumber = parseInt(input.value);
-
-    input.value = "";
-
-    let mainproblemindex = 0;
-
-    for(var i = 0; i < problems.children.length; i++){
-      if(problems.children[i].id == "mainproblem"){
-        mainproblemindex = i;
-      }
-    }
-
-    let problem = monthnumproblems[problemindex]
-    let answer = months.indexOf(problem)+1;
-
-    console.log(answer);
-
-    if(answer != inputnumber){
-      problems.children[mainproblemindex].classList.add("wronganswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[1]++;
-      problemcomplete(false);
-    }
-    else{
-      problems.children[mainproblemindex].classList.add("rightanswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
-      stats[0]++;
-      problemcomplete(true)
-    }
-
-    let fadeoutelem = problems.children[mainproblemindex];
-
-    setTimeout(() => {
-      $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
-    }, 500)
-
-
-    problems.children[mainproblemindex].id = "";
-    problems.children[mainproblemindex+1].id = "mainproblem";
-
-
-    let top = parseInt(window.getComputedStyle(problems).top);
-
-    top -= 40
-
-    $(problems).animate({ top: top + 'px' }, {duration: 0, easing:"linear"});
-
-    problemindex++;
-
-    addmonthnum();
-
-  }
-
+function monthnumanswer(problem){
+  let months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+  return months.indexOf(problem);
 }
 
+function monthnumvalidate(answer, inputnumber){
+  return answer==parseInt(inputnumber);
+}
 
-function numonlyinput(){
-
+function monthnumenter(e){
+  validateanswer(e, monthnumvalidate, addmonthnum, monthnumanswer, "monthnuminput", "monthnumproblems");
 }
