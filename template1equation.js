@@ -125,6 +125,6 @@ function validateanswer(e, validater, addproblem, getanswer, press=false, scroll
 
     problemindex++;
 
-    addproblem();
+    addproblem(false, null, currentdifficulty);
 
 }
