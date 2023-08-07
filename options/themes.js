@@ -159,7 +159,7 @@ function themeinit(){
 
 function removethemefocus(event){
 
-  if(event.target.id != "themecontainer") return;
+  if(event.target.classList.contains("themebutton")) return;
 
   let container = document.getElementById("themecontainer");
 
