@@ -124,7 +124,6 @@ function showmodeselect(){
 
   container.style.display = "";
 
-  restarttest();
-
+  init();
 
 }

@@ -1,4 +1,4 @@
-function restarttest(){
+function restarttest(focus=true){
 
   stats = [0,0];
   problemindex = 0;
@@ -17,7 +17,7 @@ function restarttest(){
   cpmtrack = [];
   rawcpmtrack = [];
 
-  input.focus();
+  if(focus) input.focus();
 
 }
 

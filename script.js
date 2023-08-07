@@ -7,7 +7,7 @@ let totaltime = 15000;
 let teststarted = false;
 let testcheckend = null;
 
-let currentmode = ["addition", "trigonometry", "exponents"];
+let currentmode = ["addition"];
 let currenttemplate = "template1equation";
 let currentdifficulty = 0;
 
@@ -174,6 +174,8 @@ function init(){
   if(cpmchart == null){
     initchart();
   }
+
+  restarttest(focus=false);
 
   document.getElementById("finishscreen").style.display = "none"
   document.getElementById(currenttemplate).style.display = ""
