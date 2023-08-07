@@ -1,6 +1,14 @@
 
 
-let templates = ["template1equation"];
+let templates = {
+
+  "template1equation":{
+    init: template1init,
+  }
+
+};
+
+let t1heighttrack = 0;
 
 function settemplate(template, settings){
 
@@ -14,6 +22,8 @@ function settemplate(template, settings){
     testcheckend = null;
   }
 
+  currenttemplate = template;
+
   for(var i = 0; i < templates.length; i++){
     let templateelement = document.getElementById(templates[i]);
     if(templates[i] != template){
@@ -24,38 +34,55 @@ function settemplate(template, settings){
     }
   }
 
-  if(template == "template1equation"){
+}
 
-    document.getElementById("template1problems").className = `problems mainproblems ${settings.name}problems`
+function template1init(){
 
-    let input = document.getElementById("template1input")
-    input.className = `numinput maininput ${settings.name}input`
-    input.setAttribute("oninput", `${settings.name}type(event); ${settings.name}enter(event)`)
-    input.setAttribute("onkeypress", `${settings.name}enter(event,true);`)
-    input.setAttribute("inputmode", (settings.inputmode || ""))
+  t1heighttrack = 0;
 
-    let problemcontainer = document.getElementById("problemscontainer");
-    problemcontainer.style.top = settings.offset || "-85px";
+  let input = document.getElementById("template1input")
+  input.value = ""
 
-    document.getElementById("template1problems").style.top = "0px"
-    document.getElementById("template1input").value = ""
+  let problemcontainer = document.getElementById("problemscontainer");
 
-    problemlist = [];
+  problemlist = [];
 
-    let currentproblems = document.getElementsByClassName("problem");
+  let currentproblems = document.getElementsByClassName("problem");
 
-    while(currentproblems.length > 0){
-      currentproblems[0].remove();
+  while(currentproblems.length > 0){
+    currentproblems[0].remove();
+  }
+
+  for(var i = 0; i < 7; i++){
+
+    let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
+    let problem = modes[problemtype].addproblem(main=i == 0, difficulty=currentdifficulty, name=problemtype);
+
+    if(i == 0){
+
+
+      let p1height = problem.getBoundingClientRect().height
+      let inputheight = input.getBoundingClientRect().height
+
+      t1heighttrack = (inputheight - p1height) / 2 - 5
+      document.getElementById("template1problems").style.top = t1heighttrack + "px";
+
     }
 
-
-
   }
+
 
 }
 
 
-function validateanswer(e, validater, addproblem, getanswer, press=false, scrollamount=40){
+function template1type(e){
+
+  let problemtype = problemlist[problemindex][0];
+  modes[problemtype].ontype(e);
+
+}
+
+function template1enter(e, press=false){
 
     if(press && e.key != "Enter") return;
     if(press) console.log("YAA");
@@ -63,24 +90,20 @@ function validateanswer(e, validater, addproblem, getanswer, press=false, scroll
     let input = document.getElementsByClassName("maininput")[0]
     let problems = document.getElementById("template1problems");
 
-
-
     if(input.value.length == 0) return;
 
     let inputnumber = input.value;
-    let mainproblemindex = 0;
+    let mainproblemindex = problemindex;
+    let problemtype = problemlist[problemindex][0];
 
-    for(var i = 0; i < problems.children.length; i++){
-      if(problems.children[i].id == "mainproblem"){
-        mainproblemindex = i;
-      }
-    }
 
     let problem = problemlist[problemindex]
-    let answer = getanswer(problem);
 
-    let correct = validater(answer, inputnumber);
+    let answer = modes[problemtype].getanswer(problem[1]);
+    let correct = modes[problemtype].validate(answer, inputnumber);
 
+
+    console.log(answer, correct)
 
     if( !(correct || e.key == "Enter") ) return;
     input.value = "";
@@ -93,7 +116,6 @@ function validateanswer(e, validater, addproblem, getanswer, press=false, scroll
       problems.children[mainproblemindex].classList.add("rightanswer");
       problems.children[mainproblemindex].classList.add("completedproblem");
       stats[0]++;
-      console.log("GO", cpmtrack.length);
       problemcomplete(true)
     }
     else{
@@ -110,7 +132,10 @@ function validateanswer(e, validater, addproblem, getanswer, press=false, scroll
     }, 500)
 
 
-    let oldheight = problems.children[mainproblemindex].getBoundingClientRect().height
+    let height1 = problems.children[mainproblemindex].getBoundingClientRect().height
+    let height2 = problems.children[mainproblemindex+1].getBoundingClientRect().height
+
+    let shifttop = (height1 + height2) / 2
 
     problems.children[mainproblemindex].id = "";
     problems.children[mainproblemindex+1].id = "mainproblem";
@@ -118,13 +143,14 @@ function validateanswer(e, validater, addproblem, getanswer, press=false, scroll
 
     let top = parseInt(window.getComputedStyle(problems).top);
 
-    top -= oldheight
+    t1heighttrack -= shifttop;
+    top = Math.floor(t1heighttrack);
 
     $(problems).animate({ top: top + 'px' }, {duration: 0});
 
-
     problemindex++;
 
-    addproblem(false, null, currentdifficulty);
+    let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
+    modes[nextproblem].addproblem(main=false, difficulty=currentdifficulty, name=nextproblem);
 
 }

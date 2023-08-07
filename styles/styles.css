@@ -1,0 +1,57 @@
+:root{
+  --background: rgb(0,0,0);
+  --button_background: rgb(35,35,35);
+  --button_border: rgb(50,50,50);
+  --window_background: rgb(20,20,20);
+  --window_border: rgb(30,30,30);
+  --text_color: rgb(255,255,255);
+  --text_select_color: rgb(255,0,0);
+  --font_family: "Monospace";
+}
+
+body{
+  background-color: var(--background);
+  padding-bottom: 500px;
+  margin: 0;
+  transition: opacity 0.2s;
+}
+
+#iconlogo{
+  -webkit-mask-image: linear-gradient(rgba(0, 255, 0, 1.0), transparent);
+  background-color: var(--text_select_color);
+}
+
+#equations{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.inputexample{
+  font-family: var( --font_family);
+  color: var(--text_color);
+  font-size: 20px;
+  opacity: 0.25;
+  position: relative;
+  margin-left: 25px;
+  margin-top: 40px;
+}
+
+.modebutton{
+  width: 100% !important;
+  height: 30px;
+  font-size: 20px !important;
+  color: var(--text_color);
+}
+
+.themebutton{
+  width: 100% !important;
+  height: 30px;
+  font-size: 20px !important;
+}
+
+.timebutton{
+  width: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

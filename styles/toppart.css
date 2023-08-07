@@ -1,0 +1,17 @@
+.difficultyselected{
+  color: var(--text_select_color) !important;
+}
+
+#iconcontainer{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#iconlogo{
+  width: 40%;
+  min-width: 300px;
+  max-width: 450px;
+}

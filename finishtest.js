@@ -10,7 +10,7 @@ function restarttest(){
     testcheckend = null;
   }
 
-  modes[currentmode].init();
+  templates[currenttemplate].init();
 
   let input = document.getElementsByClassName("maininput")[0];
 
@@ -64,7 +64,9 @@ function finishtest(){
   document.getElementById("finishcpm").innerHTML = cpm + " cpm";
   document.getElementById("finishrawcpm").innerHTML = rawcpm + " raw cpm";
 
-  document.getElementById("finishmode").innerHTML = "mode: " + currentmode;
+  let modestring = currentmode.join("<br>")
+
+  document.getElementById("finishmode").innerHTML = "mode: \n" + modestring;
   document.getElementById("finishdifficulty").innerHTML = "difficulty: " + difficultynames[currentdifficulty];
 
   document.getElementById("finishtime").innerHTML = "time: " + (totaltime / 1000) + " seconds"

@@ -37,6 +37,8 @@ function settimer(){
       ctx.moveTo(60, 60)
       ctx.lineTo(110, 60)
 
+      ctx.globalAlpha = 0.5
+
       let text_color = getComputedStyle(document.body).getPropertyValue('--text_color');
 
       ctx.fillStyle = text_color;
@@ -47,6 +49,8 @@ function settimer(){
       ctx.lineWidth = 5
       ctx.strokeStyle = text_color;
       ctx.stroke();
+
+      ctx.globalAlpha = 1
 
 
 

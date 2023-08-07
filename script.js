@@ -7,83 +7,115 @@ let totaltime = 15000;
 let teststarted = false;
 let testcheckend = null;
 
-let currentinit = additioninit;
-let currentmode = "addition";
+let currentmode = ["addition", "trigonometry", "exponents"];
+let currenttemplate = "template1equation";
 let currentdifficulty = 0;
+
+
+
 
 let modes = {
   "addition": {
-    init: additioninit,
     id: "additionequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: addaddition,
+    ontype: additiontype,
+    getanswer: additionanswer,
+    validate: additionvalidate,
     settings: {
-      name: "addition"
+      name: "addition",
+
     }
   },
   "multiplication":{
-    init:multinit,
     id: "multequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: addmult,
+    ontype: multtype,
+    getanswer: multanswer,
+    validate: multvalidate,
     settings: {
-      name: "mult"
+      name: "mult",
+
     }
   },
   "subtraction": {
-    init: subtractioninit,
     id: "subtractionequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: addsubtraction,
+    ontype: subtractiontype,
+    getanswer: subtractionanswer,
+    validate: subtractionvalidate,
     settings: {
       name: "subtraction"
     }
   },
   "division":{
-    init:divisioninit,
     id: "divisionequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: adddivision,
+    ontype: divisiontype,
+    getanswer: divisionanswer,
+    validate: divisionvalidate,
     settings: {
-      name: "division"
+      name: "division",
+
     }
   },
   "exponents":{
-    init:powerinit,
     id: "powerequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: addpower,
+    ontype: powertype,
+    getanswer: poweranswer,
+    validate: powervalidate,
     settings: {
       name: "power",
-      offset: "-110px"
+      offset: "-110px",
+
     }
   },
   "trigonometry":{
-    init: triginit,
     id: "trigequation",
     diffs: [0],
     template: "template1equation",
+    addproblem: addtrig,
+    ontype: trigtype,
+    getanswer: triganswer,
+    validate: trigvalidate,
     settings: {
       name: "trig",
       offset: "-109px"
     }
   },
   "celsius to fahrenheit":{
-    init: celctofinit,
     id: "celctofequation",
     diffs: [0,1,2],
     template: "template1equation",
+    addproblem: addcelctof,
+    ontype: celctoftype,
+    getanswer: celctofanswer,
+    validate: celctofvalidate,
     settings: {
       name: "celctof"
     }
   },
   "month to number":{
-    init: monthnuminit,
     id: "monthnumequation",
     diffs: [0],
     template: "template1equation",
+    addproblem: addmonthnum,
+    ontype: monthnumtype,
+    getanswer: monthnumanswer,
+    validate: monthnumvalidate,
     settings: {
-      name: "monthnum"
+      name: "monthnum",
+
     }
   }
 }
@@ -99,10 +131,12 @@ function init(){
 
   //$('.problem').css('opacity', '0')
 
-  modes[currentmode].init();
+  //modes[currentmode].init();
+
+  templates[currenttemplate].init();
 
 
-
+  /*
   if(currentdifficulty >= modes[currentmode].diffs.length){
 
     setdifficulty(modes[currentmode].diffs.length-1);
@@ -124,7 +158,7 @@ function init(){
 
 
   }
-
+  */
 
   if(modeselect == null){
     modeselect = "yarr";
@@ -142,6 +176,7 @@ function init(){
   }
 
   document.getElementById("finishscreen").style.display = "none"
+  document.getElementById(currenttemplate).style.display = ""
 
   cpmtrack = [];
   rawcpmtrack = [];

@@ -17,31 +17,38 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="equation.css">
-  <link rel="stylesheet" href="options.css">
-  <link rel="stylesheet" href="toppart.css">
-  <link rel="stylesheet" href="modeselect.css">
-  <link rel="stylesheet" href="themeselect.css">
-  <link rel="stylesheet" href="buttons.css">
-  <link rel="stylesheet" href="finishscreen.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/equation.css">
+  <link rel="stylesheet" href="styles/options.css">
+  <link rel="stylesheet" href="styles/toppart.css">
+  <link rel="stylesheet" href="styles/modeselect.css">
+  <link rel="stylesheet" href="styles/themeselect.css">
+  <link rel="stylesheet" href="styles/buttons.css">
+  <link rel="stylesheet" href="styles/finishscreen.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <script src="template1equation.js"></script>
-  <script src="additionfuncs.js"></script>
-  <script src="multfuncs.js"></script>
-  <script src="subtractionfuncs.js"></script>
-  <script src="division.js"></script>
-  <script src="trigfuncs.js"></script>
-  <script src="celctoffuncs.js"></script>
-  <script src="monthnumfuncs.js"></script>
-  <script src="powerfuncs.js"></script>
 
-  <script src="themes.js"></script>
-  <script src="options.js"></script>
-  <script src="modemenu.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+
+
+  <script src="template1equation.js"></script>
+  <script src="template1eqs/additionfuncs.js"></script>
+  <script src="template1eqs/multfuncs.js"></script>
+  <script src="template1eqs/subtractionfuncs.js"></script>
+  <script src="template1eqs/division.js"></script>
+  <script src="template1eqs/trigfuncs.js"></script>
+  <script src="template1eqs/celctoffuncs.js"></script>
+  <script src="template1eqs/monthnumfuncs.js"></script>
+  <script src="template1eqs/powerfuncs.js"></script>
+
+  <script src="options/themes.js"></script>
+  <script src="options/options.js"></script>
+  <script src="options/modemenu.js"></script>
 
   <script src="finishtest.js"></script>
   <script src="cpmchart.js"></script>
@@ -118,9 +125,8 @@
 
         <div class="inpandexample">
           <div class="numrestart">
-            <input class="numinput maininput" id="template1input"></input>
+            <input class="numinput maininput" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
             <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
-
           </div>
         </div>
 
