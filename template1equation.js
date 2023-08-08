@@ -60,8 +60,6 @@ function template1init(){
 
   mask.style.height = newheight;
 
-  problemlist = [];
-
   setTimeout( () => {
 
     let currentproblems = document.getElementsByClassName("problem");
@@ -70,6 +68,7 @@ function template1init(){
       currentproblems[0].remove();
     }
 
+    problemlist = [];
 
     for(var i = 0; i < 7; i++){
 

@@ -90,7 +90,6 @@ function modeinit(){
       }
 
       setmodename();
-      init();
 
 
 
@@ -128,6 +127,7 @@ function showmodeselect(){
 
   console.log("animating");
 
-  init();
+
+  //init();
 
 }
