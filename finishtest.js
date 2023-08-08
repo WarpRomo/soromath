@@ -9,8 +9,8 @@ function restarttest(focus=true){
     clearInterval(testcheckend);
     testcheckend = null;
   }
-
-  templates[currenttemplate].init();
+  
+  templates[currenttemplate].init()
 
   let input = document.getElementsByClassName("maininput")[0];
 

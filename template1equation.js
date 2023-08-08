@@ -36,7 +36,7 @@ function settemplate(template, settings){
 
 }
 
-function template1init(){
+function template1init(instantgen = false){
 
   t1heighttrack = 0;
 
@@ -52,32 +52,34 @@ function template1init(){
 
   problemlist = [];
 
-  let currentproblems = document.getElementsByClassName("problem");
+  setTimeout( () => {
 
-  while(currentproblems.length > 0){
-    currentproblems[0].remove();
-  }
+    let currentproblems = document.getElementsByClassName("problem");
 
-  for(var i = 0; i < 7; i++){
-
-    let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
-    let problem = modes[problemtype].addproblem(main=i == 0, difficulty=currentdifficulty, name=problemtype);
-
-    if(i == 0){
-
-
-      let p1height = problem.getBoundingClientRect().height
-      let inputheight = input.getBoundingClientRect().height
-
-      t1heighttrack = (inputheight - p1height) / 2 - 5
-      document.getElementById("template1problems").style.top = t1heighttrack + "px";
-
+    while(currentproblems.length > 0){
+      currentproblems[0].remove();
     }
 
-  }
 
-  console.log("YAR!");
-  
+    for(var i = 0; i < 7; i++){
+
+      let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
+      let problem = modes[problemtype].addproblem(main=i == 0, difficulty=currentdifficulty, name=problemtype);
+
+      if(i == 0){
+
+
+        let p1height = problem.getBoundingClientRect().height
+        let inputheight = input.getBoundingClientRect().height
+
+        t1heighttrack = (inputheight - p1height) / 2 - 5
+        document.getElementById("template1problems").style.top = t1heighttrack + "px";
+
+      }
+
+    }
+  }, instantgen ? 0 : 100);
+
 }
 
 

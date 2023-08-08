@@ -30,7 +30,7 @@
   width: 100%;
   height: 290px;
   transition: height 0.1s;
-  background: -webkit-linear-gradient( rgba(255, 255, 255, 0) 0%, var(--background) 25% );
+  background: -webkit-linear-gradient( rgba(255, 255, 255, 0) 0%, var(--background) 20% );
   z-index: 1;
 }
 
