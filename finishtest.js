@@ -9,7 +9,7 @@ function restarttest(focus=true){
     clearInterval(testcheckend);
     testcheckend = null;
   }
-  
+
   templates[currenttemplate].init()
 
   let input = document.getElementsByClassName("maininput")[0];
@@ -61,6 +61,8 @@ function starttest(){
 function finishtest(){
 
   console.log("CALLED!");
+
+  if(templates[currenttemplate].finish != undefined) templates[currenttemplate].finish();
 
   document.getElementById("finishcorrect").innerHTML = stats[0] + " correct";
   document.getElementById("finishwrong").innerHTML = stats[1] + " wrong";

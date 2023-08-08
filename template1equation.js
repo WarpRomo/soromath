@@ -4,6 +4,7 @@ let templates = {
 
   "template1equation":{
     init: template1init,
+    finish: template1finish,
   }
 
 };
@@ -36,7 +37,12 @@ function settemplate(template, settings){
 
 }
 
-function template1init(instantgen = false){
+function template1finish(){
+  let mask = document.getElementsByClassName("problemmask")[0]
+  mask.style.height = "290px";
+}
+
+function template1init(){
 
   t1heighttrack = 0;
 
@@ -48,7 +54,11 @@ function template1init(instantgen = false){
   let problemcontainer = document.getElementById("problemscontainer");
 
   let mask = document.getElementsByClassName("problemmask")[0]
-  mask.style.height = "290px";
+
+  let currentheight = mask.style.height;
+  let newheight = "290px";
+
+  mask.style.height = newheight;
 
   problemlist = [];
 
@@ -78,7 +88,7 @@ function template1init(instantgen = false){
       }
 
     }
-  }, instantgen ? 0 : 100);
+  }, currentheight == newheight ? 0 : 100);
 
 }
 

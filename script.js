@@ -133,7 +133,7 @@ function init(){
 
   //modes[currentmode].init();
 
-  templates[currenttemplate].init(true);
+  templates[currenttemplate].init();
 
 
   /*
