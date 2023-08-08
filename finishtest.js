@@ -17,7 +17,15 @@ function restarttest(focus=true){
   cpmtrack = [];
   rawcpmtrack = [];
 
-  if(focus) input.focus();
+  if(focus) window.setTimeout( () => input.focus(), 50 );
+
+}
+
+
+function hidefinish(){
+
+  document.getElementById("finishscreen").style.display = "none";
+  document.getElementById("options").style.display = ""
 
 }
 

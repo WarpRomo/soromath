@@ -40,10 +40,15 @@ function template1init(){
 
   t1heighttrack = 0;
 
+  document.getElementById("template1equation").style.display = ""
+
   let input = document.getElementById("template1input")
   input.value = ""
 
   let problemcontainer = document.getElementById("problemscontainer");
+
+  let mask = document.getElementsByClassName("problemmask")[0]
+  mask.style.height = "290px";
 
   problemlist = [];
 
@@ -71,7 +76,8 @@ function template1init(){
 
   }
 
-
+  console.log("YAR!");
+  
 }
 
 
@@ -85,7 +91,6 @@ function template1type(e){
 function template1enter(e, press=false){
 
     if(press && e.key != "Enter") return;
-    if(press) console.log("YAA");
 
     let input = document.getElementsByClassName("maininput")[0]
     let problems = document.getElementById("template1problems");
@@ -109,7 +114,11 @@ function template1enter(e, press=false){
     input.value = "";
 
     if(problemindex == 0){
+
       starttest();
+      let mask = document.getElementsByClassName("problemmask")[0]
+      mask.style.height = "1000px";
+
     }
 
     if(correct){

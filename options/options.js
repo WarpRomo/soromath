@@ -6,8 +6,8 @@ function setdifficulty(difficulty){
   let current = document.getElementById(difficultybuttons[currentdifficulty]);
   let pressed = document.getElementById(difficultybuttons[difficulty]);
 
-  current.classList.remove("difficultyselected");
-  pressed.classList.add("difficultyselected");
+  current.classList.remove("textselected");
+  pressed.classList.add("textselected");
 
   currentdifficulty = difficulty
 
@@ -21,7 +21,10 @@ function settime(elem, time){
 
   let current = document.getElementById("timeselected");
   current.id = "";
+  current.classList.remove("textselected");
+
   elem.id = "timeselected";
+  elem.classList.add("textselected");
 
   init();
 

@@ -27,6 +27,17 @@
   opacity: 0.9;
 }
 
+
+#themeselect::-webkit-scrollbar{
+  background-color: var(--window_background);
+  width: 5px;
+}
+
+#themeselect::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+  width: 5px;
+}
+
 @media screen and (max-width: 800px) {
   #themeselect{
     width: 85% !important;

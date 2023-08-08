@@ -36,12 +36,9 @@
   justify-content: space-around;
 }
 
-#timeselected{
-  color: var(--text_select_color);
-}
-
-.modeselected{
-  color: var(--text_select_color);
+.textselected{
+  color: var(--text_select_color) !important;
+  opacity: 1 !important;
 }
 
 @media screen and (max-width: 800px) {

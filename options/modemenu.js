@@ -102,7 +102,9 @@ function modeinit(){
   }
 
 
+  let modecontainer = modeselect.parentElement;
 
+  console.log(modecontainer);
 
 
 }
@@ -123,6 +125,8 @@ function showmodeselect(){
   let container = document.getElementById("modecontainer");
 
   container.style.display = "";
+
+  console.log("animating");
 
   init();
 

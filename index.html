@@ -73,7 +73,7 @@
 
         <p class="optiontext">Time</p>
         <div class="buttonrow">
-          <button class="zulubutton optionbutton" id="timeselected" onclick="settime(this,15000)">15s</button>
+          <button class="zulubutton optionbutton textselected" id="timeselected" onclick="settime(this,15000)">15s</button>
           <button class="zulubutton optionbutton" onclick="settime(this,60000)">60s</button>
           <button class="zulubutton optionbutton" onclick="settime(this,120000)">120s</button>
         </div>
@@ -83,7 +83,7 @@
 
         <p class="optiontext">Difficulty</p>
         <div class="buttonrow">
-          <button class="zulubutton difficultyselected optionbutton" id="easybutton" onclick="setdifficulty(0)">easy</button>
+          <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
           <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
           <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
         </div>
@@ -119,7 +119,7 @@
 
       <div id="problemandinput">
         <div id="problemscontainer">
-          <div class="problemmask"></div>
+          <div class="problemmask problemmaskhide"></div>
           <div class="problems mainproblems" id="template1problems"></div>
         </div>
 
@@ -128,6 +128,7 @@
             <input class="numinput maininput" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
             <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
           </div>
+          <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
         </div>
 
       </div>
@@ -144,7 +145,7 @@
         <p id="finishtime" class="finishtext">time: 60 seconds</p>
         <p id="finishmode" class="finishtext">mode: addition</p>
         <p id="finishdifficulty" class="finishtext">difficulty: easy</p>
-        <button id="nexttest" class="zulubutton" onclick="init()">Next test</button>
+        <button id="nexttest" class="zulubutton" onclick="restarttest(); hidefinish()">Next test</button>
       </div>
 
       <canvas id="cpmchart"></canvas>

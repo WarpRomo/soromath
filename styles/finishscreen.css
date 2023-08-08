@@ -16,6 +16,7 @@
   min-width: 500px;
   left: 45px;
   top: 30px;
+  margin-top: 35px;
 }
 
 #finishcpm{
@@ -40,7 +41,8 @@
 
 #finishtime{
   color: var(--text_color);
-  margin: 0px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 #finishrawcpm{
@@ -51,6 +53,7 @@
 }
 
 #finishmode{
+  margin-top: 0px;
   margin-bottom: 10px;
   color: var(--text_color);
 }
@@ -62,7 +65,8 @@
 
 #nexttest{
   width: 100px;
-  height: 30px;
+  height: 50px;
+  font-size: 18px;
 }
 
 .finishtext{

@@ -26,7 +26,7 @@ function addmult(main=false,difficulty=0,name=null){
 
 
   let problem = document.createElement("p");
-  problem.innerHTML = num1 + "•" + num2 + " " + "="
+  problem.innerHTML = num1 + "×" + num2 + " " + "="
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 

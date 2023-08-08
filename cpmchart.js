@@ -28,6 +28,8 @@ function problemcomplete(correct){
 
 function initchart(){
 
+  var style = getComputedStyle(document.body)
+
   cpmchart = new Chart("cpmchart", {
 
       type: "line",
@@ -53,6 +55,24 @@ function initchart(){
         responsive:true,
         maintainAspectRatio: false,
         legend: {display: true},
+        scales:{
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Calculations Per Minute',
+              color: style.getPropertyValue('--text_color'),
+              fontSize: 17,
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Seconds',
+              color: style.getPropertyValue('--text_color'),
+              fontSize: 20,
+            }
+          }]
+        }
       }
     });
 

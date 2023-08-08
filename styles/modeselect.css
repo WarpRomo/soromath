@@ -11,7 +11,7 @@
   height: 100%;
   background: rgba(0,0,0,0.2);
   backdrop-filter: blur(3px);
-  z-index: 2
+  z-index: 2;
 }
 
 #modeselect{
@@ -22,11 +22,20 @@
   background: var(--window_background);
   border-radius: 5px;
   border: solid 5px var(--window_border);
-  scrollbar-width: thin;
   overflow-x: hidden;
   top: 10%;
   margin-left: auto;
   margin-right: auto;
+}
+
+#modeselect::-webkit-scrollbar{
+  background-color: var(--window_background);
+  width: 5px;
+}
+
+#modeselect::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+  width: 5px;
 }
 
 .modeselected{
