@@ -9,11 +9,11 @@ function adddivision(main=false,difficulty=0,name=null){
   }
   if(difficulty == 1){
     num2 = Math.floor(Math.random() * 9) + 1;
-    num1 = num2 * Math.floor(Math.random() * 100);
+    num1 = num2 * Math.floor(Math.random() * 90) + 10;
   }
   if(difficulty == 2){
     num2 = Math.floor(Math.random() * 99) + 1;
-    num1 = num2 * Math.floor(Math.random() * 100);
+    num1 = num2 * Math.floor(Math.random() * 90) + 10;
   }
 
 

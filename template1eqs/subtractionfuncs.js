@@ -9,12 +9,12 @@ function addsubtraction(main=false,difficulty=0,name=null){
     num2 = Math.floor(Math.random() * 10);
   }
   if(difficulty == 1){
-    num1 = Math.floor(Math.random() * 100)
-    num2 = Math.floor(Math.random() * 100);
+    num1 = Math.floor(Math.random() * 90) + 10
+    num2 = Math.floor(Math.random() * 90) + 10;
   }
   if(difficulty == 2){
-    num1 = Math.floor(Math.random() * 1000)
-    num2 = Math.floor(Math.random() * 1000);
+    num1 = Math.floor(Math.random() * 900) + 100
+    num2 = Math.floor(Math.random() * 900) + 100;
   }
 
   if(main == false) problemlist.push([name, [num1,num2]]);
