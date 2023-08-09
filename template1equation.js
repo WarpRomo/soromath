@@ -1,39 +1,47 @@
 
-
-let templates = {
-
-  "template1equation":{
-    init: template1init,
-    finish: template1finish,
-  }
-
-};
-
 let t1heighttrack = 0;
 
-function settemplate(template, settings){
+let problemindex = 0;
+let problemlist = [];
+let stats = [0,0];
 
-  stats = [0,0];
-  problemindex = 0;
-  problemlist = [];
-  teststarted = false;
+let totaltime = 15000;
+let teststarted = false;
+let testcheckend = null;
 
-  if(testcheckend != null){
-    clearInterval(testcheckend);
-    testcheckend = null;
-  }
+
+function settemplate(template){
 
   currenttemplate = template;
 
-  for(var i = 0; i < templates.length; i++){
-    let templateelement = document.getElementById(templates[i]);
-    if(templates[i] != template){
+  let templatekeys = Object.keys(templates)
+
+  console.log("YO");
+
+  for(var i = 0; i < templatekeys.length; i++){
+
+    let templateelement = document.getElementById(templatekeys[i]);
+
+    console.log("here");
+
+    if(templatekeys[i] != template){
       templateelement.style.display = "none";
+
+      if(templates[templatekeys[i]].notit != undefined){
+
+        templates[templatekeys[i]].notit();
+
+      }
+
     }
     else{
       templateelement.style.display = "";
     }
   }
+
+  console.log(template);
+
+  templates[template].init();
 
 }
 
@@ -46,10 +54,13 @@ function template1init(){
 
   t1heighttrack = 0;
 
-  document.getElementById("template1equation").style.display = ""
+  let myself = document.getElementById("template1equation");
+  myself.style.display = "";
 
   let input = document.getElementById("template1input")
   input.value = ""
+
+  document.getElementById("difficultyoption").style.display = "";
 
   let problemcontainer = document.getElementById("problemscontainer");
 
@@ -88,6 +99,12 @@ function template1init(){
 
     }
   }, currentheight == newheight ? 0 : 100);
+
+}
+
+function template1switch(){
+
+  restarttest(false);
 
 }
 

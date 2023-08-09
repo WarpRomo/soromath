@@ -26,6 +26,15 @@
   <link rel="stylesheet" href="styles/buttons.css">
   <link rel="stylesheet" href="styles/finishscreen.css">
 
+  <link rel="stylesheet" href="styles/flashanzan.css">
+
+  <script src="jquery.min.js"></script>
+
+  <script
+			  src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+			  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+			  crossorigin="anonymous"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
@@ -35,6 +44,7 @@
         onload="renderMathInElement(document.body);"></script>
   </head>
 
+  <script src="flashanzanequation.js"></script>
 
   <script src="template1equation.js"></script>
   <script src="template1eqs/additionfuncs.js"></script>
@@ -57,7 +67,6 @@
 
 
   <script src="script.js"></script>
-  <script src="jquery.min.js"></script>
 
 </head>
 
@@ -89,6 +98,17 @@
         </div>
       </div>
 
+      <div class="option" id="flashoption">
+        <p class="optiontext">Flash Anzan</p>
+
+        <div class="buttonrow">
+          <button class="zulubutton optionbutton" id="anzansettingsbutton" onclick="showflashanzan()">settings</button>
+        </div>
+
+      </div>
+
+
+
       <div class="option" id="modeoption">
         <p class="optiontext">Mode</p>
         <div class="buttonrow">
@@ -103,7 +123,6 @@
           <button class="zulubutton optionbutton" id="themeselectbutton" onclick="showthemeselect()">default</button>
         </div>
       </div>
-
 
     </div>
 
@@ -129,6 +148,23 @@
             <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
           </div>
           <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="equation" id="flashanzanequation" style="display:none">
+
+      <p id="flashtext">7932</p>
+
+      <div id="flashinputcontainer">
+        <button id="flashstart" class="zulubutton" onclick="flashstart()">Start</button>
+
+        <div id="flashinputrestart" style="display: none">
+          <input id="flashinput" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
+          <button id="flashrestart" class="zulubutton" onclick="flashrestart()" style="display: none">↻</button>
         </div>
 
       </div>
@@ -162,6 +198,38 @@
 
   <div id = "themecontainer" onclick="removethemefocus(event)" style="display:none">
     <div id = "themeselect" onclick="removethemefocus(event)">
+
+
+    </div>
+  </div>
+
+  <div id = "flashcontainer" onclick="removeanzanfocus(event)" style="display:none">
+    <div id = "flashbox">
+
+      <p id="flashanzantitle">Flash Anzan</p>
+
+      <div class = "flashsettingstext">
+        <p class="flashlabel">Amount of digits: </p>
+        <p id="flashdigittext" class="flashvalue"></p>
+      </div>
+
+      <input type="range" min="1" max="9" value="1" class="zuluslider anzanslider" id="flashdigitamount" oninput="getanzansliders()">
+
+      <div class = "flashsettingstext">
+        <p class="flashlabel">Amount of numbers: </p>
+        <p id="flashnumtext" class="flashvalue"></p>
+      </div>
+
+      <input type="range" min="1" max="50" value="1" class="zuluslider anzanslider" id="flashnumamount" oninput="getanzansliders()">
+
+      <div class = "flashsettingstext">
+        <p class="flashlabel">Flash speed: </p>
+        <p id="flashspeedtext" class="flashvalue"></p>
+      </div>
+
+      <input type="range" min="1" max="50" value="1" class="zuluslider anzanslider" id="flashspeedamount" oninput="getanzansliders()">
+      <button class="zulubutton" id="flashdone" onclick="removeanzanfocus(event, true)">Done</button>
+
 
 
     </div>

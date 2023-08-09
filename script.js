@@ -1,15 +1,24 @@
 
-let problemindex = 0;
-let problemlist = [];
-let stats = [0,0];
 
-let totaltime = 15000;
-let teststarted = false;
-let testcheckend = null;
 
 let currentmode = ["addition"];
 let currenttemplate = "template1equation";
 let currentdifficulty = 0;
+
+let templates = {
+
+  "template1equation":{
+    init: template1init,
+    finish: template1finish,
+    notit: template1switch
+  },
+  "flashanzanequation": {
+    init: flashanzaninit,
+    notit: flashanzanswitch
+  }
+
+};
+
 
 
 
@@ -117,6 +126,12 @@ let modes = {
       name: "monthnum",
 
     }
+  },
+  "flash anzan":{
+
+    template: "flashanzanequation"
+
+
   }
 }
 
@@ -133,8 +148,7 @@ function init(){
 
   //modes[currentmode].init();
 
-  templates[currenttemplate].init();
-
+  settemplate(currenttemplate);
 
   /*
   if(currentdifficulty >= modes[currentmode].diffs.length){

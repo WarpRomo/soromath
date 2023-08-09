@@ -77,7 +77,30 @@ function modeinit(){
       }
       else{
         buttonelem.classList.add("modeselected");
-        currentmode.push(keys[num]);
+
+        let mode = keys[num];
+        let filtered = [mode];
+
+        for(var i = 0; i < currentmode.length; i++){
+          if(modes[currentmode[i]].template == modes[mode].template){
+            filtered.push(currentmode[i]);
+          }
+        }
+
+        filtered = filtered.sort();
+
+        for(var i = 0; i < currentmode.length; i++){
+          if(filtered.indexOf(currentmode[i]) == -1 && buttonelems[currentmode[i]].classList.contains("modeselected")){
+            buttonelems[currentmode[i]].classList.remove("modeselected")
+          }
+        }
+
+        currentmode = filtered;
+
+        console.log(currentmode + " YOOO");
+
+        settemplate(modes[mode].template);
+
       }
       //let current = document.getElementsByClassName("modeselected");
       //current[0].classList.remove("modeselected");
@@ -117,6 +140,7 @@ function removemodefocus(event){
 
   container.style.display = "none";
 
+
 }
 
 function showmodeselect(){
@@ -126,8 +150,5 @@ function showmodeselect(){
   container.style.display = "";
 
   console.log("animating");
-
-
-  //init();
 
 }
