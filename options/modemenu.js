@@ -74,6 +74,13 @@ function modeinit(){
         }
         newmodes = newmodes.sort();
         currentmode = newmodes;
+
+        if(currentmode.length == 0){
+          currentmode = ["addition"];
+          buttonelems["addition"].classList.add("modeselected");
+        }
+
+        settemplate(modes[currentmode[0]].template);
       }
       else{
         buttonelem.classList.add("modeselected");
@@ -105,12 +112,6 @@ function modeinit(){
       //let current = document.getElementsByClassName("modeselected");
       //current[0].classList.remove("modeselected");
 
-
-
-      if(currentmode.length == 0){
-        currentmode = ["addition"];
-        buttonelems["addition"].classList.add("modeselected");
-      }
 
       setmodename();
 
