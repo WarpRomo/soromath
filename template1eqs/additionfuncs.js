@@ -42,6 +42,12 @@ function addaddition(main=false,difficulty=0,name=null){
 
 }
 
+function additionspeech(problem){
+
+  return problem[0] + " plus " + problem[1];
+
+}
+
 function additiontype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

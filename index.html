@@ -44,6 +44,8 @@
         onload="renderMathInElement(document.body);"></script>
   </head>
 
+  <script src="voice.js"></script>
+
   <script src="flashanzanequation.js"></script>
 
   <script src="template1equation.js"></script>
@@ -91,10 +93,17 @@
       <div class="option" id="difficultyoption">
 
         <p class="optiontext">Difficulty</p>
-        <div class="buttonrow">
-          <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
-          <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
-          <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+        <div class="difficultyrow">
+          <div class="buttonrow">
+            <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
+            <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
+            <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+          </div>
+          <div class="voicemoderow">
+
+            <button class="zulubutton optionbutton" id="voicebutton" onclick="voicemodeclick()">voice mode: off</button>
+
+          </div>
         </div>
       </div>
 
@@ -134,7 +143,10 @@
 
       <p class="timercontainer">
         <canvas class="timershow"></canvas>
+        <p id="voicemodetext" style="display: none">Type to begin...</p>
       </p>
+
+
 
       <div id="problemandinput">
         <div id="problemscontainer">

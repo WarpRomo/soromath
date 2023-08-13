@@ -52,6 +52,18 @@ function template1finish(){
 
 function template1init(){
 
+
+  if(voicemodeenabled){
+    document.getElementById("voicemodetext").style.display = "";
+
+    if (synth.speaking) {
+      synth.cancel();
+    }
+  }
+  else{
+    document.getElementById("voicemodetext").style.display = "none";
+  }
+
   t1heighttrack = 0;
 
   let myself = document.getElementById("template1equation");
@@ -138,10 +150,19 @@ function template1enter(e, press=false){
 
     console.log(answer, correct)
 
+    if(voicemodeenabled && problemindex == 0){
+
+      starttest();
+      correct = true;
+      document.getElementById("voicemodetext").style.display = "none";
+
+    }
+
+
     if( !(correct || e.key == "Enter") ) return;
     input.value = "";
 
-    if(problemindex == 0){
+    if(!voicemodeenabled && problemindex == 0){
 
       starttest();
       let mask = document.getElementsByClassName("problemmask")[0]
@@ -154,12 +175,30 @@ function template1enter(e, press=false){
       problems.children[mainproblemindex].classList.add("completedproblem");
       stats[0]++;
       problemcomplete(true)
+
+      if(voicemodeenabled){
+
+        let correct = flashcorrect.cloneNode();
+        correct.volume = 0.07
+        correct.play()
+
+      }
+
     }
     else{
       problems.children[mainproblemindex].classList.add("wronganswer");
       problems.children[mainproblemindex].classList.add("completedproblem");
       stats[1]++;
       problemcomplete(false);
+
+      if(voicemodeenabled){
+
+        let wrong = flashwrong.cloneNode()
+        wrong.volume = 0.07
+        wrong.play()
+
+      }
+
     }
 
     let fadeoutelem = problems.children[mainproblemindex];
@@ -189,5 +228,25 @@ function template1enter(e, press=false){
 
     let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
     modes[nextproblem].addproblem(main=false, difficulty=currentdifficulty, name=nextproblem);
+
+    if(voicemodeenabled){
+
+      let text = "error";
+
+      if("speechText" in modes[problemlist[problemindex][0]]){
+
+        text = modes[problemlist[problemindex][0]].speechText(problemlist[problemindex][1]);
+
+      }
+
+
+      setTimeout(() => {
+        synthesisvoice(text);
+      }, 500)
+
+
+
+    }
+
 
 }

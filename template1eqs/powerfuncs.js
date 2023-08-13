@@ -55,6 +55,13 @@ function addpower(setproblem=null,difficulty=0,name=null){
 
 }
 
+function powerspeech(problem){
+
+  return problem[0] + " to the power of " + problem[1];
+
+}
+
+
 function powertype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

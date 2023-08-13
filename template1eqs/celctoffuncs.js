@@ -37,6 +37,13 @@ function addcelctof(main=false,difficulty=null,name=null){
 
 }
 
+function celctofspeech(problem){
+
+  return problem[0] + " degrees"
+
+
+}
+
 function celctoftype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

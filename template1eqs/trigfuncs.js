@@ -47,6 +47,22 @@ function addtrig(main=false,difficulty=0,name=null){
 
 }
 
+function trigspeech(problem){
+
+  let func = problem[0];
+  let fraction = problem[1];
+
+  let functionstring = "";
+
+  if(func == "sin") functionstring = "sign";
+  if(func == "cos") functionstring = "co-sign";
+  if(func = "tan") functionstring = "tan";
+
+  return functionstring + " of " + fraction[0] + " pie over " + fraction[1];
+
+}
+
+
 function trigtype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

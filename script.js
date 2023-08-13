@@ -1,5 +1,4 @@
-
-
+const synth = window.speechSynthesis;
 
 let currentmode = ["addition"];
 let currenttemplate = "template1equation";
@@ -32,6 +31,7 @@ let modes = {
     ontype: additiontype,
     getanswer: additionanswer,
     validate: additionvalidate,
+    speechText: additionspeech,
     settings: {
       name: "addition",
 
@@ -45,6 +45,7 @@ let modes = {
     ontype: multtype,
     getanswer: multanswer,
     validate: multvalidate,
+    speechText: multspeech,
     settings: {
       name: "mult",
 
@@ -58,6 +59,7 @@ let modes = {
     ontype: subtractiontype,
     getanswer: subtractionanswer,
     validate: subtractionvalidate,
+    speechText: subtractionspeech,
     settings: {
       name: "subtraction"
     }
@@ -70,6 +72,7 @@ let modes = {
     ontype: divisiontype,
     getanswer: divisionanswer,
     validate: divisionvalidate,
+    speechText: divisionspeech,
     settings: {
       name: "division",
 
@@ -83,6 +86,7 @@ let modes = {
     ontype: powertype,
     getanswer: poweranswer,
     validate: powervalidate,
+    speechText: powerspeech,
     settings: {
       name: "power",
       offset: "-110px",
@@ -97,6 +101,7 @@ let modes = {
     ontype: trigtype,
     getanswer: triganswer,
     validate: trigvalidate,
+    speechText: trigspeech,
     settings: {
       name: "trig",
       offset: "-109px"
@@ -110,6 +115,7 @@ let modes = {
     ontype: celctoftype,
     getanswer: celctofanswer,
     validate: celctofvalidate,
+    speechText: celctofspeech,
     settings: {
       name: "celctof"
     }
@@ -122,6 +128,7 @@ let modes = {
     ontype: monthnumtype,
     getanswer: monthnumanswer,
     validate: monthnumvalidate,
+    speechText: monthnumspeech,
     settings: {
       name: "monthnum",
 

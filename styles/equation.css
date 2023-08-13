@@ -1,5 +1,21 @@
 
 
+#voicemodetext{
+
+  font-family: var(--font_family);
+  color: var(--text_color);
+  font-size: 20px;
+  margin-bottom: 0px;
+  opacity: 0.6;
+
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  right: 0;
+
+}
+
 #problemandinput{
   display: flex;
   justify-content: center;

@@ -37,6 +37,15 @@ function adddivision(main=false,difficulty=0,name=null){
 
 }
 
+function divisionspeech(problem){
+
+  return problem[0] + " over " + problem[1];
+
+
+
+}
+
+
 function divisiontype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

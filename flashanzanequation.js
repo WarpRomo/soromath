@@ -144,7 +144,7 @@ function flashstart(){
           sound.volume = 0.2
           sound.play()
           numelem.innerHTML = numbers;
-        }, flashtime / 3);
+        }, flashtime / 5);
 
 
         flashnumindex++;

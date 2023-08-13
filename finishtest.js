@@ -77,7 +77,7 @@ function finishtest(){
   let modestring = currentmode.join("<br>")
 
   document.getElementById("finishmode").innerHTML = "mode: \n" + modestring;
-  document.getElementById("finishdifficulty").innerHTML = "difficulty: " + difficultynames[currentdifficulty];
+  document.getElementById("finishdifficulty").innerHTML = "difficulty: " + (voicemodeenabled ? "voice " : "") + difficultynames[currentdifficulty];
 
   document.getElementById("finishtime").innerHTML = "time: " + (totaltime / 1000) + " seconds"
 

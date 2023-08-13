@@ -37,6 +37,12 @@ function addmult(main=false,difficulty=0,name=null){
 
 }
 
+function multspeech(problem){
+
+  return problem[0] + " times " + problem[1]; 
+
+}
+
 function multtype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

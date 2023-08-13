@@ -37,6 +37,14 @@ function addsubtraction(main=false,difficulty=0,name=null){
 
 }
 
+function subtractionspeech(problem){
+
+  return problem[0] + " minus " + problem[1];
+
+
+}
+
+
 function subtractiontype(e){
 
   let input = document.getElementsByClassName("maininput")[0];

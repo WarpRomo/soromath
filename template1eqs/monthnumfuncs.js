@@ -26,6 +26,13 @@ function addmonthnum(main=false,difficulty=null,name=null){
 
 }
 
+
+function monthnumspeech(problem){
+
+  return problem[0];
+
+}
+
 function monthnumtype(e){
 
   let input = document.getElementsByClassName("maininput")[0];
