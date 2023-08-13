@@ -59,6 +59,9 @@ function template1init(){
     if (synth.speaking) {
       synth.cancel();
     }
+
+    voiceinit();
+
   }
   else{
     document.getElementById("voicemodetext").style.display = "none";
@@ -70,6 +73,7 @@ function template1init(){
   myself.style.display = "";
 
   let input = document.getElementById("template1input")
+
   input.value = ""
 
   document.getElementById("difficultyoption").style.display = "";
@@ -160,7 +164,10 @@ function template1enter(e, press=false){
 
 
     if( !(correct || e.key == "Enter") ) return;
-    input.value = "";
+    if(!voicemodeenabled) input.value = "";
+    else{
+      setTimeout(() => {input.value=""}, 50);
+    }
 
     if(!voicemodeenabled && problemindex == 0){
 

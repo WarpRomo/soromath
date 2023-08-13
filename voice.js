@@ -1,7 +1,9 @@
 
 let voicemodeenabled = false;
+let voicerate = 1;
 
-function voicemodeclick(){
+
+function voicemodeclick(yarr=true){
 
   let button = document.getElementById("voicebutton");
 
@@ -24,6 +26,7 @@ function voicemodeclick(){
     document.getElementsByClassName("numrestart")[0].style.left = "0%";
     document.getElementsByClassName("inputexample")[0].style.left = "0%";
     document.getElementById("voicemodetext").style.display = "";
+    document.getElementById("voicesettings").disabled = false;
 
     init();
 
@@ -43,9 +46,44 @@ function voicemodeclick(){
     document.getElementsByClassName("numrestart")[0].style.left = "50%";
     document.getElementsByClassName("inputexample")[0].style.left = "50%";
     document.getElementById("voicemodetext").style.display = "none";
+    document.getElementById("voicesettings").disabled = true;
 
   }
 
+
+}
+
+function voicesettingsclick(){
+
+}
+
+
+function voiceinit(doinit=false){
+  setvoicesliders(doinit);
+}
+
+function getvoicesliders(){
+  voicerate = 1 + document.getElementById("voicespeedslider").value / 3;
+}
+
+function setvoicesliders(doinit){
+  document.getElementById("voicespeedslider").value = (voicerate - 1)*3;
+
+}
+
+function removevoicecontainer(event, bypass){
+
+  if(!bypass && event.target.id != "voicecontainer") return
+
+  document.getElementById("voicecontainer").style.display = "none";
+  init();
+
+
+}
+
+function showvoicecontainer(){
+
+  document.getElementById("voicecontainer").style.display = "";
 
 }
 
@@ -66,7 +104,7 @@ function synthesisvoice(text, rate=1.2){
 
   }
 
-  utterThis.rate = rate;
+  utterThis.rate = voicerate;
 
 
   if (synth.speaking) {

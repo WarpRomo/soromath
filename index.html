@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="styles/themeselect.css">
   <link rel="stylesheet" href="styles/buttons.css">
   <link rel="stylesheet" href="styles/finishscreen.css">
+  <link rel="stylesheet" href="styles/voice.css">
 
   <link rel="stylesheet" href="styles/flashanzan.css">
 
@@ -102,6 +103,8 @@
           <div class="voicemoderow">
 
             <button class="zulubutton optionbutton" id="voicebutton" onclick="voicemodeclick()">voice mode: off</button>
+            <button class="zulubutton optionbutton" id="voicesettings" onclick="showvoicecontainer()" disabled />voice ⚙️</button>
+
 
           </div>
         </div>
@@ -241,6 +244,27 @@
 
       <input type="range" min="1" max="50" value="1" class="zuluslider anzanslider" id="flashspeedamount" oninput="getanzansliders()">
       <button class="zulubutton" id="flashdone" onclick="removeanzanfocus(event, true)">Done</button>
+
+
+
+    </div>
+  </div>
+
+  <div id = "voicecontainer" onclick="removevoicecontainer(event)" style="display:none">
+    <div id = "voicebox">
+
+      <p id="flashanzantitle">Voice Settings</p>
+
+      <div class = "flashsettingstext">
+        <p class="flashlabel">Voice speed: </p>
+        <p id="flashdigittext" class="flashvalue"></p>
+      </div>
+
+      <input type="range" min="1" max="7" value="1" class="zuluslider voiceslider" id="voicespeedslider" oninput="getvoicesliders()">
+
+      <button class="zulubutton" id="voicetest" onclick="synthesisvoice('394 plus 921', voicerate)">Test voice</button>
+
+      <button class="zulubutton" id="voicedone" onclick="removevoicecontainer(event, true)">Done</button>
 
 
 

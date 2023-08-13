@@ -201,6 +201,10 @@ function init(){
   document.getElementById("finishscreen").style.display = "none"
   document.getElementById(currenttemplate).style.display = ""
 
+  if(!voicemodeenabled){
+    document.getElementById("voicesettings").disabled = true;
+  }
+
   cpmtrack = [];
   rawcpmtrack = [];
 
