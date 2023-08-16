@@ -3,4 +3,4 @@
 <h1><a id="title" href="https://warpromo.github.io/flashmath/" target="_blank">https://warpromo.github.io/flashmath/</a></h1>
 <h1>In flashmath, you practice your mental math.</h1> 
 <h1>There are many things to customize, such as different modes, flash anzan, and even a voice-mode.</h1> 
-<h1><b>Made using HTML5 Canvas + Javascript + CSS</b></h1>
+<h1><b>Made using HTML + Javascript + CSS</b></h1>
