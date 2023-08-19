@@ -19,35 +19,35 @@ let completedtests = [
    cpm: 120,
    acc: [10,20],
    time:"15s",
-   mode: ["addition","subtraction"],
+   mode: ["addition"],
    date: 1692392598730 - 10*86400000
  },
  {
   cpm: 120,
   acc: [10,20],
   time:"15s",
-  mode: ["addition","subtraction"],
+  mode: ["addition"],
   date: 1692392598730 - 6*86400000
   },
   {
    cpm: 120,
    acc: [10,20],
    time:"15s",
-   mode: ["addition","subtraction"],
+   mode: ["addition"],
    date: 1692392598730 - 5.3*86400000
   },
   {
    cpm: 120,
    acc: [10,20],
    time:"15s",
-   mode: ["addition","subtraction"],
+   mode: ["addition"],
    date: 1692392598730 - 4*86400000
   },
   {
    cpm: 120,
    acc: [10,20],
    time:"15s",
-   mode: ["addition","subtraction"],
+   mode: ["addition"],
    date: 1692392598730 - 3*86400000
   },
 ]

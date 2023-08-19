@@ -107,10 +107,19 @@ function makeprofilechart(){
 
   let values = [];
 
+  let pb = -1;
+  let totalacc = 0;
+  let testcount = timelist.length;
+
+
   for(var i = 0; i < timelist.length; i++){
 
     //let dtime = (timedistance - (currenttime - timelist[i].date)) / timedistance;
 
+
+    if(timelist[i].cpm > pb) pb = timelist[i].cpm;
+
+    totalacc += timelist[i].acc[0] / (timelist[i].acc[0] + timelist[i].acc[1])
 
     values.push({
       x: timelist[i].date,
@@ -119,11 +128,14 @@ function makeprofilechart(){
 
   }
 
+  totalacc = totalacc / timelist.length;
+  totalacc = Math.floor(totalacc * 10000) / 100
+
   console.log(values);
 
   var style = getComputedStyle(document.body)
 
-  document.getElementById("profilechart").style.display = "";
+  document.getElementById("profilechartcontainer").style.display = "";
   document.getElementById("profilecharthide").style.display = "none";
 
   if(values.length >= requiredTests){
@@ -140,9 +152,13 @@ function makeprofilechart(){
     }
 
     profilecpmchart.update();
+
+    document.getElementById("cpmstat").innerHTML = `PB: ${pb} CPM`
+    document.getElementById("accstat").innerHTML = `Accuracy: ${totalacc}%`
+    document.getElementById("testcountstat").innerHTML = `Test Count: ${testcount}`
   }
   else{
-    document.getElementById("profilechart").style.display = "none";
+    document.getElementById("profilechartcontainer").style.display = "none";
     document.getElementById("profilecharthide").style.display = "";
   }
 

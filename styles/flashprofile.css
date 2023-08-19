@@ -6,11 +6,27 @@
   margin-right: auto;
 }
 
+#profilegraphstats{
+  display: flex;
+  justify-content: center;
+}
+
+.profilegraphstat{
+  font-family: var(--font_family);
+  color: var(--text_color);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 2px;
+  opacity: 0.6;
+  font-size: 15px;
+}
+
 #profilechartcontainer{
   width: 100%;
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 #backgroundprofiletext{
