@@ -71,7 +71,12 @@ function initprofilechart(){
 
 function makeprofilechart(){
 
+  if(profilecpmchart != null){
+    profilecpmchart.destroy();
+    profilecpmchart = null;
+  }
   if(profilecpmchart == null) initprofilechart()
+
 
   let filtered = [];
 

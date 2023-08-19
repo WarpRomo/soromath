@@ -80,7 +80,6 @@ function profileinit(){
   }
 
 
-  initprofilechart()
   setdaybutton();
   setprofiletimebutton();
   setprofiledifficultybutton();
