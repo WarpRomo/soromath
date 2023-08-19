@@ -111,6 +111,10 @@ function modeinit(){
       //current[0].classList.remove("modeselected");
 
 
+      if(currenttemplate == "template1equation"){
+        restarttest(false);
+      }
+
       setmodename();
 
 
