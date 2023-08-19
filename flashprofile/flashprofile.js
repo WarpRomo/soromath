@@ -7,7 +7,7 @@ let timebuttons = ["15sbutton", "60sbutton", "120sbutton"]
 let profiletime = "15sbutton"
 
 
-let currentprofilemode = ["addition", "subtraction"];
+let currentprofilemode = ["addition"];
 
 let requiredTests = 5;
 
