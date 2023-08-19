@@ -11,6 +11,11 @@ let currentprofilemode = ["addition"];
 
 let requiredTests = 5;
 
+
+let profiledifficultybuttons = ["easypbutton", "mediumpbutton", "hardpbutton"];
+let profiledifficulty = "easypbutton";
+
+
 let completedtests = localStorage.getItem("completedtests");
 let completedparsed = false;
 /*
@@ -78,6 +83,7 @@ function profileinit(){
   initprofilechart()
   setdaybutton();
   setprofiletimebutton();
+  setprofiledifficultybutton();
   makeprofilechart();
 
 }
@@ -115,6 +121,27 @@ function setprofiletimebutton(time=null){
     let btn = document.getElementById(timebuttons[i]);
 
     if(timebuttons[i] == profiletime){
+      if(!btn.classList.contains("textselected")) btn.classList.add("textselected")
+    }
+    else{
+      if(btn.classList.contains("textselected")) btn.classList.remove("textselected")
+    }
+
+  }
+
+}
+
+function setprofiledifficultybutton(difficulty=null){
+
+  let prevtime = profiledifficulty;
+  if(difficulty != null) profiledifficulty = difficulty;
+  if(profiledifficulty != prevtime) makeprofilechart();
+
+  for(var i = 0; i < profiledifficultybuttons.length; i++){
+
+    let btn = document.getElementById(profiledifficultybuttons[i]);
+
+    if(profiledifficultybuttons[i] == profiledifficulty){
       if(!btn.classList.contains("textselected")) btn.classList.add("textselected")
     }
     else{

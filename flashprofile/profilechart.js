@@ -79,6 +79,10 @@ function makeprofilechart(){
 
   let times = ["15s", "60s", "120s"];
 
+  let difficulties = [0,1,2]
+
+  let difficultychoice = difficulties[profiledifficultybuttons.indexOf(profiledifficulty)];
+
   let timechoice = times[timebuttons.indexOf(profiletime)];
 
   let timedistance = millis[days.indexOf(currentday)];
@@ -105,6 +109,12 @@ function makeprofilechart(){
     }
 
     if(completedtests[i].time != timechoice) continue L;
+
+    if(completedtests[i].difficulty == undefined){
+      completedtests[i].difficulty = 0;
+    }
+
+    if(completedtests[i].difficulty != difficultychoice) continue L;
 
     timelist.push(completedtests[i]);
 

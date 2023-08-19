@@ -92,9 +92,10 @@ function finishtest(){
        cpm: cpm,
        acc: [stats[0],stats[1]],
        time: (totaltime / 1000)+"s",
+       difficulty: currentdifficulty,
        mode: currentmode,
        date: new Date().getTime()
-    })    
+    })
   }
 
 
