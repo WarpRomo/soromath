@@ -54,7 +54,14 @@ function initprofilechart(){
           xAxes: [{
               type: 'linear',
               position: 'bottom',
-              display: false,
+              display: true,
+              ticks:{
+
+                callback: function(value, index, values) {
+                    return new Date(value).toLocaleDateString();
+                }
+
+              }
           }]
         }
       }
