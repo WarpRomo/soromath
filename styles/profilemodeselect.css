@@ -1,0 +1,42 @@
+
+
+#profilemodecontainer{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
+  z-index: 2;
+}
+
+#profilemodeselect{
+  position: relative;
+  width: 500px;
+  height: 600px;
+  overflow-y: scroll;
+  background: var(--window_background);
+  border-radius: 5px;
+  border: solid 5px var(--window_border);
+  overflow-x: hidden;
+  top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#profilemodeselect::-webkit-scrollbar{
+  background-color: var(--window_background);
+  width: 5px;
+}
+
+#profilemodeselect::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+  width: 5px;
+}
+
+
+@media screen and (max-width: 800px) {
+  #profilemodeselect{
+    width: 85% !important;
+  }
+}

@@ -1,5 +1,9 @@
 const synth = window.speechSynthesis;
 
+
+let tabs = ["flashproblems", "flashprofile"];
+let currenttab = "flashproblems";
+
 let currentmode = ["addition"];
 let currenttemplate = "template1equation";
 let currentdifficulty = 0;
@@ -78,6 +82,20 @@ let modes = {
 
     }
   },
+  "fraction addition":{
+    id: "fractionequation",
+    diffs: [0,1,2],
+    template: "template1equation",
+    addproblem: addfraction,
+    ontype: fractiontype,
+    getanswer: fractionanswer,
+    validate: fractionvalidate,
+    speechText: fractionspeech,
+    settings: {
+      name: "fraction",
+      offset: "-109px"
+    }
+  },
   "exponents":{
     id: "powerequation",
     diffs: [0,1,2],
@@ -142,6 +160,50 @@ let modes = {
   }
 }
 
+
+function settab(tab){
+
+
+  for(var i = 0; i < tabs.length; i++){
+
+    if(tabs[i] != tab){
+      document.getElementById(tabs[i]).style.display = "none";
+    }
+    else{
+      document.getElementById(tabs[i]).style.display = "";
+    }
+
+
+  }
+
+  currenttab = tab;
+
+
+
+}
+
+function switchtab(tab, doswitch=true){
+
+  currenttab = tab;
+
+  for(var i = 0; i < tabs.length; i++){
+
+    let btn = document.getElementById(tabs[i]+"button");
+
+    if(tabs[i] == currenttab){
+      if(btn.classList.contains("tabbuttonselected") == false) btn.classList.add("tabbuttonselected")
+    }
+    else{
+      if(btn.classList.contains("tabbuttonselected")) btn.classList.remove("tabbuttonselected")
+    }
+
+  }
+
+  if(doswitch) settab(tab);
+
+
+}
+
 function init(){
 
 
@@ -151,39 +213,15 @@ function init(){
 
   document.getElementById("options").style.display = "";
 
-  //$('.problem').css('opacity', '0')
-
-  //modes[currentmode].init();
-
   settemplate(currenttemplate);
 
-  /*
-  if(currentdifficulty >= modes[currentmode].diffs.length){
+  switchtab(currenttab);
 
-    setdifficulty(modes[currentmode].diffs.length-1);
-
-  }
-
-  for(var i = 0; i < difficultybuttons.length; i++){
-
-    let button = document.getElementById(difficultybuttons[i])
-
-    if(modes[currentmode].diffs.indexOf(i) == -1){
-
-      button.disabled = true;
-
-    }
-    else{
-      button.disabled = false;
-    }
-
-
-  }
-  */
 
   if(modeselect == null){
     modeselect = "yarr";
     modeinit();
+    profilemodeinit();
   }
 
   if(themeselect == null){
@@ -198,6 +236,8 @@ function init(){
 
   restarttest(focus=false);
 
+  profileinit();
+
   document.getElementById("finishscreen").style.display = "none"
   document.getElementById(currenttemplate).style.display = ""
 
@@ -208,4 +248,9 @@ function init(){
   cpmtrack = [];
   rawcpmtrack = [];
 
+}
+
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
 }

@@ -26,8 +26,11 @@
   <link rel="stylesheet" href="styles/buttons.css">
   <link rel="stylesheet" href="styles/finishscreen.css">
   <link rel="stylesheet" href="styles/voice.css">
+  <link rel="stylesheet" href="styles/flashprofile.css">
 
   <link rel="stylesheet" href="styles/flashanzan.css">
+
+  <link rel="stylesheet" href="styles/profilemodeselect.css">
 
   <script src="jquery.min.js"></script>
 
@@ -54,6 +57,7 @@
   <script src="template1eqs/multfuncs.js"></script>
   <script src="template1eqs/subtractionfuncs.js"></script>
   <script src="template1eqs/division.js"></script>
+  <script src="template1eqs/fractionfuncs.js"></script>
   <script src="template1eqs/trigfuncs.js"></script>
   <script src="template1eqs/celctoffuncs.js"></script>
   <script src="template1eqs/monthnumfuncs.js"></script>
@@ -67,6 +71,10 @@
   <script src="cpmchart.js"></script>
   <script src="timer.js"></script>
 
+  <script src="flashprofile/flashprofile.js"></script>
+  <script src="flashprofile/profilechart.js"></script>
+
+  <script src="flashprofile/profilemodemenu.js"></script>
 
 
   <script src="script.js"></script>
@@ -79,90 +87,142 @@
   <div id="iconcontainer">
     <img src="icon.png" id="iconlogo"></img>
   </div>
-  <div id="options">
-    <div id = "optionsinner">
-      <div class="option" id="timeoption">
 
-        <p class="optiontext">Time</p>
-        <div class="buttonrow">
-          <button class="zulubutton optionbutton textselected" id="timeselected" onclick="settime(this,15000)">15s</button>
-          <button class="zulubutton optionbutton" onclick="settime(this,60000)">60s</button>
-          <button class="zulubutton optionbutton" onclick="settime(this,120000)">120s</button>
-        </div>
-      </div>
+  <div id = "tabbuttons">
 
-      <div class="option" id="difficultyoption">
+    <button id="flashproblemsbutton" class="zulubutton tabbutton currenttab" onclick="switchtab('flashproblems')">
 
-        <p class="optiontext">Difficulty</p>
-        <div class="difficultyrow">
-          <div class="buttonrow">
-            <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
-            <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
-            <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+      <img class="tabimg" src="flashproblems.png"></img>
+
+    </button>
+    <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="switchtab('flashprofile'); profileinit()">
+
+      <img class="tabimg" src="flashprofile.png"></img>
+
+    </button>
+    <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="openInNewTab('https://discord.gg/VRbbwbD9yv')">
+
+      <img class="tabimg" src="discord.png"></img>
+
+    </button>
+
+  </div>
+
+
+  <div id = "flashprofile">
+
+    <div id ="profileoptions">
+
+
+      <div id="profilegraph" class="option">
+        <p class="profilelabel profiletitle">Personal Stats</p>
+
+        <div class="profileoption">
+          <p class="profilelabel">Time-span</p>
+          <div id="profiledays" class="profilesection">
+
+            <button id="alltime" class="zulubutton daysbutton" onclick="setdaybutton('alltime')">all time</button>
+            <button id="1year" class="zulubutton daysbutton" onclick="setdaybutton('1year')">last year</button>
+            <button id="6months" class="zulubutton daysbutton" onclick="setdaybutton('6months')">last 6 months</button>
+            <button id="1month" class="zulubutton daysbutton" onclick="setdaybutton('1month')">last month</button>
+            <button id="1week" class="zulubutton daysbutton" onclick="setdaybutton('1week')">last week</button>
+
           </div>
-          <div class="voicemoderow">
+        </div>
 
-            <button class="zulubutton optionbutton" id="voicebutton" onclick="voicemodeclick()">voice mode: off</button>
-            <button class="zulubutton optionbutton" id="voicesettings" onclick="showvoicecontainer()" disabled />voice ⚙️</button>
+        <div class="profileoption">
+          <p class="profilelabel">Time-mode</p>
+          <div id="profiletimes" class="profilesection">
 
+            <button id="15sbutton" class="zulubutton daysbutton" onclick="setprofiletimebutton('15sbutton')">15s</button>
+            <button id="60sbutton" class="zulubutton daysbutton" onclick="setprofiletimebutton('60sbutton')">60s</button>
+            <button id="120sbutton" class="zulubutton daysbutton" onclick="setprofiletimebutton('120sbutton')">120s</button>
 
           </div>
         </div>
-      </div>
 
-      <div class="option" id="flashoption">
-        <p class="optiontext">Flash Anzan</p>
+        <div class="profileoption">
+          <p class="profilelabel">Mode</p>
+          <div id="profilemodes" class="profilesection">
 
-        <div class="buttonrow">
-          <button class="zulubutton optionbutton" id="anzansettingsbutton" onclick="showflashanzan()">settings</button>
+            <button id="profilemodeselectbutton" class="zulubutton daysbutton textselected" onclick="showprofilemodeselect()">addition</button>
+
+          </div>
         </div>
 
-      </div>
 
-
-
-      <div class="option" id="modeoption">
-        <p class="optiontext">Mode</p>
-        <div class="buttonrow">
-          <button class="zulubutton optionbutton" id="modeselectbutton" onclick="showmodeselect()">addition</button>
+        <p id="profilecharthide" style="display: none">Complete at least 5 tests for this mode...</p>
+        <div id="profilechartcontainer">
+          <canvas id="profilechart" class="option"></canvas>
         </div>
       </div>
+    </div>
+
+    <div id = "profilemodecontainer" onclick="removeprofilemodefocus(event)" style="display:none">
+      <div id = "profilemodeselect" onclick="removeprofilemodefocus(event)">
 
 
-      <div class="option" id="themeoption">
-        <p class="optiontext">Theme</p>
-        <div class="buttonrow">
-          <button class="zulubutton optionbutton" id="themeselectbutton" onclick="showthemeselect()">default</button>
-        </div>
       </div>
-
     </div>
 
   </div>
 
-  <div id="equations">
+  <div id = "flashproblems">
+    <div id="options">
+      <div id = "optionsinner">
+        <div class="option" id="timeoption">
 
-    <div class="equation" id="template1equation">
-
-      <p class="timercontainer">
-        <canvas class="timershow"></canvas>
-        <p id="voicemodetext" style="display: none">Type to begin...</p>
-      </p>
-
-
-
-      <div id="problemandinput">
-        <div id="problemscontainer">
-          <div class="problemmask problemmaskhide"></div>
-          <div class="problems mainproblems" id="template1problems"></div>
+          <p class="optiontext">Time</p>
+          <div class="buttonrow">
+            <button class="zulubutton optionbutton textselected" id="timeselected" onclick="settime(this,15000)">15s</button>
+            <button class="zulubutton optionbutton" onclick="settime(this,60000)">60s</button>
+            <button class="zulubutton optionbutton" onclick="settime(this,120000)">120s</button>
+          </div>
         </div>
 
-        <div class="inpandexample">
-          <div class="numrestart">
-            <input class="numinput maininput" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
-            <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
+        <div class="option" id="difficultyoption">
+
+          <p class="optiontext">Difficulty</p>
+          <div class="difficultyrow">
+            <div class="buttonrow">
+              <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
+              <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
+              <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+            </div>
+            <div class="voicemoderow">
+
+              <button class="zulubutton optionbutton" id="voicebutton" onclick="voicemodeclick()">voice mode: off</button>
+              <button class="zulubutton optionbutton" id="voicesettings" onclick="showvoicecontainer()" disabled />voice ⚙️</button>
+
+
+            </div>
           </div>
-          <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
+        </div>
+
+        <div class="option" id="flashoption">
+          <p class="optiontext">Flash Anzan</p>
+
+          <div class="buttonrow">
+            <button class="zulubutton optionbutton" id="anzansettingsbutton" onclick="showflashanzan()">settings</button>
+          </div>
+
+        </div>
+
+
+
+        <div class="option" id="modeoption">
+          <p class="optiontext">Mode</p>
+          <div class="buttonrow">
+            <button class="zulubutton optionbutton" id="modeselectbutton" onclick="showmodeselect()">addition</button>
+          </div>
+        </div>
+
+
+        <div class="option" id="themeoption">
+          <p class="optiontext">Theme</p>
+          <div class="buttonrow">
+            <button class="zulubutton optionbutton" id="themeselectbutton" onclick="showthemeselect()">default</button>
+          </div>
         </div>
 
       </div>
@@ -170,20 +230,51 @@
     </div>
 
 
-    <div class="equation" id="flashanzanequation" style="display:none">
+    <div id="equations">
 
-      <p id="flashtext">7932</p>
+      <div class="equation" id="template1equation">
 
-      <div id="flashinputcontainer">
-        <button id="flashstart" class="zulubutton" onclick="flashstart()">Start</button>
+        <p class="timercontainer">
+          <canvas class="timershow"></canvas>
+          <p id="voicemodetext" style="display: none">Type to begin...</p>
+        </p>
 
-        <div id="flashinputrestart" style="display: none">
-          <input id="flashinput" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
-          <button id="flashrestart" class="zulubutton" onclick="flashrestart()" style="display: none">↻</button>
+
+
+        <div id="problemandinput">
+          <div id="problemscontainer">
+            <div class="problemmask problemmaskhide"></div>
+            <div class="problems mainproblems" id="template1problems"></div>
+          </div>
+
+          <div class="inpandexample">
+            <div class="numrestart">
+              <input class="numinput maininput" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
+              <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
+            </div>
+            <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
+          </div>
+
         </div>
 
       </div>
 
+
+      <div class="equation" id="flashanzanequation" style="display:none">
+
+        <p id="flashtext">7932</p>
+
+        <div id="flashinputcontainer">
+          <button id="flashstart" class="zulubutton" onclick="flashstart()">Start</button>
+
+          <div id="flashinputrestart" style="display: none">
+            <input id="flashinput" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
+            <button id="flashrestart" class="zulubutton" onclick="flashrestart()" style="display: none">↻</button>
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
     <div id="finishscreen" style="display:none">

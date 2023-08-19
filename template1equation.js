@@ -47,7 +47,7 @@ function settemplate(template){
 
 function template1finish(){
   let mask = document.getElementsByClassName("problemmask")[0]
-  mask.style.height = "290px";
+  mask.style.height = "400px";
 }
 
 function template1init(){
@@ -83,7 +83,7 @@ function template1init(){
   let mask = document.getElementsByClassName("problemmask")[0]
 
   let currentheight = mask.style.height;
-  let newheight = "290px";
+  let newheight = "400px";
 
   mask.style.height = newheight;
 

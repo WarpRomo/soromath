@@ -87,6 +87,17 @@ function finishtest(){
 
   teststarted = false;
 
+  if(!voicemodeenabled){
+    addcompleted({
+       cpm: cpm,
+       acc: [stats[0],stats[1]],
+       time: (totaltime / 1000)+"s",
+       mode: currentmode,
+       date: new Date().getTime()
+    })    
+  }
+
+
   makechart();
 
 

@@ -7,6 +7,9 @@
   background: var(--window_background);
   border: solid 2px var(--window_border);
   display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
 }
 
 #cpmchart{

@@ -104,8 +104,6 @@ function modeinit(){
 
         currentmode = filtered;
 
-        console.log(currentmode + " YOOO");
-
         settemplate(modes[mode].template);
 
       }

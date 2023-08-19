@@ -15,3 +15,36 @@
   min-width: 300px;
   max-width: 450px;
 }
+
+
+#tabbuttons{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.tabimg{
+  width: 25px;
+  height: 25px;
+  mask-image: linear-gradient(var(--text_select_color), var(--text_select_color));
+}
+
+.tabbutton{
+  margin: 10px !important;
+  opacity: 0.5 !important;
+}
+
+.tabbutton:hover{
+
+  opacity: 0.7 !important;
+
+}
+
+.tabbuttonselected{
+  opacity: 1 !important;
+}
+
+.tabbuttonselected:hover{
+  opacity: 1 !important;
+}

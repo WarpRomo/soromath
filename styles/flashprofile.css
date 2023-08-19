@@ -1,0 +1,121 @@
+
+
+#profilegraph{
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#profilechartcontainer{
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#backgroundprofiletext{
+
+  font-family: var(--font_family);
+  color: var(--text_color);
+  position: relative;
+  text-align: center;
+
+}
+
+#profilechart{
+  position: relative;
+  max-height: 400px;
+  min-height: 400px;
+  max-width: 700px;
+  min-width: 700px;
+  padding: 5% !important;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileoption{
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profiletitle{
+  font-size: 30px !important;
+}
+
+
+#profiledays{
+  display: flex;
+  justify-content: center;
+}
+
+#profiletimes{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#profilemodes{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.daysbutton{
+  margin: 5px;
+}
+
+.profilelabel{
+  font-family: var(--font_family);
+  color: var(--text_color);
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
+
+
+#profileoptions{
+  display: flex;
+  flex-direction: column;
+}
+
+#profilecharthide{
+  font-family: var(--font_family);
+  color: var(--text_color);
+  opacity: 0.4;
+  font-size: 20px;
+  text-align: center;
+  overflow: hidden;
+  font-style: italic;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 900px) {
+
+  #profilegraph{
+    width: 90% !important;
+  }
+
+  #profilechart{
+    max-width: 80% !important;
+    min-width: 80% !important;
+  }
+  #profiledays{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+
+  #profiledays > button{
+    width: 100px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
