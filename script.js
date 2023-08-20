@@ -6,7 +6,7 @@ let currenttab = "flashproblems";
 
 let currentmode = ["addition"];
 let currenttemplate = "template1equation";
-let currentdifficulty = 0;
+let currentdifficulty = "easy";
 
 let templates = {
 
@@ -27,64 +27,12 @@ let templates = {
 
 
 let modes = {
-  "addition": {
-    id: "additionequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: addaddition,
-    ontype: additiontype,
-    getanswer: additionanswer,
-    validate: additionvalidate,
-    speechText: additionspeech,
-    settings: {
-      name: "addition",
-
-    }
-  },
-  "multiplication":{
-    id: "multequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: addmult,
-    ontype: multtype,
-    getanswer: multanswer,
-    validate: multvalidate,
-    speechText: multspeech,
-    settings: {
-      name: "mult",
-
-    }
-  },
-  "subtraction": {
-    id: "subtractionequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: addsubtraction,
-    ontype: subtractiontype,
-    getanswer: subtractionanswer,
-    validate: subtractionvalidate,
-    speechText: subtractionspeech,
-    settings: {
-      name: "subtraction"
-    }
-  },
-  "division":{
-    id: "divisionequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: adddivision,
-    ontype: divisiontype,
-    getanswer: divisionanswer,
-    validate: divisionvalidate,
-    speechText: divisionspeech,
-    settings: {
-      name: "division",
-
-    }
-  },
+  "addition": additionpreset,
+  "multiplication": multpreset,
+  "subtraction": subtractionpreset,
+  "division": divisionpreset,
   "fraction addition":{
     id: "fractionequation",
-    diffs: [0,1,2],
     template: "template1equation",
     addproblem: addfraction,
     ontype: fractiontype,
@@ -96,24 +44,9 @@ let modes = {
       offset: "-109px"
     }
   },
-  "exponents":{
-    id: "powerequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: addpower,
-    ontype: powertype,
-    getanswer: poweranswer,
-    validate: powervalidate,
-    speechText: powerspeech,
-    settings: {
-      name: "power",
-      offset: "-110px",
-
-    }
-  },
+  "exponents": powerpreset,
   "trigonometry":{
     id: "trigequation",
-    diffs: [0],
     template: "template1equation",
     addproblem: addtrig,
     ontype: trigtype,
@@ -125,22 +58,9 @@ let modes = {
       offset: "-109px"
     }
   },
-  "celsius to fahrenheit":{
-    id: "celctofequation",
-    diffs: [0,1,2],
-    template: "template1equation",
-    addproblem: addcelctof,
-    ontype: celctoftype,
-    getanswer: celctofanswer,
-    validate: celctofvalidate,
-    speechText: celctofspeech,
-    settings: {
-      name: "celctof"
-    }
-  },
+  "C° to F°": celctofpreset,
   "month to number":{
     id: "monthnumequation",
-    diffs: [0],
     template: "template1equation",
     addproblem: addmonthnum,
     ontype: monthnumtype,
@@ -152,12 +72,7 @@ let modes = {
 
     }
   },
-  "flash anzan":{
-
-    template: "flashanzanequation"
-
-
-  }
+  "flash anzan": flashanzanpreset
 }
 
 

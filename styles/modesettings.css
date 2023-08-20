@@ -1,0 +1,47 @@
+.radiolabel{
+
+  color: var(--text_color);
+  font-family: var(--font_family);
+  font-size: 20px;
+
+}
+
+.radiosetting {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+
+  background-color: var(--button_border);
+  border: 5px solid var(--button_background);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.radiosetting:hover{
+  opacity: 1;
+}
+
+
+.radiosettingdisabled:hover{
+  opacity: 0.5;
+}
+
+/* appearance for checked radiobutton */
+.radiosetting:checked {
+  background-color: var(--text_select_color);
+  opacity: 1;
+}
+
+.settinglabel{
+  color: var(--text_color);
+  text-align: center;
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  font-family: var( --font_family);
+}

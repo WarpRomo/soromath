@@ -1,19 +1,85 @@
-let difficultybuttons = ["easybutton", "mediumbutton", "hardbutton"];
-let difficultynames = ["easy", "medium", "hard"];
+let difficultybuttons = ["easybutton", "mediumbutton", "hardbutton", "custombutton"];
+let difficultynames = ["easy", "medium", "hard", "custom"];
 
 function setdifficulty(difficulty){
 
-  let current = document.getElementById(difficultybuttons[currentdifficulty]);
-  let pressed = document.getElementById(difficultybuttons[difficulty]);
+  let keys = Object.keys(modes);
+
+  for(var i = 0; i < keys.length; i++){
+
+
+    if(modes[keys[i]].settingsgui != undefined && modes[keys[i]].settings.presets != undefined){
+
+      console.log(keys[i])
+
+      if(modes[keys[i]].settingsgui.doneinit == false){
+        modes[keys[i]].settingsgui.init(modes[keys[i]], false);
+      }
+
+      modes[keys[i]].settingsgui.setpreset(modes[keys[i]], difficulty)
+
+    }
+
+  }
+
+
+  matchdifficulty();
+  init();
+
+
+
+}
+
+function matchdifficulty(){
+
+  let prev = null;
+
+  console.log(currentmode);
+
+  let keys = currentmode;
+  let newdifficulty = null;
+
+  L: for(var i =0 ; i < keys.length; i++){
+
+    if(modes[keys[i]].settingsgui == undefined || modes[keys[i]].settings.preset == undefined) continue;
+
+    if(prev != null){
+
+      if(modes[keys[i]].settings.preset != prev){
+        newdifficulty = "custom";
+        break L;
+      }
+
+    }
+
+    prev = modes[keys[i]].settings.preset
+    newdifficulty = prev
+
+  }
+
+  console.log(newdifficulty);
+
+  if(newdifficulty == undefined) return;
+
+  let current = document.getElementById(difficultybuttons[difficultynames.indexOf(currentdifficulty)]);
+  let pressed = document.getElementById(difficultybuttons[difficultynames.indexOf(newdifficulty)]);
 
   current.classList.remove("textselected");
   pressed.classList.add("textselected");
 
-  currentdifficulty = difficulty
+  currentdifficulty = newdifficulty;
 
-  init();
+  console.log("YALLLLLLLLLLLLLL")
+
+  if(currentdifficulty != "custom"){
+    document.getElementById("custombutton").disabled = true;
+  }
+  else{
+    document.getElementById("custombutton").disabled = false;
+  }
 
 }
+
 
 function settime(elem, time){
 

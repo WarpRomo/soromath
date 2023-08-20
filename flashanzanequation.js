@@ -23,33 +23,223 @@ let defaultnumbers = "Amount of numbers"
 let defaultspeed = "Flash speed"
 
 
+let flashanzanpreset = {
+
+  template: "flashanzanequation",
+  settings:{
+    speed: 0.7,
+    amount: 10,
+    range: [0, 9]
+  },
+  settingsgui: {
+
+    init: basicpresetgen3range("Speed", "Number Amount", "Number Range")
+
+  }
+
+
+}
+
+function basicpresetgen3range(range1label, range2label, range3label){
+  return (self, changegui=true) => {basicpreset3range(self, range1label, range2label, range3label, changegui)}
+}
+
+function basicpreset3range(self, range1label, range2label, range3label, changegui){
+  let modesettingsbutton = document.getElementById("modesettingsbutton")
+  let modesettingssection = document.getElementById("modesettingssection");
+
+  if(!changegui){
+    modesettingsbutton = document.createElement("div");
+    modesettingssection = document.createElement("div");
+  }
+
+  let fullParent = document.createElement("div");
+  fullParent.style.display = "flex";
+  fullParent.style.flexDirection = "column";
+  fullParent.style.alignItems = "center";
+
+  let numRange = document.createElement("p");
+  numRange.innerHTML = range1label;
+  numRange.classList.add("settinglabel");
+  numRange.style.marginTop = "20px";
+
+  let numRange2 = document.createElement("p");
+  numRange2.innerHTML = range2label;
+  numRange2.classList.add("settinglabel");
+  numRange2.style.marginTop = "20px";
+
+  let numRange3 = document.createElement("p");
+  numRange3.innerHTML = range3label;
+  numRange3.classList.add("settinglabel");
+  numRange3.style.marginTop = "20px";
+
+
+  function makeinput(){
+
+    let input1 = document.createElement("input")
+    input1.style.margin = "7px";
+    input1.classList.add("numinput");
+
+    return input1;
+
+  }
+
+  function makeinputrange(){
+
+    let parent = document.createElement("div");
+    parent.style.display = "flex";
+    parent.style.justifyContent = "center"
+
+    let input1 = document.createElement("input")
+    let input2 = document.createElement("input")
+
+    input1.style.margin = "7px";
+    input2.style.margin = "7px";
+
+    input1.classList.add("numinput");
+    input2.classList.add("numinput");
+
+    parent.appendChild(input1);
+    parent.appendChild(input2);
+
+    return [parent, input1, input2];
+
+  }
+
+  let input1 = makeinput();
+  let input2 = makeinput();
+  let range = makeinputrange();
+
+  input1.value = self.settings.speed;
+  input2.value = self.settings.amount;
+
+  input1.oninput = () => {
+
+    let allowed = "0123456789.";
+    let filtered = "";
+
+    for(var i = 0; i < input1.value.length; i++){
+      if(allowed.indexOf(input1.value[i]) != -1) filtered += input1.value[i];
+    }
+
+    input1.value = filtered;
+
+
+  }
+  input1.onblur = () => {
+
+    let val = parseFloat(input1.value);
+
+    if(val+"" == "NaN"){
+      val = 0.3;
+    }
+    if(val < 0.02){
+      val = 0.02;
+    }
+
+    input1.value = val;
+    self.settings.speed = val;
+
+    //flashanzaninit();
+
+  }
+
+  input2.oninput = () => {
+
+    let allowed = "0123456789";
+    let filtered = "";
+
+    for(var i = 0; i < input2.value.length; i++){
+      if(allowed.indexOf(input2.value[i]) != -1) filtered += input2.value[i];
+    }
+
+    input2.value = filtered;
+
+
+  }
+  input2.onblur = () => {
+
+    let val = parseFloat(input2.value);
+
+    if(val+"" == "NaN" || val <= 0){
+      val = 1;
+    }
+
+    input2.value = val;
+    self.settings.amount = val;
+
+    //flashanzaninit();
+
+  }
+
+
+  range[1].value = self.settings.range[0];
+  range[2].value = self.settings.range[1];
+  range[1].oninput = () => { oninput(range[1])}
+  range[2].oninput = () => { oninput(range[2])}
+  range[1].onblur = () => {self.settings.range[0] = onblur(range[1]); swap(range[1], range[2]);  }
+  range[2].onblur = () => {self.settings.range[1] = onblur(range[2]); swap(range[1], range[2]);  }
+  self.settingsgui.range = range;
+
+  fullParent.appendChild(numRange);
+  fullParent.appendChild(input1);
+
+  fullParent.appendChild(numRange2);
+  fullParent.appendChild(input2);
+
+  fullParent.appendChild(numRange3);
+  fullParent.appendChild(range[0])
+
+  modesettingssection.appendChild(fullParent);
+
+  function oninput(input){
+
+    let allowed = "-0123456789";
+    let chars = "";
+
+    for(var i = 0; i < input.value.length; i++){
+      if(allowed.indexOf(input.value[i]) != -1) chars += input.value[i];
+    }
+
+    input.value = chars;
+
+    return input.value;
+
+  }
+  function onblur(input){
+
+    let parsed = parseInt(input.value);
+    if(parsed+"" == "NaN") parsed = 0;
+    input.value = parsed;
+
+    return parsed;
+
+  }
+
+  function swap(e1, e2){
+
+    if(parseInt(e1.value) > parseInt(e2.value)){
+
+      let temp = e1.value;
+      e1.value = e2.value;
+      e2.value = temp;
+
+    }
+
+  }
+
+  modesettingsbutton.children[0].innerHTML = "flash anzan"
+  self.settingsgui.doneinit = true;
+
+}
+
+
+
 let flashstuff = {
   start: null,
   restart: null,
   input: null,
   inputrestart: null
-}
-
-function setanzansliders(){
-  document.getElementById("flashdigitamount").value = flashnumdigits;
-  document.getElementById("flashnumamount").value = flashnumproblems;
-  document.getElementById("flashspeedamount").value = flashtime / 100;
-
-}
-
-function getanzansliders(){
-
-  flashnumdigits = document.getElementById("flashdigitamount").value
-  flashnumproblems = document.getElementById("flashnumamount").value
-  flashtime = document.getElementById("flashspeedamount").value * 100
-  flashanzaninit(false);
-
-}
-
-function setanzantext(){
-  document.getElementById("flashdigittext").innerHTML =  flashnumdigits;
-  document.getElementById("flashnumtext").innerHTML = flashnumproblems;
-  document.getElementById("flashspeedtext").innerHTML = (flashtime / 1000) + "s";
 }
 
 let flashinit = null;
@@ -61,15 +251,7 @@ function flashanzaninit(){
   flashstuff.inputrestart = document.getElementById("flashinputrestart");
 
   document.getElementById("difficultyoption").style.display = "none";
-  document.getElementById("flashoption").style.display = "";
-
-  if(flashinit == null){
-    setanzansliders();
-    flashinit = true;
-  }
-  setanzantext();
-
-
+  //document.getElementById("flashoption").style.display = "";
 
   flashstuff.input.value = "";
   flashstuff.input.disabled = false;
@@ -98,7 +280,7 @@ function flashanzanswitch(){
   console.log("HERE");
 
   flashrestart(false);
-  document.getElementById("flashoption").style.display = "none";
+  //document.getElementById("flashoption").style.display = "none";
 
 
 }
@@ -123,7 +305,7 @@ function flashstart(){
 
       let numbers = flashgennumber();
 
-      if(flashnumindex == flashnumproblems){
+      if(flashnumindex == flashanzanpreset.settings.amount){
 
         flashstuff.input.style.display = "";
 
@@ -151,7 +333,7 @@ function flashstart(){
       }
 
 
-    }, flashtime)
+    }, flashanzanpreset.settings.speed * 1000)
   }, flashstartdelay)
 
 
@@ -205,8 +387,10 @@ function flashinput(event){
 
 function flashgennumber(){
 
-  return Math.floor(Math.random() * (10**flashnumdigits - 10**(flashnumdigits - 1)) + 10**(flashnumdigits - 1));
+  let num1 = flashanzanpreset.settings.range[0];
+  let num2 = flashanzanpreset.settings.range[1];
 
+  return Math.floor(Math.random() * (num2 - num1 + 1) ) + num1;
 
 }
 

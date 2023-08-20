@@ -1,4 +1,5 @@
 
+
 .zulubutton{
   all: unset;
   background: var(--button_background);
@@ -21,9 +22,13 @@
   opacity: 0.2 !important;
 }
 
-
 .modebutton{
   opacity: 0.3;
+  height:25px;
+  display: flex;
+  justify-content: space-between;
+  align-items:center
+
 }
 
 .modebutton:hover{
@@ -31,5 +36,9 @@
 }
 
 .modeselected{
-  opacity: 0.85 !important;
+  opacity: 0.85;
+}
+
+.modeselected:hover{
+  opacity: 0.85;
 }

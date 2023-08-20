@@ -32,6 +32,8 @@
 
   <link rel="stylesheet" href="styles/profilemodeselect.css">
 
+  <link rel="stylesheet" href="styles/modesettings.css">
+
   <script src="jquery.min.js"></script>
 
   <script
@@ -205,9 +207,10 @@
           <p class="optiontext">Difficulty</p>
           <div class="difficultyrow">
             <div class="buttonrow">
-              <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty(0)">easy</button>
-              <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty(1)">medium</button>
-              <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty(2)">hard</button>
+              <button class="zulubutton optionbutton textselected" id="easybutton" onclick="setdifficulty('easy')">easy</button>
+              <button class="zulubutton optionbutton" id="mediumbutton" onclick="setdifficulty('medium')">medium</button>
+              <button class="zulubutton optionbutton" id="hardbutton" onclick="setdifficulty('hard')">hard</button>
+              <button class="zulubutton optionbutton" id="custombutton">custom</button>
             </div>
             <div class="voicemoderow">
 
@@ -218,16 +221,6 @@
             </div>
           </div>
         </div>
-
-        <div class="option" id="flashoption">
-          <p class="optiontext">Flash Anzan</p>
-
-          <div class="buttonrow">
-            <button class="zulubutton optionbutton" id="anzansettingsbutton" onclick="showflashanzan()">settings</button>
-          </div>
-
-        </div>
-
 
 
         <div class="option" id="modeoption">
@@ -320,6 +313,28 @@
 
 
     </div>
+
+    <div id = "modesettings" style="display:none">
+
+
+      <div id = "modesettingssection" style="opacity: 0">
+      </div>
+
+      <div id = "modesettingsbuttoncontainer">
+
+        <button id = "modesettingsbutton" class="zulubutton modebutton">
+
+          <p>Hello</p>
+
+        </button>
+
+        <button id = "modesettingsback" class="zulubutton"><img src="settingsback.png"></img></button>
+
+
+      </div>
+
+    </div>
+
   </div>
 
   <div id = "themecontainer" onclick="removethemefocus(event)" style="display:none">

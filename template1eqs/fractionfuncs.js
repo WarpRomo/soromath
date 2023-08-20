@@ -2,27 +2,8 @@
 function addfraction(main=false,difficulty=0,name=null){
 
 
-  let frac1 = []
-  let frac2 = [];
-
-  if(difficulty == 0){
-
-    frac1 = [Math.floor(Math.random() * 8) + 2, Math.floor(Math.random() * 8) + 2]
-    frac2 = [Math.floor(Math.random() * 8) + 2, Math.floor(Math.random() * 8) + 2]
-
-  }
-  if(difficulty == 1){
-
-    frac1 = [Math.floor(Math.random() * 18) + 2, Math.floor(Math.random() * 18) + 2]
-    frac2 = [Math.floor(Math.random() * 18) + 2, Math.floor(Math.random() * 18) + 2]
-
-  }
-  if(difficulty == 2){
-
-    frac1 = [Math.floor(Math.random() * 98) + 2, Math.floor(Math.random() * 98) + 2]
-    frac2 = [Math.floor(Math.random() * 98) + 2, Math.floor(Math.random() * 98) + 2]
-
-  }
+  let frac1 = [Math.floor(Math.random() * 8) + 2, Math.floor(Math.random() * 8) + 2]
+  let frac2 = [Math.floor(Math.random() * 8) + 2, Math.floor(Math.random() * 8) + 2]
 
 
 

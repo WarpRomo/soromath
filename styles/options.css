@@ -46,7 +46,7 @@
   opacity: 1 !important;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   #optionsinner{
     display: block;
   }

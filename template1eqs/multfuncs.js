@@ -1,20 +1,51 @@
-function addmult(main=false,difficulty=0,name=null){
+let multpreset = {
+  id: "multequation",
+  diffs: [0,1,2],
+  template: "template1equation",
+  addproblem: addmult,
+  ontype: multtype,
+  getanswer: multanswer,
+  validate: multvalidate,
+  speechText: multspeech,
+  name: "multiplication",
+  settings: {
+    preset: "easy",
+    presets:{
+      "easy":{
+        range1: [1,9],
+        range2: [1,9]
+      },
+      "medium":{
+        range1: [10,99],
+        range2: [10,99]
+      },
+      "hard":{
+        range1: [100,999],
+        range2: [100,999]
+      },
+      "custom":{}
+    },
+    range1: [1,9],
+    range2: [1,9],
+  },
+  settingsgui: {
 
-  let num1 = 0;
-  let num2 = 0;
+    range1: null,
+    range2: null,
+    doneinit: false,
+    init: basicpresetgen("Number Range 1", "Number Range 2"),
+    setpreset: setpreset,
+    matchpreset: matchpreset,
 
-  if(difficulty == 0){
-    num1 = Math.floor(Math.random() * 10)
-    num2 = Math.floor(Math.random() * 10);
   }
-  if(difficulty == 1){
-    num1 = Math.floor(Math.random() * 90) + 10
-    num2 = Math.floor(Math.random() * 90) + 10;
-  }
-  if(difficulty == 2){
-    num1 = Math.floor(Math.random() * 900) + 100
-    num2 = Math.floor(Math.random() * 900) + 100;
-  }
+
+}
+
+
+function addmult(main=false,self=multpreset,name=null){
+
+  let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
+  let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
 
 
   if(main == false) problemlist.push([name, [num1,num2]]);
@@ -39,7 +70,7 @@ function addmult(main=false,difficulty=0,name=null){
 
 function multspeech(problem){
 
-  return problem[0] + " times " + problem[1]; 
+  return (problem[0] < 0 ? "negative " : "") + Math.abs(problem[0]) + " times " + (problem[1] < 0 ? "negative " : "") + Math.abs(problem[1]);
 
 }
 
@@ -48,7 +79,7 @@ function multtype(e){
   let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
-  let nums = "0123456789"
+  let nums = "-0123456789"
 
   for(var i = 0; i < input.value.length; i++){
     if(nums.indexOf(input.value[i]) == -1) continue;

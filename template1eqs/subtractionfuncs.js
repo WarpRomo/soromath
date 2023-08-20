@@ -1,21 +1,51 @@
 
-function addsubtraction(main=false,difficulty=0,name=null){
+let subtractionpreset = {
+  id: "subtractionequation",
+  diffs: [0,1,2],
+  template: "template1equation",
+  addproblem: addsubtraction,
+  ontype: subtractiontype,
+  getanswer: subtractionanswer,
+  validate: subtractionvalidate,
+  speechText: subtractionspeech,
+  name: "subtraction",
+  settings: {
+    preset: "easy",
+    presets:{
+      "easy":{
+        range1: [0,9],
+        range2: [0,9]
+      },
+      "medium":{
+        range1: [0,99],
+        range2: [0,99]
+      },
+      "hard":{
+        range1: [0,999],
+        range2: [0,999]
+      },
+      "custom":{}
+    },
+    range1: [0,9],
+    range2: [0,9],
+  },
+  settingsgui: {
 
-  let num1 = 0;
-  let num2 = 0;
+    range1: null,
+    range2: null,
+    doneinit: false,
+    init: basicpresetgen("Number Range 1", "Number Range 2"),
+    setpreset: setpreset,
+    matchpreset: matchpreset,
 
-  if(difficulty == 0){
-    num1 = Math.floor(Math.random() * 10)
-    num2 = Math.floor(Math.random() * 10);
   }
-  if(difficulty == 1){
-    num1 = Math.floor(Math.random() * 90) + 10
-    num2 = Math.floor(Math.random() * 90) + 10;
-  }
-  if(difficulty == 2){
-    num1 = Math.floor(Math.random() * 900) + 100
-    num2 = Math.floor(Math.random() * 900) + 100;
-  }
+}
+
+
+function addsubtraction(main=false,self=subtractionpreset,name=null){
+
+  let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
+  let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
 
   if(main == false) problemlist.push([name, [num1,num2]]);
   else{
@@ -39,7 +69,7 @@ function addsubtraction(main=false,difficulty=0,name=null){
 
 function subtractionspeech(problem){
 
-  return problem[0] + " minus " + problem[1];
+  return (problem[0] < 0 ? "negative " : "") + Math.abs(problem[0]) + " minus " + (problem[1] < 0 ? "negative " : "") + Math.abs(problem[1]);
 
 
 }

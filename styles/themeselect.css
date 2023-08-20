@@ -21,10 +21,11 @@
   scrollbar-width: thin;
   overflow-x: hidden;
   position: relative;
-  top: 10%;
   margin-left: auto;
   margin-right: auto;
   opacity: 0.9;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 

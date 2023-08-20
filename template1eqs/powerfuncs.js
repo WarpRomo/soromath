@@ -1,21 +1,49 @@
 
-function addpower(setproblem=null,difficulty=0,name=null){
+let powerpreset = {
+  id: "powerequation",
+  template: "template1equation",
+  addproblem: addpower,
+  ontype: powertype,
+  getanswer: poweranswer,
+  validate: powervalidate,
+  speechText: powerspeech,
+  name: "exponents",
+  settings: {
+    preset: "easy",
+    presets:{
+      "easy":{
+        range1: [2,5],
+        range2: [1,3]
+      },
+      "medium":{
+        range1: [2,9],
+        range2: [1,4]
+      },
+      "hard":{
+        range1: [2,9],
+        range2: [1,5]
+      },
+      "custom":{}
+    },
+    range1: [2,5],
+    range2: [1,3],
+  },
+  settingsgui: {
 
-  let num1 = 0;
-  let num2 = 0;
+    range1: null,
+    range2: null,
+    doneinit: false,
+    init: basicpresetgen("Base", "Exponent"),
+    setpreset: setpreset,
+    matchpreset: matchpreset,
 
-  if(difficulty == 0){
-    num1 = Math.floor(Math.random() * 5) + 2
-    num2 = Math.floor(Math.random() * 2) + 2;
   }
-  if(difficulty == 1){
-    num1 = Math.floor(Math.random() * 9) + 2
-    num2 = Math.floor(Math.random() * 2) + 2;
-  }
-  if(difficulty == 2){
-    num1 = Math.floor(Math.random() * 9) + 2
-    num2 = Math.floor(Math.random() * 4) + 2;
-  }
+}
+
+function addpower(setproblem=null,self=powerpreset,name=null){
+
+  let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
+  let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
 
 
   if(main == false) problemlist.push([name,[num1,num2]]);
@@ -57,7 +85,7 @@ function addpower(setproblem=null,difficulty=0,name=null){
 
 function powerspeech(problem){
 
-  return problem[0] + " to the power of " + problem[1];
+  return (problem[0] < 0 ? "negative " : "") + Math.abs(problem[0]) + " to the power of " + (problem[1] < 0 ? "negative " : "") + Math.abs(problem[1]);
 
 }
 
@@ -67,7 +95,7 @@ function powertype(e){
   let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
-  let nums = "0123456789"
+  let nums = "-0123456789"
 
   for(var i = 0; i < input.value.length; i++){
     if(nums.indexOf(input.value[i]) == -1) continue;

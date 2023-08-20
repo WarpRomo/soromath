@@ -24,18 +24,29 @@ function setmodename(){
 
 }
 
+
+let buttonelems = {};
+let modesettingopen = null;
+
 function modeinit(){
 
   let keys = Object.keys(modes);
-  let buttonelems = {};
 
   let modeselect = document.getElementById("modeselect")
+
+  let innersetting = document.getElementById("modesettingsback");
+  let innersettingbutton = document.getElementById("modesettingsbutton");
+
+  innersettingbutton.appendChild(innersetting)
 
   setmodename();
 
   for(var i = 0; i < keys.length; i++){
 
+    let num = i;
+    let parentDiv = document.createElement("div");
     let buttonelem = document.createElement("button");
+    let buttontext = document.createElement("p");
 
     buttonelems[keys[i]] = buttonelem;
 
@@ -47,7 +58,12 @@ function modeinit(){
 
     buttonelem.id = "modebutton" + keys[i];
 
-    buttonelem.innerHTML = keys[i];
+    buttontext.innerHTML = keys[i];
+    buttonelem.appendChild(buttontext);
+
+    if(modes[keys[i]].settings != undefined && modes[keys[i]].settings.preset != undefined){
+      buttontext.innerHTML += " (" + modes[keys[i]].settings.preset + ")";
+    }
 
     if(currentmode.indexOf(keys[i]) > -1){
       buttonelem.classList.add("modeselected");
@@ -57,10 +73,9 @@ function modeinit(){
     }
 
 
-    let num = i;
+    buttonelem.onclick = (e) => {
 
-    buttonelem.onclick = () => {
-
+      if(e.target.classList.contains("modesettingsenter") || e.target.src != undefined) return;
 
 
       if(buttonelem.classList.contains("modeselected")){
@@ -120,9 +135,93 @@ function modeinit(){
 
 
     }
+    parentDiv.appendChild(buttonelem);
+
+    if(modes[keys[num]].settingsgui != undefined){
+      let settingsButton = document.createElement("button");
+
+      settingsButton.classList.add("zulubutton");
+      settingsButton.classList.add("modesettingsenter");
+
+      let settingsImage = document.createElement("img");
+      settingsImage.src = "settings.png";
+      settingsImage.style.width = "100%";
+      settingsImage.style.height = "100%";
+
+      settingsButton.appendChild(settingsImage);
+
+      settingsButton.onclick = () => {
+
+        document.getElementById("modesettings").style.display = "";
+
+        let modesettingscontainer = document.getElementById("modesettingsbuttoncontainer")
+        let modesettingsback = document.getElementById("modesettingsback");
+        let modesettingssection = document.getElementById("modesettingssection");
+        let modesettingsbutton = document.getElementById("modesettingsbutton");
+
+        console.log(modesettingscontainer);
+
+        modesettingopen = keys[num]
+
+        modesettingssection.innerHTML = "";
+        modes[keys[num]].settingsgui.init(modes[keys[num]]);
+
+        let offset = buttonelem.offsetTop
+
+        //modesettingsbutton.innerHTML = buttonelem.innerHTML
+
+        buttonelem.parentElement.style.opacity = 0;
+        modesettingsbuttoncontainer.style.top = offset + "px";
+
+        let animTime = 300;
 
 
-    modeselect.appendChild(buttonelem);
+        $(modesettingssection).animate({
+
+          opacity: 1
+
+        }, animTime)
+
+        $(modesettingscontainer).animate({
+
+          top: (modesettingscontainer.parentElement.offsetHeight - buttonelem.offsetHeight - 10) + "px",
+
+        }, animTime, "easeOutQuad")
+
+        modesettingsbutton.onclick = () => {
+
+          modesettingopen = null;
+
+          let offset = buttonelem.offsetTop
+
+          $(modesettingssection).animate({
+
+            opacity: 0
+
+          }, animTime)
+
+          $(modesettingscontainer).animate({
+
+            top: offset + "px",
+
+          }, animTime, "easeOutQuad", () => {
+
+            buttonelem.parentElement.style.opacity = "";
+            document.getElementById("modesettings").style.display = "none";
+
+          })
+
+        }
+
+
+      }
+
+      buttonelem.appendChild(settingsButton)
+
+    }
+
+
+    modeselect.appendChild(parentDiv);
 
   }
 
@@ -137,12 +236,18 @@ function modeinit(){
 
 function removemodefocus(event){
 
-  if(event.target.classList.contains("modebutton")) return;
+  if(event.target.id != "modeselect" && event.target.id != "modecontainer") return;
+
+  if(modesettingopen != null){
+    let modesettingsback = document.getElementById("modesettingsbutton");
+    modesettingsback.onclick()
+  }
 
   let container = document.getElementById("modecontainer");
 
   container.style.display = "none";
 
+  init();
 
 }
 
@@ -152,6 +257,6 @@ function showmodeselect(){
 
   container.style.display = "";
 
-  console.log("animating");
+  init();
 
 }

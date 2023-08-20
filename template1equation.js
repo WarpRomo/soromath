@@ -53,6 +53,8 @@ function template1finish(){
 function template1init(){
 
 
+  console.log('CALLED')
+
   if(voicemodeenabled){
     document.getElementById("voicemodetext").style.display = "";
 
@@ -100,7 +102,7 @@ function template1init(){
     for(var i = 0; i < 7; i++){
 
       let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
-      let problem = modes[problemtype].addproblem(main=i == 0, difficulty=currentdifficulty, name=problemtype);
+      let problem = modes[problemtype].addproblem(main=i == 0, modes[problemtype], name=problemtype);
 
       if(i == 0){
 
@@ -115,6 +117,8 @@ function template1init(){
 
     }
   }, currentheight == newheight ? 0 : 100);
+
+  matchdifficulty();
 
 }
 
@@ -234,7 +238,7 @@ function template1enter(e, press=false){
     problemindex++;
 
     let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
-    modes[nextproblem].addproblem(main=false, difficulty=currentdifficulty, name=nextproblem);
+    modes[nextproblem].addproblem(main=false, modes[nextproblem], name=nextproblem);
 
     if(voicemodeenabled){
 
