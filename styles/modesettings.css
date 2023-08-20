@@ -16,7 +16,7 @@
   height: 35px;
   margin-right: 10px;
 
-  background-color: var(--button_border);
+  background-color: var(--window_background);
   border: 5px solid var(--button_background);
   border-radius: 50%;
   opacity: 0.5;
