@@ -101,7 +101,8 @@
   width: 75px;
   height: 75px;
   margin: auto;
-  z-index: 1
+  z-index: 1;
+  transition: opacity 0.5s;
 }
 
 .timercontainer{
