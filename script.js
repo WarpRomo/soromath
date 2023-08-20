@@ -45,6 +45,7 @@ let modes = {
     }
   },
   "exponents": powerpreset,
+  "Nth Roots": rootpreset,
   "trigonometry":{
     id: "trigequation",
     template: "template1equation",
