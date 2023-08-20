@@ -262,7 +262,7 @@
 
           <div class="inpandexample">
             <div class="numrestart">
-              <input class="numinput maininput" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
+              <input class="numinput maininput" placeholder="Type here" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
               <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
             </div>
             <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
@@ -281,7 +281,7 @@
           <button id="flashstart" class="zulubutton" onclick="flashstart()">Start</button>
 
           <div id="flashinputrestart" style="display: none">
-            <input id="flashinput" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
+            <input id="flashinput" placeholder="Type here" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
             <button id="flashrestart" class="zulubutton" onclick="flashrestart()" style="display: none">↻</button>
           </div>
 
