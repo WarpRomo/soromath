@@ -12,20 +12,20 @@ let divisionpreset = {
     preset: "easy",
     presets:{
       "easy":{
-        range1: [0,9],
+        range1: [1,9],
         range2: [0,9]
       },
       "medium":{
-        range1: [0,99],
+        range1: [1,99],
         range2: [0,99]
       },
       "hard":{
-        range1: [0,999],
+        range1: [1,999],
         range2: [0,999]
       },
       "custom":{}
     },
-    range1: [0,9],
+    range1: [1,9],
     range2: [0,9],
   },
   settingsgui: {
@@ -45,6 +45,10 @@ function adddivision(main=false,self=divisionpreset,name=null){
 
   let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
   let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
+
+  let temp = num1;
+  num1 *= num2;
+  num2 = temp;
 
   if(main == false) problemlist.push([name,[num1,num2]]);
   else{
