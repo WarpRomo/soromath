@@ -14,7 +14,7 @@ let themes = {
     text_color: 'rgb(255,255,255)',
     text_select_color: 'rgb(255,0,0)',
     display_color: 'rgb(255,255,255)',
-    font_family: "Monospace",
+    font_family: "Arial",
   },
   "matrix": {
     background: 'rgb(0,0,0)',
@@ -37,6 +37,17 @@ let themes = {
     text_select_color: 'rgb(255,77,255)',
     display_color: 'rgb(255,77,255)',
     font_family: "Arial",
+  },
+  "lime": {
+    background: `rgb(${0*0.1},${77*0.05},${0*0.1})`,
+    button_background: `rgb(${0*0.3},${77*0.3},${0*0.3})`,
+    button_border: `rgb(${0*0.4},${77*0.4},${0*0.4})`,
+    window_background: `rgb(${0*0.2},${77*0.2},${0*0.2})`,
+    window_border: `rgb(${0*0.2},${77*0.2},${0*0.2})`,
+    text_color: 'rgb(255,255,255)',
+    text_select_color: 'rgb(0,255,0)',
+    display_color: 'rgb(0,255,0)',
+    font_family: "cursive",
   },
   "ocean": {
     background: 'rgb(10,10,35)',
@@ -69,6 +80,17 @@ let themes = {
       text_select_color: 'rgb(255,0,0)',
       display_color: 'rgb(0,0,0)',
       font_family: "Monospace",
+  },
+  "shadow": {
+      background: 'rgb(0,0,0)',
+      button_background: 'rgb(35,35,35)',
+      button_border: 'rgb(50,50,50)',
+      window_background: 'rgb(20,20,20)',
+      window_border: 'rgb(30,30,30)',
+      text_color: 'rgb(255,255,255)',
+      text_select_color: 'rgb(100,100,100)',
+      display_color: 'rgb(255,255,255)',
+      font_family: "Arial",
   },
 
 
