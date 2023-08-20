@@ -32,13 +32,14 @@
   top: 50px;
   height: 290px;
   padding-top: 30px;
-  overflow-y: hidden;
+  overflow: hidden;
   display: inline-flex;
   justify-content: right;
   right: 50%;
   padding-top: 115px;
   min-width: 150px;
   margin-right: 15px;
+
 }
 
 .problemmask{
@@ -80,6 +81,10 @@
 }
 
 .powerproblem{
+  height: 90px;
+}
+
+.rootproblem{
   height: 90px;
 }
 
