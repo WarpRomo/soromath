@@ -152,6 +152,10 @@
 }
 
 
+.numinput::placeholder{
+    font-size: 20px;
+}
+
 .numinput{
   all: unset;
   position: relative;
