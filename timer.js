@@ -7,6 +7,13 @@ function settimer(){
 
   for(var i = 0; i < elements.length; i++){
 
+    if(!teststarted){
+      elements[i].style.opacity = 0.1;
+    }
+    else{
+      elements[i].style.opacity = "";
+    }
+
     if(window.getComputedStyle(elements[i]).display != "none"){
 
 
