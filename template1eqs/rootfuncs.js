@@ -94,8 +94,8 @@ function rootspeech(problem){
   rootpart += wordending[parseInt(stringed[stringed.length-1])] + " root"
 
   if(problem[0] == 1) rootpart = "first root"
-  if(problem[0] == 1) rootpart = "square root"
-  if(problem[0] == 1) rootpart = "cube root"
+  if(problem[0] == 2) rootpart = "square root"
+  if(problem[0] == 3) rootpart = "cube root"
 
   return rootpart + " of " + problem[1];
 
