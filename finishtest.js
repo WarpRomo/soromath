@@ -3,7 +3,7 @@ function restarttest(focus=true){
   stats = [0,0];
   problemindex = 0;
   problemlist = [];
-  teststarted = false;
+  teststarted = 0;
 
   if(testcheckend != null){
     clearInterval(testcheckend);
@@ -34,11 +34,24 @@ function starttest(){
 
   lastcompleteraw = new Date().getTime();
   lastcomplete = new Date().getTime();
-  teststarted = new Date().getTime();
+  teststarted = 0;
+
+  let lasttime = new Date().getTime();
+
   testcheckend = setInterval(() => {
 
     let time = new Date().getTime();
-    if(time - teststarted >= totaltime){
+    let dt = time - lasttime;
+    lasttime = new Date().getTime();
+
+    if(synth.speaking) {
+      dt = 0;
+    }
+
+    teststarted += dt;
+
+
+    if(teststarted >= totaltime){
 
       console.log("HERE");
 
@@ -85,7 +98,7 @@ function finishtest(){
   document.getElementById("options").style.display = "none"
   document.getElementById("finishscreen").style.display = ""
 
-  teststarted = false;
+  teststarted = 0;
 
   if(!voicemodeenabled){
     addcompleted({

@@ -6,7 +6,7 @@ let problemlist = [];
 let stats = [0,0];
 
 let totaltime = 15000;
-let teststarted = false;
+let teststarted = 0;
 let testcheckend = null;
 
 

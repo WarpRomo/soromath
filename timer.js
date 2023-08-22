@@ -7,7 +7,7 @@ function settimer(){
 
   for(var i = 0; i < elements.length; i++){
 
-    if(!teststarted){
+    if(teststarted == 0){
       elements[i].style.opacity = 0.1;
     }
     else{
@@ -26,8 +26,7 @@ function settimer(){
       elements[i].width = 120;
       elements[i].height = 120;
 
-      let starttime = ((!teststarted) ? (new Date().getTime()) : teststarted);
-      let timeportion = ((new Date().getTime()) - starttime) / totaltime;
+      let timeportion = teststarted / totaltime;
 
       ctx.beginPath();
       ctx.arc(60, 60, 50, 0, 2 * Math.PI);
