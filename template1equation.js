@@ -16,13 +16,11 @@ function settemplate(template){
 
   let templatekeys = Object.keys(templates)
 
-  console.log("YO");
 
   for(var i = 0; i < templatekeys.length; i++){
 
     let templateelement = document.getElementById(templatekeys[i]);
 
-    console.log("here");
 
     if(templatekeys[i] != template){
       templateelement.style.display = "none";
@@ -39,7 +37,6 @@ function settemplate(template){
     }
   }
 
-  console.log(template);
 
   templates[template].init();
 
@@ -102,7 +99,10 @@ function template1init(){
     for(var i = 0; i < 7; i++){
 
       let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
-      let problem = modes[problemtype].addproblem(main=i == 0, modes[problemtype], name=problemtype);
+
+      if(i == 0) console.log(problemtype);
+
+      let problem = modes[problemtype].addproblem(i == 0, modes[problemtype], problemtype);
 
       if(i == 0){
 

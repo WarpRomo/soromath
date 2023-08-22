@@ -1,3 +1,17 @@
+let monthnumpreset = {
+  id: "monthnumequation",
+  template: "template1equation",
+  addproblem: addmonthnum,
+  ontype: monthnumtype,
+  getanswer: monthnumanswer,
+  validate: monthnumvalidate,
+  speechText: monthnumspeech,
+  settings: {
+    name: "monthnum",
+
+  }
+}
+
 function addmonthnum(main=false,difficulty=null,name=null){
 
   let months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]

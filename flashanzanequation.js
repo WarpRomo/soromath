@@ -277,7 +277,6 @@ function flashanzaninit(){
 
 function flashanzanswitch(){
 
-  console.log("HERE");
 
   flashrestart(false);
   //document.getElementById("flashoption").style.display = "none";
@@ -351,8 +350,6 @@ function flashinput(event){
     flashstuff.input.disabled = true
 
     document.getElementById("flashtext").innerHTML = flashcount;
-
-    console.log(flashcount, numinput)
 
     if(numinput == flashcount){
       let correct = flashcorrect.cloneNode();

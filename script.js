@@ -31,48 +31,13 @@ let modes = {
   "multiplication": multpreset,
   "subtraction": subtractionpreset,
   "division": divisionpreset,
-  "fraction addition":{
-    id: "fractionequation",
-    template: "template1equation",
-    addproblem: addfraction,
-    ontype: fractiontype,
-    getanswer: fractionanswer,
-    validate: fractionvalidate,
-    speechText: fractionspeech,
-    settings: {
-      name: "fraction",
-      offset: "-109px"
-    }
-  },
+  "fraction addition": fractionpreset,
   "exponents": powerpreset,
   "Nth Roots": rootpreset,
-  "trigonometry":{
-    id: "trigequation",
-    template: "template1equation",
-    addproblem: addtrig,
-    ontype: trigtype,
-    getanswer: triganswer,
-    validate: trigvalidate,
-    speechText: trigspeech,
-    settings: {
-      name: "trig",
-      offset: "-109px"
-    }
-  },
+  "linear equations": linearpreset,
+  "trigonometry":trigpreset,
   "C° to F°": celctofpreset,
-  "month to number":{
-    id: "monthnumequation",
-    template: "template1equation",
-    addproblem: addmonthnum,
-    ontype: monthnumtype,
-    getanswer: monthnumanswer,
-    validate: monthnumvalidate,
-    speechText: monthnumspeech,
-    settings: {
-      name: "monthnum",
-
-    }
-  },
+  "month to number": monthnumpreset,
   "flash anzan": flashanzanpreset
 }
 

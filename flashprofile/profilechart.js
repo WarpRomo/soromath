@@ -6,7 +6,6 @@ function initprofilechart(){
 
   var style = getComputedStyle(document.body)
 
-  console.log("HEREAAA");
 
   profilecpmchart = new Chart("profilechart", {
 
@@ -153,7 +152,6 @@ function makeprofilechart(){
   totalacc = totalacc / timelist.length;
   totalacc = Math.floor(totalacc * 10000) / 100
 
-  console.log(values);
 
   var style = getComputedStyle(document.body)
 

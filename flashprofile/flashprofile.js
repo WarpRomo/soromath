@@ -67,8 +67,6 @@ function addcompleted(obj){
 
 function profileinit(){
 
-  console.log("DOIN THIS");
-
   if(!completedparsed){
     if(completedtests == null){
       completedtests = [];

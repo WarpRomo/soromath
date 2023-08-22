@@ -65,6 +65,8 @@
   <script src="template1eqs/monthnumfuncs.js"></script>
   <script src="template1eqs/powerfuncs.js"></script>
   <script src="template1eqs/rootfuncs.js"></script>
+  <script src="template1eqs/linearsystem.js"></script>
+
 
   <script src="options/themes.js"></script>
   <script src="options/options.js"></script>
@@ -181,8 +183,8 @@
       </div>
     </div>
 
-    <div id = "profilemodecontainer" onclick="removeprofilemodefocus(event)" style="display:none">
-      <div id = "profilemodeselect" onclick="removeprofilemodefocus(event)">
+    <div id = "profilemodecontainer" onmousedown="removeprofilemodefocus(event)" style="display:none">
+      <div id = "profilemodeselect" onmousedown="removeprofilemodefocus(event)">
 
 
       </div>
@@ -309,8 +311,8 @@
     </div>
     </div>
 
-  <div id = "modecontainer" onclick="removemodefocus(event)" style="display:none">
-    <div id = "modeselect" onclick="removemodefocus(event)">
+  <div id = "modecontainer" onmousedown="removemodefocus(event)" style="display:none">
+    <div id = "modeselect" onmousedown="removemodefocus(event)">
 
 
     </div>
@@ -338,40 +340,8 @@
 
   </div>
 
-  <div id = "themecontainer" onclick="removethemefocus(event)" style="display:none">
-    <div id = "themeselect" onclick="removethemefocus(event)">
-
-
-    </div>
-  </div>
-
-  <div id = "flashcontainer" onclick="removeanzanfocus(event)" style="display:none">
-    <div id = "flashbox">
-
-      <p id="flashanzantitle">Flash Anzan</p>
-
-      <div class = "flashsettingstext">
-        <p class="flashlabel">Amount of digits: </p>
-        <p id="flashdigittext" class="flashvalue"></p>
-      </div>
-
-      <input type="range" min="1" max="9" value="1" class="zuluslider anzanslider" id="flashdigitamount" oninput="getanzansliders()">
-
-      <div class = "flashsettingstext">
-        <p class="flashlabel">Amount of numbers: </p>
-        <p id="flashnumtext" class="flashvalue"></p>
-      </div>
-
-      <input type="range" min="1" max="50" value="1" class="zuluslider anzanslider" id="flashnumamount" oninput="getanzansliders()">
-
-      <div class = "flashsettingstext">
-        <p class="flashlabel">Flash speed: </p>
-        <p id="flashspeedtext" class="flashvalue"></p>
-      </div>
-
-      <input type="range" min="1" max="50" value="1" class="zuluslider anzanslider" id="flashspeedamount" oninput="getanzansliders()">
-      <button class="zulubutton" id="flashdone" onclick="removeanzanfocus(event, true)">Done</button>
-
+  <div id = "themecontainer" onmousedown="removethemefocus(event)" style="display:none">
+    <div id = "themeselect" onmousedown="removethemefocus(event)">
 
 
     </div>

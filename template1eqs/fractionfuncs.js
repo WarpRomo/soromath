@@ -1,4 +1,18 @@
 
+let fractionpreset = {
+  id: "fractionequation",
+  template: "template1equation",
+  addproblem: addfraction,
+  ontype: fractiontype,
+  getanswer: fractionanswer,
+  validate: fractionvalidate,
+  speechText: fractionspeech,
+  settings: {
+    name: "fraction",
+    offset: "-109px"
+  }
+}
+
 function addfraction(main=false,difficulty=0,name=null){
 
 

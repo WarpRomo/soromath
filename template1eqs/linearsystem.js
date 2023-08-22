@@ -44,24 +44,33 @@ let linearpreset = {
 
 function addlinear(main=false,self=linearpreset,name=null){
 
-  let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
-  let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
-  let num3 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
-  let num4 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
+  let num1 = null;
+  let num2 = null;
+  let num3 = null;
+  let num4 = null;
 
   problemarr = [];
 
   if(main == false){
 
-    problemarr = [num1+"",num2+"",num3+"",num4+""];
+    problemarr = ["","","",""];
 
     problemarr[Math.floor(Math.random() * problemarr.length)]+="x";
 
     while(true){
       let rand = Math.floor(Math.random() * problemarr.length);
-      if(!problemarr[rand].includes("x")){
+      if(problemarr[rand].length == 0){
         problemarr[rand]+="x"
         break;
+      }
+    }
+
+    for(var i = 0; i < problemarr.length; i++){
+      if(problemarr[i] == "x"){
+        problemarr[i] = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0])+"x";
+      }
+      else{
+        problemarr[i] = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0])+"";
       }
     }
 
@@ -96,12 +105,12 @@ function addlinear(main=false,self=linearpreset,name=null){
 
   let part1 = problemarr[0];
 
-  if(problemarr[1] < 0) part1 += " " + problemarr[1];
+  if(problemarr[1] < 0) part1 += " - " + Math.abs(problemarr[1]);
   else part1 += " + " + problemarr[1];
 
   part1 += " = " + problemarr[2];
 
-  if(problemarr[3] < 0) part1 += " " + problemarr[3];
+  if(problemarr[3] < 0) part1 += " - " + Math.abs(problemarr[3]);
   else part1 += " + " + problemarr[3];
 
   problem.innerHTML = part1;

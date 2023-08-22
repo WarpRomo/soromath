@@ -34,8 +34,6 @@ function matchdifficulty(){
 
   let prev = null;
 
-  console.log(currentmode);
-
   let keys = currentmode;
   let newdifficulty = null;
 
@@ -57,8 +55,6 @@ function matchdifficulty(){
 
   }
 
-  console.log(newdifficulty);
-
   if(newdifficulty == undefined) return;
 
   let current = document.getElementById(difficultybuttons[difficultynames.indexOf(currentdifficulty)]);
@@ -68,8 +64,6 @@ function matchdifficulty(){
   pressed.classList.add("textselected");
 
   currentdifficulty = newdifficulty;
-
-  console.log("YALLLLLLLLLLLLLL")
 
   if(currentdifficulty != "custom"){
     document.getElementById("custombutton").disabled = true;

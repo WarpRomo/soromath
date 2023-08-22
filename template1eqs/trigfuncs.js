@@ -1,4 +1,18 @@
 
+let trigpreset = {
+  id: "trigequation",
+  template: "template1equation",
+  addproblem: addtrig,
+  ontype: trigtype,
+  getanswer: triganswer,
+  validate: trigvalidate,
+  speechText: trigspeech,
+  settings: {
+    name: "trig",
+    offset: "-109px"
+  }
+}
+
 function addtrig(main=false,difficulty=0,name=null){
 
   let funcs = ["sin","cos","tan"];
