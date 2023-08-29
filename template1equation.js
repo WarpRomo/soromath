@@ -102,7 +102,7 @@ function template1init(){
 
       if(i == 0) console.log(problemtype);
 
-      let problem = modes[problemtype].addproblem(i == 0, modes[problemtype], problemtype);
+      let problem = addrandproblem();
 
       if(i == 0){
 
@@ -237,8 +237,9 @@ function template1enter(e, press=false){
 
     problemindex++;
 
-    let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
-    modes[nextproblem].addproblem(main=false, modes[nextproblem], name=nextproblem);
+
+    addrandproblem();
+
 
     if(voicemodeenabled){
 
@@ -246,6 +247,41 @@ function template1enter(e, press=false){
 
     }
 
+
+}
+
+function addrandproblem(){
+
+  let trials = 0;
+
+  let problem = null;
+  while(true){
+
+    let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
+    problem = modes[nextproblem].addproblem(problemlist.length == 0, modes[nextproblem], name=nextproblem);
+    trials++;
+
+    if(trials > 5 || problemlist.length <= 1){
+      break;
+    }
+
+    if(problemlist.length > 1){
+
+      let e1 = problemlist[problemlist.length - 1];
+      let e2 = problemlist[problemlist.length - 2];
+
+      if(e1[0] == e2[0] && JSON.stringify(e1[1]) == JSON.stringify(e2[1])){
+        console.log("DUPLICATE DETECTED!");
+        problem.remove();
+        problemlist.pop();
+      }
+
+
+    }
+
+  }
+
+  return problem;
 
 }
 
