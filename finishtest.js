@@ -45,7 +45,7 @@ function starttest(){
     lasttime = new Date().getTime();
 
     if(synth.speaking) {
-      dt = 0;
+      //dt = 0;
     }
 
     teststarted += dt;

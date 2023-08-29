@@ -40,7 +40,7 @@ let powerpreset = {
   }
 }
 
-function addpower(setproblem=null,self=powerpreset,name=null){
+function addpower(main=false,self=powerpreset,name=null){
 
   let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
   let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);

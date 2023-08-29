@@ -242,22 +242,34 @@ function template1enter(e, press=false){
 
     if(voicemodeenabled){
 
-      let text = "error";
-
-      if("speechText" in modes[problemlist[problemindex][0]]){
-
-        text = modes[problemlist[problemindex][0]].speechText(problemlist[problemindex][1]);
-
-      }
-
-
-      setTimeout(() => {
-        synthesisvoice(text);
-      }, 500)
-
-
+      voiceproblem();
 
     }
 
 
+}
+
+function revoiceproblem(){
+
+  voiceproblem(0);
+
+  setTimeout( () => {
+    document.getElementById("template1input").focus();
+  }, 50)
+
+}
+
+function voiceproblem(delay=500){
+  let text = "error";
+
+  if("speechText" in modes[problemlist[problemindex][0]]){
+
+    text = modes[problemlist[problemindex][0]].speechText(problemlist[problemindex][1]);
+
+  }
+
+
+  setTimeout(() => {
+    synthesisvoice(text);
+  }, delay)
 }
