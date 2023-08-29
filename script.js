@@ -38,6 +38,7 @@ let modes = {
   "trigonometry":trigpreset,
   "C° to F°": celctofpreset,
   "month to number": monthnumpreset,
+  "date to day of week": calendarpreset,
   "flash anzan": flashanzanpreset
 }
 
