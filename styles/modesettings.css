@@ -45,3 +45,28 @@
   margin-bottom: 0px;
   font-family: var( --font_family);
 }
+
+
+.dateinput{
+  all: unset;
+  position: relative;
+  width: 150px;
+  font-family: var( --font_family);
+  font-size: 20px;
+  height: 50px;
+  background: var(--button_background);
+  border: solid 1px var(--button_border);
+  color: gray;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+  padding-left: 10px;
+  float: left;
+}
+
+.dateinput:hover{
+  opacity: 0.8;
+}
+
+.dateinput:focus{
+  opacity: 1;
+}
