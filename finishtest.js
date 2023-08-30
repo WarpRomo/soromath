@@ -84,8 +84,8 @@ function finishtest(){
   let rawcpm = (60000 / totaltime) * (stats[0] + stats[1]);
 
 
-  document.getElementById("finishcpm").innerHTML = cpm + " cpm";
-  document.getElementById("finishrawcpm").innerHTML = rawcpm + " raw cpm";
+  document.getElementById("finishcpm").innerHTML = Math.floor(cpm) + " cpm";
+  document.getElementById("finishrawcpm").innerHTML = Math.floor(rawcpm) + " raw cpm";
 
   let modestring = currentmode.join("<br>")
 
