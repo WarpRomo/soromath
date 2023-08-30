@@ -50,7 +50,7 @@
   opacity: 1;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-color: red var(--window_background);
+  scrollbar-color: var(--button_background) var(--window_background);
   top: 50%;
   transform: translateY(-50%);
 
