@@ -37,6 +37,7 @@ let modes = {
   "linear equations": linearpreset,
   "trigonometry":trigpreset,
   "C° to F°": celctofpreset,
+  "F° to C°": ftocelcpreset,
   "month to number": monthnumpreset,
   "date to day of week": calendarpreset,
   "flash anzan": flashanzanpreset

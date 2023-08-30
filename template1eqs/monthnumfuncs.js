@@ -24,6 +24,8 @@ function addmonthnum(main=false,difficulty=null,name=null){
      problemlist.push([name,[quest]]);
   }
 
+  if(recentduplicate()) return;
+
 
   let problem = document.createElement("p");
   problem.innerHTML = quest;

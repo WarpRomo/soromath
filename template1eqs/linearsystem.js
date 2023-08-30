@@ -100,6 +100,8 @@ function addlinear(main=false,self=linearpreset,name=null){
 
   }
 
+  if(recentduplicate()) return;
+
 
   let problem = document.createElement("p");
 

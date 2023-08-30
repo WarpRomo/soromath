@@ -31,6 +31,7 @@ function addtrig(main=false,difficulty=0,name=null){
 
   }
 
+  if(recentduplicate()) return;
 
   let problem = document.createElement("p");
 

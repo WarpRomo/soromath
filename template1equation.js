@@ -250,40 +250,65 @@ function template1enter(e, press=false){
 
 }
 
+
+let gentrials = 0;
+
 function addrandproblem(){
 
-  let trials = 0;
-
   let problem = null;
+
   while(true){
 
     let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
     problem = modes[nextproblem].addproblem(problemlist.length == 0, modes[nextproblem], name=nextproblem);
-    trials++;
+    gentrials++;
 
-    if(trials > 5 || problemlist.length <= 1){
+    if(recentduplicate()){
+      if(problem != undefined) problem.remove();
+      problemlist.pop();
+    }
+    else{
       break;
     }
 
-    if(problemlist.length > 1){
+  }
 
-      let e1 = problemlist[problemlist.length - 1];
-      let e2 = problemlist[problemlist.length - 2];
+  gentrials = 0;
+
+  return problem;
+
+}
+
+
+function recentduplicate(){
+
+  if(gentrials > 20 || problemlist.length <= 1){
+    console.log("pass");
+    return false;
+  }
+
+  if(problemlist.length > 1){
+
+    let e1 = problemlist[problemlist.length - 1];
+
+    for(var i = problemlist.length - 2; i >= 0 && i >= problemlist.length - 7; i--){
+
+      let e2 = problemlist[i];
 
       if(e1[0] == e2[0] && JSON.stringify(e1[1]) == JSON.stringify(e2[1])){
-        console.log("DUPLICATE DETECTED!");
-        problem.remove();
-        problemlist.pop();
-      }
 
+
+        return true;
+      }
 
     }
 
   }
 
-  return problem;
+  return false;
 
 }
+
 
 function revoiceproblem(){
 

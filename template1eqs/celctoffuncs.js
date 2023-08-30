@@ -242,6 +242,8 @@ function addcelctof(main=false,self=celctofpreset,name=null){
      problemlist.push([name,[num]]);
   }
 
+  if(recentduplicate()) return;
+
 
   let problem = document.createElement("p");
   problem.innerHTML = num + "°C"

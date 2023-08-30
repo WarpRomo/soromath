@@ -55,6 +55,8 @@ function addpower(main=false,self=powerpreset,name=null){
 
   }
 
+  if(recentduplicate()) return;
+
   let problem = document.createElement("p");
   problem.innerHTML = `${num1}^${num2}=`
   problem.classList.add("problem");
@@ -64,10 +66,6 @@ function addpower(main=false,self=powerpreset,name=null){
 
   let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
-
-  console.log(problem);
-
-
 
   const macros = {};
 

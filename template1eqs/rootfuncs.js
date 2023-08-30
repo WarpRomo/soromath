@@ -56,6 +56,8 @@ function addroot(main=false,self=rootpreset,name=null){
 
   }
 
+  if(recentduplicate()) return;
+
   let problem = document.createElement("p");
   problem.innerHTML = `\\sqrt[${num1}]{${num2}}`
   problem.classList.add("problem");

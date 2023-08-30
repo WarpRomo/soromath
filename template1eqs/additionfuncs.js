@@ -322,6 +322,7 @@ function addaddition(main=false,self=additionpreset,name=null){
 
   }
 
+  if(recentduplicate()) return;
 
   let problem = document.createElement("p");
   problem.innerHTML = num1 + "+" + num2 + " " + "="

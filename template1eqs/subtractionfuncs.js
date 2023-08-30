@@ -54,6 +54,7 @@ function addsubtraction(main=false,self=subtractionpreset,name=null){
      problemlist.push([name, [num1,num2]]);
   }
 
+  if(recentduplicate()) return;
 
   let problem = document.createElement("p");
   problem.innerHTML = num1 + "-" + num2 + " " + "="

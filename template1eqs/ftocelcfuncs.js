@@ -1,45 +1,49 @@
 
-let calendarpreset = {
-  id: "calendarday",
-  diffs: [0,1,2],
+
+let ftocelcpreset = {
+  id: "ftocelcequation",
   template: "template1equation",
-  addproblem: addcalendar,
-  ontype: calendartype,
-  getanswer: calendaranswer,
-  validate: calendarvalidate,
-  speechText: calendarspeech,
-  name: "date to day of week",
+  addproblem: addftocelc,
+  ontype: ftocelctype,
+  getanswer: ftocelcanswer,
+  validate: ftocelcvalidate,
+  speechText: ftocelcspeech,
+  name: "F° to C°",
   settings: {
     preset: "easy",
     presets:{
       "easy":{
-        range1: [0,8999942400000]
+        range1: [0,100],
+      },
+      "medium":{
+        range1: [-50,100],
       },
       "hard":{
-        range1: [-9000028800000,9000000000000]
+        range1: [-500,500],
       },
       "custom":{}
     },
-    range1: [0,8999942400000]
+    range1: [0,100],
   },
   settingsgui: {
 
     range1: null,
+    range2: null,
     doneinit: false,
-    init: basicpresetgendate("Date Range"),
-    setpreset: setpresetdate,
+    init: basicpresetgen1range("Degree Range"),
+    setpreset: setpreset1range,
     matchpreset: matchpreset,
 
   }
-
 }
 
 
-function basicpresetgendate(range1label){
-  return (self, changegui=true) => {basicpresetdate(self, range1label, changegui)}
+
+function basicpresetgen1range(range1label){
+  return (self, changegui=true) => {basicpreset1range(self, range1label, changegui)}
 }
 
-function basicpresetdate(self, range1label, changegui){
+function basicpreset1range(self, range1label, changegui){
   let modesettingsbutton = document.getElementById("modesettingsbutton")
   let modesettingssection = document.getElementById("modesettingssection");
 
@@ -54,7 +58,7 @@ function basicpresetdate(self, range1label, changegui){
 
   modesettingssection.appendChild(presetLabel);
 
-  let radioPresets = ["easy","hard", "custom"]
+  let radioPresets = ["easy", "medium", "hard", "custom"]
 
   let radioButtons = document.createElement("div");
 
@@ -134,14 +138,11 @@ function basicpresetdate(self, range1label, changegui){
     let input1 = document.createElement("input")
     let input2 = document.createElement("input")
 
-    input1.setAttribute("type", "date");
-    input2.setAttribute("type", "date");
-
     input1.style.margin = "7px";
     input2.style.margin = "7px";
 
-    input1.classList.add("dateinput");
-    input2.classList.add("dateinput");
+    input1.classList.add("numinput");
+    input2.classList.add("numinput");
 
     parent.appendChild(input1);
     parent.appendChild(input2);
@@ -152,40 +153,48 @@ function basicpresetdate(self, range1label, changegui){
 
   let range1 = makeinputrange();
 
-  range1[1].valueAsNumber = self.settings.range1[0];
-  range1[2].valueAsNumber = self.settings.range1[1];
-
+  range1[1].value = self.settings.range1[0];
+  range1[2].value = self.settings.range1[1];
   range1[1].oninput = () => { oninput(range1[1]) }
   range1[2].oninput = () => { oninput(range1[2]) }
-  range1[1].onblur = () => {onblur(range1[1]); swap(range1[1], range1[2]); self.settings.range1[0] = range1[1].valueAsNumber; self.settings.range1[1] = range1[2].valueAsNumber; self.settingsgui.matchpreset(self) }
-  range1[2].onblur = () => {onblur(range1[2]); swap(range1[1], range1[2]); self.settings.range1[1] = range1[2].valueAsNumber; self.settings.range1[0] = range1[1].valueAsNumber; self.settingsgui.matchpreset(self) }
+  range1[1].onblur = () => {self.settings.range1[0] = onblur(range1[1]); swap(range1[1], range1[2]); self.settingsgui.matchpreset(self) }
+  range1[2].onblur = () => {self.settings.range1[1] = onblur(range1[2]); swap(range1[1], range1[2]); self.settingsgui.matchpreset(self) }
   self.settingsgui.range1 = range1;
 
   modesettingssection.appendChild(numRange);
   modesettingssection.appendChild(range1[0])
 
   function oninput(input){
-    return input.valueAsNumber;
+
+    let allowed = "-0123456789";
+    let chars = "";
+
+    for(var i = 0; i < input.value.length; i++){
+      if(allowed.indexOf(input.value[i]) != -1) chars += input.value[i];
+    }
+
+    input.value = chars;
+
+    return input.value;
+
   }
   function onblur(input){
 
-    if(input.valueAsNumber+"" == "NaN"){
-      input.valueAsNumber = 0;
-    }
+    let parsed = parseInt(input.value);
+    if(parsed+"" == "NaN") parsed = 0;
+    input.value = parsed;
 
-    return input.valueAsNumber;
+    return parsed;
+
   }
 
   function swap(e1, e2){
 
-    console.log("perform swap");
-    console.log(e1.valueAsNumber, e2.valueAsNumber)
+    if(parseInt(e1.value) > parseInt(e2.value)){
 
-    if(e1.valueAsNumber > e2.valueAsNumber){
-
-      let temp = e1.valueAsNumber;
-      e1.valueAsNumber = e2.valueAsNumber;
-      e2.valueAsNumber = temp;
+      let temp = e1.value;
+      e1.value = e2.value;
+      e2.value = temp;
 
     }
 
@@ -197,7 +206,7 @@ function basicpresetdate(self, range1label, changegui){
 
 }
 
-function setpresetdate(self, presetname){
+function setpreset1range(self, presetname){
 
   if(presetname in self.settings.presets == false){
 
@@ -210,8 +219,8 @@ function setpresetdate(self, presetname){
 
   self.settings.range1 = [...preset.range1];
 
-  self.settingsgui.range1[1].valueAsNumber = preset.range1[0];
-  self.settingsgui.range1[2].valueAsNumber = preset.range1[1];
+  self.settingsgui.range1[1].value = preset.range1[0];
+  self.settingsgui.range1[2].value = preset.range1[1];
 
   self.settings.preset = presetname
 
@@ -222,63 +231,45 @@ function setpresetdate(self, presetname){
 
 
 
-function addcalendar(main=false,self=calendarpreset,name=null){
+function addftocelc(main=false,self=ftocelcpreset,name=null){
 
-  let num1 = null;
-  let num2 = null;
 
-  problemarr = [];
+  let num = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
 
-  if(main == false){
-
-    let num = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0])
-    problemarr = [num];
-    problemlist.push([name, problemarr]);
-
-  }
+  if(main == false) problemlist.push([name,[num]]);
   else{
-
-    num1 = 0;
-    problemarr = [num1]
-
-    problemlist.push([name,problemarr]);
-
+     num = 32;
+     problemlist.push([name,[num]]);
   }
 
   if(recentduplicate()) return;
 
+
   let problem = document.createElement("p");
-
-  let part = problemarr[0];
-
-  problem.innerHTML = new Date(part).toLocaleDateString();
+  problem.innerHTML = num + "°F"
   problem.classList.add("problem");
-
   if(main) problem.id = "mainproblem"
-
-  problem.classList.add("calendarproblem")
 
   let problems = document.getElementsByClassName("mainproblems")[0];
   problems.appendChild(problem);
-
-
 
   return problem;
 
 }
 
-function calendarspeech(problem){
+function ftocelcspeech(problem){
 
-  return problem[0];
+  return (problem[0] < 0 ? "negative " : "") + Math.abs(problem[0]) + " degrees"
+
 
 }
 
-function calendartype(e){
+function ftocelctype(e){
 
   let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
-  let nums = "abcdefghijklmnopqrstuvwxyz"
+  let nums = "-0123456789."
 
   for(var i = 0; i < input.value.length; i++){
     if(nums.indexOf(input.value[i]) == -1) continue;
@@ -287,25 +278,13 @@ function calendartype(e){
 
   input.value  = nonums;
 
-}
-
-function calendaranswer(problem){
-
-  let answers = ["m", "tu", "w", "th", "f", "sa", "su"];
-  const d = new Date(problem[0]);
-  let day = d.getDay();
-
-  day--;
-  if(day < 0) day = answers.length-1;
-
-  return answers[day];
 
 }
 
-function calendarvalidate(answer, inputnumber){
+function ftocelcanswer(problem){
+    return (problem - 32) * 5/9
+}
 
-  let input = inputnumber+"";
-  input = input.toLowerCase();
-  return input.startsWith(answer);
-
+function ftocelcvalidate(answer, inputnumber){
+  return Math.abs(answer-parseFloat(inputnumber)) <= 1;
 }
