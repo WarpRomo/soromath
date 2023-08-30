@@ -91,6 +91,12 @@ function makechart(){
   let cumulative = 0;
   let rawcumulative = 0;
 
+  console.log(totaltime);
+
+  if(totaltime <= 10000){
+    timeinterval = 1;
+  }
+
   for(var i = 0; i <= totaltime / (1000 * timeinterval); i++){
     cpmbuckets.push(0);
     rawcpmbuckets.push(0);
@@ -100,17 +106,19 @@ function makechart(){
   for(var i = 0; i < cpmtrack.length; i++){
     cumulative += cpmtrack[i];
     let bucket = Math.floor(cumulative / (1000*timeinterval));
+    if(bucket >= cpmbuckets.length) continue;
     cpmbuckets[bucket]++;
   }
   for(var i = 0; i < rawcpmtrack.length; i++){
     rawcumulative += rawcpmtrack[i];
     let rawbucket = Math.floor(rawcumulative / (1000*timeinterval));
+    if(rawbucket >= cpmbuckets.length) continue;
     rawcpmbuckets[rawbucket]++;
   }
 
   let xvalues = [];
 
-  for(var i = 3; i <= totaltime / 1000; i+=timeinterval){
+  for(var i = timeinterval; i <= totaltime / 1000; i+=timeinterval){
     xvalues.push(i);
   }
 

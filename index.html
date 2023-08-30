@@ -63,6 +63,7 @@
   <script src="template1eqs/trigfuncs.js"></script>
   <script src="template1eqs/celctoffuncs.js"></script>
   <script src="template1eqs/ftocelcfuncs.js"></script>
+
   <script src="template1eqs/monthnumfuncs.js"></script>
   <script src="template1eqs/powerfuncs.js"></script>
   <script src="template1eqs/rootfuncs.js"></script>
@@ -200,10 +201,22 @@
 
           <p class="optiontext">Time</p>
           <div class="buttonrow">
-            <button class="zulubutton optionbutton textselected" id="timeselected" onclick="settime(this,15000)">15s</button>
-            <button class="zulubutton optionbutton" onclick="settime(this,60000)">60s</button>
-            <button class="zulubutton optionbutton" onclick="settime(this,120000)">120s</button>
+            <button class="zulubutton optionbutton textselected 15sbuttontime" id="timeselected" onclick="settime(this,15000)">15s</button>
+            <button class="zulubutton optionbutton 60sbuttontime" onclick="settime(this,60000)">60s</button>
+            <button class="zulubutton optionbutton 120sbuttontime" onclick="settime(this,120000)">120s</button>
+            <button class="zulubutton optionbutton customtimebutton" onclick="showcustomtime()">custom</button>
           </div>
+        </div>
+
+        <div id="customtimecontainer" style="display:none" onmousedown="closetimecontainer(event)">
+
+          <div id="customtime">
+
+            <p class="settinglabel" id="customtimelabel">Set time</p>
+            <input class="numinput" placeholder="Type here" id="customtimeinp" oninput="customtimetype(event)" onblur="customtimeblur(event)"></input>
+            <button class="zulubutton" id="customtimedone" onclick="customtimedone()">Done</button>
+          </div>
+
         </div>
 
         <div class="option" id="difficultyoption">

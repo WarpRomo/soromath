@@ -1,6 +1,9 @@
 let difficultybuttons = ["easybutton", "mediumbutton", "hardbutton", "custombutton"];
 let difficultynames = ["easy", "medium", "hard", "custom"];
 
+let optiontimebuttons = ["15sbuttontime", "60sbuttontime", "120sbuttontime"];
+let optiontimenames = [15000, 60000, 120000];
+
 function setdifficulty(difficulty){
 
   let keys = Object.keys(modes);
@@ -86,6 +89,95 @@ function settime(elem, time){
   elem.id = "timeselected";
   elem.classList.add("textselected");
 
+  if(elem.classList.contains("customtimebutton") == false){
+
+    let yar = document.getElementsByClassName("customtimebutton")[0];
+    yar.innerHTML = "custom";
+
+  }
+
+
   init();
+
+}
+
+function customtimetype(event){
+
+  let nums = "0123456789"
+
+  let filtered = "";
+
+  for(var i =0 ; i < event.target.value.length; i++){
+
+    if(nums.indexOf(event.target.value[i]) != -1){
+      filtered += event.target.value[i];
+    }
+
+  }
+
+  event.target.value = filtered;
+
+}
+
+function customtimeblur(event){
+
+  let value = parseInt(event.target.value);
+
+  if(value == 0 || value+"" == "NaN"){
+
+    event.target.value = "";
+
+  }
+  else{
+    event.target.value = value;
+  }
+
+}
+
+
+function showcustomtime(){
+
+  let container = document.getElementById("customtimecontainer")
+
+  container.style.display = "";
+
+
+}
+
+function closetimecontainer(event){
+
+  if(event.target.id == "customtimecontainer"){
+    customtimedone();
+  }
+
+}
+
+function customtimedone(){
+
+  let input = document.getElementById("customtimeinp");
+  let timevalue = parseInt(input.value == "" ? 15 : input.value) * 1000;
+
+  document.getElementById("customtimecontainer").style.display = "none"
+
+  if(optiontimenames.indexOf(timevalue) != -1){
+    let name = optiontimebuttons[optiontimenames.indexOf(timevalue)];
+    let elem = document.getElementsByClassName(name)[0];
+    settime(elem, timevalue);
+  }
+  else{
+    let elem = document.getElementsByClassName("customtimebutton")[0];
+    settime(elem, timevalue);
+
+    let text = "custom\n" + (timevalue / 1000) +"s";
+
+    if(text.length > 11){
+      text = "custom"
+    }
+
+    elem.innerHTML = text;
+
+  }
+
+
 
 }

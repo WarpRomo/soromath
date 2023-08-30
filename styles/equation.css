@@ -122,7 +122,7 @@
   left: 50%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .numrestart{
     flex-direction: column;
   }
@@ -196,6 +196,7 @@
   transition: opacity 0.15s;
   padding-left: 10px;
   float: left;
+  vertical-align: middle;
 }
 
 .numinput:hover{

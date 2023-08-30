@@ -26,7 +26,6 @@ function voicemodeclick(yarr=true){
     document.getElementsByClassName("numrestart")[0].style.left = "0%";
     document.getElementsByClassName("inputexample")[0].style.left = "0%";
     document.getElementById("voicemodetext").style.display = "";
-    document.getElementById("voicerestart").style.display = "";
     document.getElementById("voicesettings").disabled = false;
 
     init();
@@ -48,7 +47,6 @@ function voicemodeclick(yarr=true){
     document.getElementsByClassName("inputexample")[0].style.left = "50%";
     document.getElementById("voicemodetext").style.display = "none";
     document.getElementById("voicesettings").disabled = true;
-    document.getElementById("voicerestart").style.display = "none";
 
   }
 
@@ -116,12 +114,5 @@ function synthesisvoice(text, rate=1.2){
   console.log("SPEAK");
 
   synth.speak(utterThis);
-
-}
-
-function voiceproblem(){
-
-
-
 
 }

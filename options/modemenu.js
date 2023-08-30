@@ -158,6 +158,7 @@ function modeinit(){
         let modesettingsback = document.getElementById("modesettingsback");
         let modesettingssection = document.getElementById("modesettingssection");
         let modesettingsbutton = document.getElementById("modesettingsbutton");
+        let modeselect = document.getElementById("modeselect");
 
         console.log(modesettingscontainer);
 
@@ -166,7 +167,7 @@ function modeinit(){
         modesettingssection.innerHTML = "";
         modes[keys[num]].settingsgui.init(modes[keys[num]]);
 
-        let offset = buttonelem.offsetTop
+        let offset = buttonelem.offsetTop - modeselect.scrollTop;
 
         //modesettingsbutton.innerHTML = buttonelem.innerHTML
 
@@ -192,7 +193,7 @@ function modeinit(){
 
           modesettingopen = null;
 
-          let offset = buttonelem.offsetTop
+          let offset = buttonelem.offsetTop - modeselect.scrollTop
 
           $(modesettingssection).animate({
 

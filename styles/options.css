@@ -46,7 +46,59 @@
   opacity: 1 !important;
 }
 
-@media screen and (max-width: 900px) {
+
+#customtimecontainer{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(3px);
+  z-index: 2
+}
+
+#customtimelabel{
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+#customtime{
+  position: relative;
+  width: 300px;
+  height: 200px;
+  overflow-y: scroll;
+  background: var(--window_background);
+  border-radius: 10px;
+  border: solid 2px var(--window_border);
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#customtimeinp{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#customtimedone{
+  margin-top: 10px;
+  width: 200px;
+}
+
+
+@media screen and (max-width: 1000px) {
   #optionsinner{
     display: block;
   }
