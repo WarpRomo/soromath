@@ -27,6 +27,7 @@
   margin-right: auto;
   top: 50%;
   transform: translateY(-50%);
+  scrollbar-color: var(--window_border) var(--window_background);
 }
 
 #modeselect::-webkit-scrollbar{
@@ -50,7 +51,7 @@
   opacity: 1;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-color: var(--button_background) var(--window_background);
+  scrollbar-color: var(--window_border) var(--window_background); 
   top: 50%;
   transform: translateY(-50%);
 
