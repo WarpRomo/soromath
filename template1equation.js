@@ -143,7 +143,12 @@ function template1enter(e, press=false){
     let input = document.getElementsByClassName("maininput")[0]
     let problems = document.getElementById("template1problems");
 
-    if(input.value.length == 0) return;
+    if(input.value.length == 0){
+      if(voicemodeenabled){
+        revoiceproblem();
+      }
+       return;
+     }
 
     let inputnumber = input.value;
     let mainproblemindex = problemindex;
