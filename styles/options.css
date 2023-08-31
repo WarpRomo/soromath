@@ -72,7 +72,6 @@
   background: var(--window_background);
   border-radius: 10px;
   border: solid 2px var(--window_border);
-  scrollbar-width: thin;
   overflow-x: hidden;
   position: relative;
   margin-left: auto;
