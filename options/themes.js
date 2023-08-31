@@ -253,11 +253,17 @@ function syncthemeedit(){
   buttonelem.style.color = themeediting.text_color
   buttonelem.style.border = `solid 1px ${themeediting.button_border}`
 
+  buttonelem.children[1].style.background = preset.button_background;
+  buttonelem.children[1].style.border = `solid 1px ${preset.button_border}`
+
   buttonelem2.children[0].innerHTML = preset.name;
   buttonelem2.style.background = themeediting.background
   buttonelem2.style.fontFamily = themeediting.font_family
   buttonelem2.style.color = themeediting.text_color
   buttonelem2.style.border = `solid 1px ${themeediting.button_border}`
+
+  buttonelem2.children[1].style.background = preset.button_background;
+  buttonelem2.children[1].style.border = `solid 1px ${preset.button_border}`
 
 }
 
@@ -569,7 +575,7 @@ function genpresetbutton(index){
 
     $(themesettingsbutton).animate({
 
-      top: (themecustomizecontainer.offsetHeight - buttonelem.offsetHeight - 7) + "px",
+      top: (themecustomizecontainer.offsetHeight - buttonelem.offsetHeight - 9) + "px",
 
     }, animTime, "easeOutQuad")
 
