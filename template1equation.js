@@ -264,9 +264,11 @@ function addrandproblem(){
 
   while(true){
 
+    gentrials++;
+
     let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
     problem = modes[nextproblem].addproblem(problemlist.length == 0, modes[nextproblem], name=nextproblem);
-    gentrials++;
+
 
     if(recentduplicate()){
       if(problem != undefined) problem.remove();
@@ -288,7 +290,6 @@ function addrandproblem(){
 function recentduplicate(){
 
   if(gentrials > 20 || problemlist.length <= 1){
-    console.log("pass");
     return false;
   }
 
