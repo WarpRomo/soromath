@@ -144,7 +144,7 @@ function template1enter(e, press=false){
     let problems = document.getElementById("template1problems");
 
     if(input.value.length == 0){
-      if(voicemodeenabled){
+      if(voicemodeenabled && e.key == "Enter"){
         revoiceproblem();
       }
        return;
