@@ -1,4 +1,38 @@
 
+
+#themebuttonselected{
+  position: fixed;
+  box-shadow: 0px 5px 30px var(--background)
+}
+
+.themeplus{
+  width: 23px !important;
+  height: 23px !important;
+  margin-right: 11px !important;
+}
+
+.themeplus > img{
+  width: 23px;
+  height: 23px;
+}
+
+
+.themebutton{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 23px !important;
+}
+
+.themebutton > p{
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+}
+
+
 #themecontainer{
   position: fixed;
   left: 0px;
@@ -11,23 +45,23 @@
 }
 
 #themeselect{
-  position: relative;
+  position: absolute;
   width: 500px;
   height: 600px;
-  overflow-y: scroll;
   background: var(--window_background);
   border-radius: 5px;
   border: solid 5px var(--window_border);
-  scrollbar-width: thin;
   overflow-x: hidden;
-  position: relative;
+  overflow-y: scroll;
+  left: 0;
+  right: 0;
   margin-left: auto;
   margin-right: auto;
   opacity: 0.9;
   top: 50%;
   transform: translateY(-50%);
+  scrollbar-color: var(--window_border) var(--window_background);
 }
-
 
 #themeselect::-webkit-scrollbar{
   background-color: var(--window_background);
@@ -39,8 +73,152 @@
   width: 5px;
 }
 
+
+
+#themecustomizecontainer{
+  position: absolute;
+  width: 500px;
+  height: 600px;
+  border-radius: 5px;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  border: solid 5px var(--window_border);
+  scrollbar-color: var(--window_border) var(--window_background);
+}
+
+#themecustomize{
+  width: 100%;
+  height: 100%;
+  background: var(--window_background);
+  overflow-y: scroll;
+  scrollbar-color: var(--window_border) var(--window_background);
+}
+
+#themecustomize::-webkit-scrollbar{
+  background-color: var(--window_background);
+  width: 5px;
+}
+
+#themecustomize::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+  width: 5px;
+}
+
+#themefont{
+  width: 150px;
+  font-size: 20px;
+  border: unset;
+  outline: none;
+  color: var(--text_color);
+  background: var(--button_background);
+  height: 40px;
+  padding-left: 10px;
+  border: solid 3px var(--window_border);
+
+}
+
+#deletetheme{
+  font-size: 23px;
+  margin-left: 30px;
+  margin-top: 20px;
+  color: var(--text_select_color)
+}
+
+#themepresetinput{
+  width: 190px !important;
+  font-size: 23px;
+}
+
+#themesettingsbuttoncontainer{
+  position: absolute;
+  top: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#themesettingsbuttoncontainer::-webkit-scrollbar{
+  background-color: var(--window_background);
+  width: 5px;
+}
+
+#themesettingsbuttoncontainer::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+  width: 5px;
+}
+
+
+#themesettingsbutton{
+  position: absolute;
+  z-index: 10;
+  opacity: 1;
+}
+
+#themecustomize{
+  scroll-padding-bottom: 100px;
+}
+
+.themesetting{
+  margin-left: 30px;
+  border-left: solid 3px var(--button_background);
+  padding-left: 10px;
+}
+
+.themesetting > p{
+  font-family: var(--font_family);
+  color: var(--text_color);
+  font-size: 25px;
+  margin-bottom: 7px;
+}
+
+.themecolorraw{
+  pointer-events: all !important;
+  height: 40px;
+  width: 150px;
+  border: solid 3px var(--button_border);
+  outline: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.themecolor{
+  height: 40px;
+  width: 150px;
+  border: solid 3px var(--button_border);
+  outline: none;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  pointer-events: none;
+  position: relative;
+  bottom: 40px;
+}
+
+.themecolorparent{
+  opacity: 0.7;
+  width: max-content;
+  height: 45px;
+}
+
+.themecolorparent:hover{
+  opacity: 1
+}
+
+
 @media screen and (max-width: 800px) {
   #themeselect{
     width: 85% !important;
   }
+
+  #themecustomizecontainer{
+    width: 85% !important;
+  }
+
 }

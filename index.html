@@ -255,6 +255,9 @@
           </div>
         </div>
 
+
+
+
       </div>
 
     </div>
@@ -356,11 +359,91 @@
 
   </div>
 
-  <div id = "themecontainer" onmousedown="removethemefocus(event)" style="display:none">
-    <div id = "themeselect" onmousedown="removethemefocus(event)">
+  <div id = "themecontainer" onmousedown="removethemefocus(event, this)" style="display:none">
+    <div id = "themeselect" onmousedown="removethemefocus(event, this)">
 
 
     </div>
+
+    <div id = "themecustomizecontainer" style="display: none">
+
+      <div id = "themecustomize">
+
+        <div class="themesetting">
+          <p>Preset Name</p>
+          <input class="numinput" id="themepresetinput" placeholder="Type here..."  oninput = "themeeditingname(event)"></input>
+        </div>
+
+        <div class="themesetting">
+          <p>Background</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Button Background</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Button Border</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Window Background</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Window Border</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Text Color</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Text Select Color</p>
+          <div class = "themecolorparent">
+            <input type="color" class="themecolorraw"></input>
+          </div>
+        </div>
+
+        <div class="themesetting">
+          <p>Font Family</p>
+          <select id="themefont" oninput = "themeeditingfont(event)">
+            <option value="Arial" style="font-family: Arial">Arial</option>
+            <option value="Monospace" style="font-family: Monospace">Monospace</option>
+            <option value="Cursive" style="font-family: Cursive">Cursive</option>
+            <option value="Times New Roman" style="font-family: 'Times New Roman'">Times New Roman</option>
+          </select>
+        </div>
+
+        <button class="zulubutton" id="deletetheme" onclick="deletethemeediting()">Delete Preset</button>
+
+        <div style="height: 250px;"></div>
+
+      </div>
+
+      <button id = "themesettingsbutton" class = "zulubutton themebutton"></button>
+
+
+    </div>
+
   </div>
 
   <div id = "voicecontainer" onclick="removevoicecontainer(event)" style="display:none">
