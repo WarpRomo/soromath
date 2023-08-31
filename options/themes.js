@@ -73,19 +73,7 @@ let themes = {
     display_color: 'rgb(170,50,50)',
     font_family: "Times New Roman",
     name: "fire"
-  },"light": {
-      background: 'rgb(255,255,255)',
-      button_background: 'rgb(220,220,220)',
-      button_border: 'rgb(205,205,205)',
-      window_background: 'rgb(235,235,235)',
-      window_border: 'rgb(225,225,225)',
-      text_color: 'rgb(0,0,0)',
-      text_select_color: 'rgb(255,0,0)',
-      display_color: 'rgb(0,0,0)',
-      font_family: "Monospace",
-      name: "light"
-  },
-  "shadow": {
+  },"shadow": {
       background: 'rgb(0,0,0)',
       button_background: 'rgb(35,35,35)',
       button_border: 'rgb(50,50,50)',
