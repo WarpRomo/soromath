@@ -31,6 +31,7 @@ let modes = {
   "multiplication": multpreset,
   "subtraction": subtractionpreset,
   "division": divisionpreset,
+  "percentages":percentagepreset,
   "fraction addition": fractionpreset,
   "exponents": powerpreset,
   "Nth Roots": rootpreset,

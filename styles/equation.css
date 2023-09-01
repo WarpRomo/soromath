@@ -131,6 +131,10 @@
     width: 120px !important;
   }
 
+  .widenuminput{
+    width: 260px !important;
+  }
+
   #restarttest{
     width: 120px !important;
     padding-left: 5px !important;
@@ -224,4 +228,8 @@
 
 .rightanswer{
   color: green;
+}
+
+.widenuminput{
+  width: 300px;
 }
