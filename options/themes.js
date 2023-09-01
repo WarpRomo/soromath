@@ -1,8 +1,8 @@
 var r = document.querySelector(':root');
 
 
-let themes = {
-  "default": {
+let themes = [
+  {
     background: 'rgb(0,0,0)',
     button_background: 'rgb(35,35,35)',
     button_border: 'rgb(50,50,50)',
@@ -13,8 +13,7 @@ let themes = {
     display_color: 'rgb(255,255,255)',
     font_family: "Arial",
     name: "default",
-  },
-  "matrix": {
+  },{
     background: 'rgb(0,0,0)',
     button_background: 'rgb(35,35,35)',
     button_border: 'rgb(50,60,50)',
@@ -25,8 +24,7 @@ let themes = {
     display_color: 'rgb(0,255,0)',
     font_family: "Monospace",
     name: "matrix"
-  },
-  "sakura": {
+  },{
     background: 'rgb(10,10,15)',
     button_background: 'rgb(35,35,35)',
     button_border: `rgb(${255*0.4},${77*0.4},${255*0.4})`,
@@ -37,8 +35,7 @@ let themes = {
     display_color: 'rgb(255,77,255)',
     font_family: "Arial",
     name: "sakura"
-  },
-  "lime": {
+  },{
     background: `rgb(${0*0.1},${77*0.05},${0*0.1})`,
     button_background: `rgb(${0*0.3},${77*0.3},${0*0.3})`,
     button_border: `rgb(${0*0.4},${77*0.4},${0*0.4})`,
@@ -49,8 +46,7 @@ let themes = {
     display_color: 'rgb(0,255,0)',
     font_family: "Cursive",
     name: "lime",
-  },
-  "ocean": {
+  },{
     background: 'rgb(10,10,35)',
     button_background: 'rgb(35,35,55)',
     button_border: `rgb(${0},${0},${255*0.4})`,
@@ -61,8 +57,7 @@ let themes = {
     display_color: 'rgb(50,50,170)',
     font_family: "Times New Roman",
     name: "ocean",
-  },
-  "fire": {
+  },{
     background: 'rgb(50,10,10)',
     button_background: 'rgb(50,35,35)',
     button_border: `rgb(${255*0.4},${0},${0})`,
@@ -73,7 +68,7 @@ let themes = {
     display_color: 'rgb(170,50,50)',
     font_family: "Times New Roman",
     name: "fire"
-  },"shadow": {
+  },{
       background: 'rgb(0,0,0)',
       button_background: 'rgb(35,35,35)',
       button_border: 'rgb(50,50,50)',
@@ -85,9 +80,9 @@ let themes = {
       font_family: "Arial",
       name: "shadow"
   },
-}
+]
 
-let currenttheme = themes["default"];
+let currenttheme = themes[0];
 
 try{
   if(localStorage.getItem('theme') != null) currenttheme = JSON.parse(localStorage.getItem('theme'));
@@ -176,8 +171,17 @@ function changetheme(theme,hidescreen=true){
 
   settheme(currenttheme);
 
-  console.log("here");
-  console.log(theme);
+  let buttonindex = themecustompresets.indexOf(theme);
+  if(buttonindex == -1) buttonindex = themecustompresets.length + themes.indexOf(theme);
+  let buttonelem = document.getElementById("themeselect").children[buttonindex];
+
+  console.log(buttonindex);
+
+  let current = document.getElementById("themeselectedbutton");
+  if(current != null) current.id = "";
+  buttonelem.id = "themeselectedbutton"
+
+
 
   let button = document.getElementById("themeselectbutton");
   button.innerHTML = theme.name;
@@ -196,10 +200,12 @@ function themeeditingname(event){
 }
 
 function themeeditingfont(event){
+
   themeediting.font_family = event.target.value
 
   settheme(themeediting);
   syncthemeedit();
+
 }
 
 function deletethemeediting(){
@@ -214,12 +220,6 @@ function deletethemeediting(){
   let preset = themeediting;
   let buttonelem = themeselect.children[index]
 
-  if(currenttheme == themeediting){
-
-    changetheme(themes["default"], false);
-
-  }
-
   themecustompresets.splice(index, 1);
   buttonelem.remove();
 
@@ -231,6 +231,11 @@ function deletethemeediting(){
 
   }, animTime, () => {
 
+    if(currenttheme == themeediting){
+      changetheme(themes[0], false);
+    }
+
+    settheme(currenttheme);
     themecustomizecontainer.style.display = "none";
     themecustomizecontainer.style.opacity = 1;
 
@@ -359,7 +364,7 @@ function themeinit(){
 
         if(event.target.src != undefined || event.target.classList.contains("themeplus")) return;
 
-        changetheme(themes[keys[num]])
+        changetheme(themes[keys[num]], false)
       };
 
 
@@ -378,11 +383,11 @@ function themeinit(){
       buttonelem.style.fontFamily = themes[keys[i]].font_family
 
       buttonelem.onmouseover = () => {
-        settheme(themes[keys[num]])
+        //settheme(themes[keys[num]])
       }
 
       let buttontext = document.createElement("p");
-      buttontext.innerHTML = keys[i];
+      buttontext.innerHTML = themes[keys[i]].name;
       let text_color = themes[keys[i]].text_color;
       buttontext.style.color = text_color
 
@@ -404,7 +409,7 @@ function themeinit(){
       clonebutton.onclick = () => {
 
         let newpreset = JSON.parse(JSON.stringify(themes[keys[num]]));
-        newpreset.name = keys[num] + " preset";
+        newpreset.name = themes[keys[num]].name + " preset";
         themecustompresets.push(newpreset);
 
         let newelem = genpresetbutton(themecustompresets.length-1);
@@ -494,7 +499,7 @@ function genpresetbutton(index){
 
     if(event.target.src != undefined || event.target.classList.contains("themeplus")) return;
 
-    changetheme(preset);
+    changetheme(preset, false);
   };
 
 
@@ -514,7 +519,7 @@ function genpresetbutton(index){
   buttonelem.style.fontFamily = preset.font_family
 
   buttonelem.onmouseover = () => {
-    settheme(preset)
+    //settheme(preset)
   }
 
   let buttontext = document.createElement("p");
@@ -541,6 +546,7 @@ function genpresetbutton(index){
 
     setthemesettings(preset);
     themeediting = preset;
+    settheme(themeediting);
 
     let animTime = 300;
 
@@ -554,8 +560,10 @@ function genpresetbutton(index){
 
     let themesettingsbutton = document.getElementById("themesettingsbutton");
 
+    console.log(preset.font_family);
+
     themesettingsbutton.style.background = preset.background
-    themesettingsbutton.style.font_family = preset.font_family
+    themesettingsbutton.style.fontFamily = preset.font_family
     themesettingsbutton.style.color = preset.text_color
     themesettingsbutton.style.border = `solid 1px ${preset.button_border}`
 
@@ -593,6 +601,7 @@ function genpresetbutton(index){
 
       }, animTime, "easeOutQuad", () => {
 
+        settheme(currenttheme);
 
         buttonelem.style.opacity = "";
 
