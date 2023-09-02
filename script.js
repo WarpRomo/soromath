@@ -45,6 +45,69 @@ let modes = {
 }
 
 
+function loaddifficulty(){
+
+  if(localStorage["difficultysettings"] == undefined){
+
+    savedifficulty();
+
+  }
+
+  let difficultysettings = JSON.parse(localStorage["difficultysettings"]);
+
+  let keys = Object.keys(difficultysettings);
+
+  for(var i = 0; i < keys.length; i++){
+
+    let keys2 = Object.keys(difficultysettings[keys[i]]);
+
+    for(var j = 0; j < keys2.length; j++){
+
+      modes[keys[i]].settings[keys2[j]] = difficultysettings[keys[i]][keys2[j]];
+
+    }
+
+    if("settingsgui" in modes[keys[i]]){
+      modes[keys[i]].settingsgui.init(modes[keys[i]])
+    }
+
+  }
+
+
+}
+
+function savedifficulty(){
+
+  let difficultysettings = {};
+
+  let savekeys = ["range1", "range2", "range"]
+
+  let keys = Object.keys(modes);
+
+  for(var i = 0; i < keys.length; i++){
+
+    let keys2 = Object.keys(modes[keys[i]].settings);
+
+    for(var j = 0; j < keys2.length; j++){
+
+      if(savekeys.indexOf(keys2[j]) == -1) continue;
+
+      let value = modes[keys[i]].settings[keys2[j]];
+
+      if(keys[i] in difficultysettings == false) difficultysettings[keys[i]] = {};
+
+      difficultysettings[keys[i]][keys2[j]] = value;
+
+    }
+
+  }
+
+  localStorage["difficultysettings"] = JSON.stringify(difficultysettings);
+
+
+
+}
+
 function settab(tab){
 
 
@@ -106,7 +169,9 @@ function init(){
     modeselect = "yarr";
     modeinit();
     profilemodeinit();
+    loaddifficulty();
   }
+  savedifficulty();
 
   if(themeselect == null){
     themeselect = "yarr";

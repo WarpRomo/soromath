@@ -28,6 +28,8 @@ function setmodename(){
 let buttonelems = {};
 let modesettingopen = null;
 
+let firstmodeinit = false;
+
 function modeinit(){
 
   let keys = Object.keys(modes);
@@ -230,6 +232,8 @@ function modeinit(){
   let modecontainer = modeselect.parentElement;
 
   console.log(modecontainer);
+
+  firstmodeinit = true;
 
 
 }

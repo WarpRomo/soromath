@@ -47,10 +47,9 @@ function template1finish(){
   mask.style.height = "400px";
 }
 
+
 function template1init(){
 
-
-  console.log('CALLED')
 
   if(voicemodeenabled){
     document.getElementById("voicemodetext").style.display = "";
