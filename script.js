@@ -4,7 +4,7 @@ const synth = window.speechSynthesis;
 let tabs = ["flashproblems", "flashprofile"];
 let currenttab = "flashproblems";
 
-let currentmode = ["addition"];
+let currentmode = ["clock to time"];
 let currenttemplate = "template1equation";
 let currentdifficulty = "easy";
 
@@ -37,6 +37,7 @@ let modes = {
   "Nth Roots": rootpreset,
   "linear equations": linearpreset,
   "trigonometry":trigpreset,
+  "clock to time": clockpreset,
   "C° to F°": celctofpreset,
   "F° to C°": ftocelcpreset,
   "month to number": monthnumpreset,

@@ -109,7 +109,7 @@ function template1init(){
         let p1height = problem.getBoundingClientRect().height
         let inputheight = input.getBoundingClientRect().height
 
-        t1heighttrack = (inputheight - p1height) / 2 - 5
+        t1heighttrack = (inputheight - p1height) / 2 - 2
         document.getElementById("template1problems").style.top = t1heighttrack + "px";
 
       }

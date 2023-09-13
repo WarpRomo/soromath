@@ -1,3 +1,6 @@
+:root{
+  --clock_size: 150px;
+}
 
 
 #voicemodetext{
@@ -86,6 +89,21 @@
 
 .rootproblem{
   height: 90px;
+}
+
+.clockproblem{
+  margin-right:0px;
+  height: var(--clock_size);
+  width: var(--clock_size);
+  z-index: 1;
+}
+
+.clockproblem.rightanswer{
+  filter: brightness(50%) sepia(100) saturate(100) hue-rotate(100deg)
+}
+
+.clockproblem.wronganswer{
+  filter: brightness(50%) sepia(100) saturate(100) hue-rotate(25deg)
 }
 
 #mainproblem{
