@@ -4,7 +4,7 @@ const synth = window.speechSynthesis;
 let tabs = ["flashproblems", "flashprofile"];
 let currenttab = "flashproblems";
 
-let currentmode = ["clock to time"];
+let currentmode = ["addition"];
 let currenttemplate = "template1equation";
 let currentdifficulty = "easy";
 
