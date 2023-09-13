@@ -249,9 +249,9 @@ function addclock(main=false,self=clockpreset,name=null){
   if(main == false) problemlist.push([name, [hour, minute]]);
   else{
 
-    time = 12 + 53/60;
+    time = 12;
     hour = 12;
-    minute = 53;
+    minute = 0;
     second = 0;
 
     problemlist.push([name, [hour, minute]]);
