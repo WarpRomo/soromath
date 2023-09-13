@@ -189,9 +189,9 @@ function setpreset1input(self, presetname){
 
   let preset = self.settings.presets[presetname];
 
-  self.settings.range1 = [...preset.range1];
+  self.settings.range = [...preset.range];
 
-  self.settingsgui.range1[1].value = preset.range1[0];
+  self.settingsgui.range[1].value = preset.range[0];
 
   self.settings.preset = presetname
 
