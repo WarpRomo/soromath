@@ -249,9 +249,9 @@ function addclock(main=false,self=clockpreset,name=null){
   if(main == false) problemlist.push([name, [hour, minute]]);
   else{
 
-    time = 12;
+    time = 12 + 53/60;
     hour = 12;
-    minute = 0;
+    minute = 53;
     second = 0;
 
     problemlist.push([name, [hour, minute]]);
@@ -436,11 +436,22 @@ function clockvalidate(answer, input){
 
   if(parseInt(minute) < 10 && minute.length != 2) return false;
 
+  hour = parseInt(hour);
   minute = parseInt(minute);
 
   console.log(hour, minute, answer[0], answer[1]);
 
-  return hour == answer[0] && Math.abs(minute - answer[1]) <= clockpreset.settings.range
+  let tinput = hour + minute * 1/60;
+  let tanswer = answer[0] + answer[1] * 1/60;
+  let tdist = Math.abs(tinput - tanswer)
+
+
+
+  if(Math.abs(tdist - 12) < tdist) tdist = Math.abs(tdist - 12);
+
+  tdist *= 60;
+
+  return tdist <= clockpreset.settings.range;
 
 }
 
