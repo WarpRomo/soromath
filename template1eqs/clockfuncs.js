@@ -13,14 +13,17 @@ let clockpreset = {
     presets:{
       "easy":{
         range: [0],
+        nonummode: false
       },
       "custom":{}
     },
     range: [0],
+    nonummode: false,
   },
   settingsgui: {
 
     range: null,
+    nonummode: null,
     doneinit: false,
     init: basicpresetgen1input("Allowed Minute Error"),
     setpreset: setpreset1input,
@@ -172,6 +175,35 @@ function basicpreset1input(self, range1label, changegui){
 
   }
 
+  let notickmode = document.createElement("input");
+  notickmode.setAttribute("type", "checkbox");
+  notickmode.name = "nonummode";
+
+  notickmode.onclick = (event) => {
+    console.log("HERE");
+    self.settings.nonummode = event.target.checked;
+
+    console.log(self);
+
+    self.settingsgui.matchpreset(self)
+  }
+
+  self.settingsgui.nonummode = notickmode;
+  self.settingsgui.nonummode.checked = self.settings.nonummode;
+
+  let noticklabel = document.createElement("label");
+  noticklabel.setAttribute("for", "nonummode");
+  noticklabel.innerHTML = "No numbers";
+
+  let notickparent = document.createElement("div");
+  notickparent.appendChild(notickmode);
+  notickparent.appendChild(noticklabel);
+
+  notickmode.classList.add("modesettingcheckboxinner")
+  notickparent.classList.add("modesettingcheckbox")
+
+  modesettingssection.appendChild(notickparent);
+
   self.settingsgui.matchpreset(self);
 
   self.settingsgui.doneinit = true;
@@ -193,6 +225,10 @@ function setpreset1input(self, presetname){
 
   self.settingsgui.range[1].value = preset.range[0];
 
+  self.settings.nonummode = preset.nonummode;
+
+  self.settingsgui.nonummode.checked = preset.nonummode;
+
   self.settings.preset = presetname
 
   self.settingsgui.matchpreset(self);
@@ -206,6 +242,7 @@ function addclock(main=false,self=clockpreset,name=null){
   let time = Math.random() * 12 + 1;
   let hour = Math.floor(time);
   let minute = Math.floor(time % 1 * 60);
+  let second = Math.random() * 60;
 
 
 
@@ -215,6 +252,7 @@ function addclock(main=false,self=clockpreset,name=null){
     time = 12;
     hour = 12;
     minute = 0;
+    second = 0;
 
     problemlist.push([name, [hour, minute]]);
 
@@ -285,7 +323,7 @@ function addclock(main=false,self=clockpreset,name=null){
     ctx.font = text_size + "px Arial";
     ctx.textAlign = "center";
 
-    ctx.fillText(hour+"", clocksize/2 + dx*text_point, clocksize/2 + dy*text_point + text_size/2 - 2)
+    if(self.settings.nonummode == false) ctx.fillText(hour+"", clocksize/2 + dx*text_point, clocksize/2 + dy*text_point + text_size/2 - 2)
 
   }
 
@@ -310,8 +348,8 @@ function addclock(main=false,self=clockpreset,name=null){
     ctx.stroke();
   }
 
-  let hourwidth = 3;
-  let minutewidth = 3;
+  let hourwidth = 4;
+  let minutewidth = 4;
   let secondwidth = 1.5;
 
   let hoursize = 0.45;
@@ -320,7 +358,7 @@ function addclock(main=false,self=clockpreset,name=null){
 
   let hourangle = 2 * Math.PI * time / 12 - Math.PI / 2;
   let minuteangle = 2 * Math.PI * minute / 60 - Math.PI / 2;
-  let secondangle = Math.random() * 2 * Math.PI;
+  let secondangle = (second / 60)  * 2 * Math.PI - Math.PI / 2;
 
 
   ctx.fillStyle = text_color;
@@ -368,7 +406,7 @@ function clocktype(e){
   let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
-  let nums = "0123456789:"
+  let nums = "0123456789: "
 
   for(var i = 0; i < input.value.length; i++){
     if(nums.indexOf(input.value[i]) == -1) continue;
@@ -388,7 +426,10 @@ function clockvalidate(answer, input){
 
   let values = input.split(":");
 
-  if(values.length != 2) return false;
+  if(values.length != 2){
+    values = input.split(" ");
+    if(values.length != 2) return false;
+  }
 
   let hour = values[0];
   let minute = values[1];

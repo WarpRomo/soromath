@@ -81,7 +81,7 @@ function savedifficulty(){
 
   let difficultysettings = {};
 
-  let savekeys = ["range1", "range2", "range"]
+  let savekeys = ["range1", "range2", "range", "nonummode"]
 
   let keys = Object.keys(modes);
 

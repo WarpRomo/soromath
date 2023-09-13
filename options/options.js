@@ -75,6 +75,8 @@ function matchdifficulty(){
     document.getElementById("custombutton").disabled = false;
   }
 
+  console.log("SAVING!");
+
 }
 
 
