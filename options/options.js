@@ -68,12 +68,14 @@ function matchdifficulty(){
 
   currentdifficulty = newdifficulty;
 
+  /*
   if(currentdifficulty != "custom"){
     document.getElementById("custombutton").disabled = true;
   }
   else{
     document.getElementById("custombutton").disabled = false;
   }
+  */
 
   console.log("SAVING!");
 
