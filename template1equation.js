@@ -6,6 +6,7 @@ let problemlist = [];
 let stats = [0,0];
 
 let totaltime = 15000;
+let totalproblems = null;
 let teststarted = 0;
 let testcheckend = null;
 
@@ -99,6 +100,8 @@ function template1init(){
 
       let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
 
+      if(totalproblems != null && problemlist.length == totalproblems) return;
+
       if(i == 0) console.log(problemtype);
 
       let problem = addrandproblem();
@@ -136,6 +139,11 @@ function template1type(e){
 }
 
 function template1enter(e, press=false){
+
+    if(totalproblems != null && problemindex == totalproblems){
+      console.log("RETURN");
+      return;
+    }
 
     if(press && e.key != "Enter") return;
 
@@ -222,27 +230,31 @@ function template1enter(e, press=false){
       $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
     }, 500)
 
+    if(!(totalproblems != null && problemindex + 1 == totalproblems)){
+      let height1 = problems.children[mainproblemindex].getBoundingClientRect().height
+      let height2 = problems.children[mainproblemindex+1].getBoundingClientRect().height
 
-    let height1 = problems.children[mainproblemindex].getBoundingClientRect().height
-    let height2 = problems.children[mainproblemindex+1].getBoundingClientRect().height
+      let shifttop = (height1 + height2) / 2
 
-    let shifttop = (height1 + height2) / 2
-
-    problems.children[mainproblemindex].id = "";
-    problems.children[mainproblemindex+1].id = "mainproblem";
+      problems.children[mainproblemindex].id = "";
+      problems.children[mainproblemindex+1].id = "mainproblem";
 
 
-    let top = parseInt(window.getComputedStyle(problems).top);
+      let top = parseInt(window.getComputedStyle(problems).top);
 
-    t1heighttrack -= shifttop;
-    top = Math.floor(t1heighttrack);
+      t1heighttrack -= shifttop;
+      top = Math.floor(t1heighttrack);
 
-    $(problems).animate({ top: top + 'px' }, {duration: 0});
+      $(problems).animate({ top: top + 'px' }, {duration: 0});
+    }
 
     problemindex++;
 
+    if( !(totalproblems != null && problemlist.length >= totalproblems) ){
 
-    addrandproblem();
+      addrandproblem();
+
+    }
 
 
     if(voicemodeenabled){

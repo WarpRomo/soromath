@@ -50,8 +50,7 @@ function starttest(){
 
     teststarted += dt;
 
-
-    if(teststarted >= totaltime){
+    if((totalproblems != null && problemindex == totalproblems) || (totaltime != null && teststarted >= totaltime) ){
 
       console.log("HERE");
 
@@ -77,11 +76,13 @@ function finishtest(){
 
   if(templates[currenttemplate].finish != undefined) templates[currenttemplate].finish();
 
+  if(totaltime != null) teststarted = totaltime;
+
   document.getElementById("finishcorrect").innerHTML = stats[0] + " correct";
   document.getElementById("finishwrong").innerHTML = stats[1] + " wrong";
 
-  let cpm = (60000 / totaltime) * stats[0];
-  let rawcpm = (60000 / totaltime) * (stats[0] + stats[1]);
+  let cpm = (60000 / teststarted) * stats[0];
+  let rawcpm = (60000 / teststarted) * (stats[0] + stats[1]);
 
 
   document.getElementById("finishcpm").innerHTML = Math.floor(cpm) + " cpm";
@@ -94,13 +95,21 @@ function finishtest(){
 
   document.getElementById("finishtime").innerHTML = "time: " + (totaltime / 1000) + " seconds"
 
+  if(totalproblems != null){
+
+    document.getElementById("finishtime").innerHTML = (teststarted / 1000) + " seconds<br>" + totalproblems + " problems"
+
+  }
+
   document.getElementsByClassName("equation")[0].style.display = "none"
   document.getElementById("options").style.display = "none"
   document.getElementById("finishscreen").style.display = ""
 
-  teststarted = 0;
-
   if(!voicemodeenabled){
+
+    let addtime = totaltime;
+    if(totaltime == null) addtime = teststarted;
+
     addcompleted({
        cpm: cpm,
        acc: [stats[0],stats[1]],
@@ -111,8 +120,9 @@ function finishtest(){
     })
   }
 
-
   makechart();
+
+  teststarted = 0;
 
 
 }

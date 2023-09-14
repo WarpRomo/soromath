@@ -86,13 +86,29 @@
   overflow: hidden;
 }
 
+#customtimeoptions{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#customtimeoptions .zulubutton{
+  margin: 10px;
+  margin-bottom: 15px;
+}
+
+#customtimeoptions .numinput{
+  width: 150px !important;
+  margin-bottom: 20px;
+}
+
 #customtimeinp{
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
 #customtimedone{
-  margin-top: 10px;
+  margin-top: 15px;
   width: 200px;
 }
 

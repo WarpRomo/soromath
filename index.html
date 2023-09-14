@@ -213,8 +213,13 @@
 
           <div id="customtime">
 
-            <p class="settinglabel" id="customtimelabel">Set time</p>
-            <input class="numinput" placeholder="Type here" id="customtimeinp" oninput="customtimetype(event)" onblur="customtimeblur(event)"></input>
+
+            <div id = "customtimeoptions">
+              <button class="zulubutton textselected" id="customtimetimed" onclick="switchtime('timed')">timed</button>
+              <button class="zulubutton" id="customtimeproblems" onclick="switchtime('problems')">problems</button>
+            </div>
+
+            <input class="numinput" placeholder="Seconds..." id="customtimeinp" oninput="customtimetype(event)" onblur="customtimeblur(event)"></input>
             <button class="zulubutton" id="customtimedone" onclick="customtimedone()">Done</button>
           </div>
 
@@ -288,7 +293,7 @@
               <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
 
             </div>
-            <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>etc.</p>
+            <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>12:00<br>etc.</p>
           </div>
 
         </div>

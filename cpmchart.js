@@ -93,11 +93,16 @@ function makechart(){
 
   console.log(totaltime);
 
-  if(totaltime <= 10000){
+  console.log(teststarted);
+
+  if(totaltime != null) teststarted = totaltime;
+
+
+  if(teststarted <= 10000){
     timeinterval = 1;
   }
 
-  for(var i = 0; i <= totaltime / (1000 * timeinterval); i++){
+  for(var i = 0; i <= teststarted / (1000 * timeinterval); i++){
     cpmbuckets.push(0);
     rawcpmbuckets.push(0);
     overallcpmbuckets.push(0);
@@ -118,7 +123,7 @@ function makechart(){
 
   let xvalues = [];
 
-  for(var i = timeinterval; i <= totaltime / 1000; i+=timeinterval){
+  for(var i = timeinterval; i <= teststarted / 1000; i+=timeinterval){
     xvalues.push(i);
   }
 
@@ -169,8 +174,37 @@ function makechart(){
       data: overallcpmbuckets
     }]
   }
-  cpmchart.update();
 
+  if(teststarted < 1100){
+    console.log("YE");
+    cpmchart.data = {
+      labels: xvalues,
+      datasets: [{
+        label: 'CPM',
+        fill: false,
+        lineTension: 0.25,
+        backgroundColor: style.getPropertyValue('--text_select_color'),
+        borderColor: style.getPropertyValue('--text_select_color'),
+        data: []
+      },{
+        label: 'Raw CPM',
+        fill: false,
+        lineTension: 0.25,
+        backgroundColor: `rgba(0,0,0,0.5)`,
+        borderColor: `rgba(0,0,0,0.5)`,
+        data: []
+      },{
+        label: 'Overall CPM',
+        fill: false,
+        lineTension: 0.25,
+        backgroundColor: style.getPropertyValue('--text_color'),
+        borderColor: style.getPropertyValue('--text_color'),
+        data: []
+      }]
+    }
+  }
+
+  cpmchart.update();
 
 
 }

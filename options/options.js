@@ -4,6 +4,8 @@ let difficultynames = ["easy", "medium", "hard", "custom"];
 let optiontimebuttons = ["15sbuttontime", "60sbuttontime", "120sbuttontime"];
 let optiontimenames = [15000, 60000, 120000];
 
+let problemmode = "timed";
+
 function setdifficulty(difficulty){
 
   let keys = Object.keys(modes);
@@ -84,7 +86,17 @@ function matchdifficulty(){
 
 function settime(elem, time){
 
-  totaltime = time;
+  if(problemmode == "timed"){
+    console.log("YH");
+    totaltime = time;
+    totalproblems = null;
+  }
+  else{
+    console.log("NH")
+    totaltime = null;
+    totalproblems = time;
+  }
+
 
   let current = document.getElementById("timeselected");
   current.id = "";
@@ -132,9 +144,40 @@ function customtimeblur(event){
     event.target.value = "";
 
   }
+  else if(problemmode == "problems" && value == 1){
+    event.target.value = "";
+  }
   else{
     event.target.value = value;
   }
+
+}
+
+function switchtime(mode){
+
+  let buttons = ["customtimetimed", "customtimeproblems" ];
+
+  let input = document.getElementById("customtimeinp");
+
+  if(mode == "timed"){
+
+    document.getElementById(buttons[1]).classList.remove("textselected");
+    document.getElementById(buttons[0]).classList.add("textselected");
+
+    input.setAttribute("placeholder", "Seconds...");
+
+  }
+
+  if(mode == "problems"){
+
+    document.getElementById(buttons[0]).classList.remove("textselected");
+    document.getElementById(buttons[1]).classList.add("textselected");
+
+    input.setAttribute("placeholder", "Problems...");
+
+  }
+
+  problemmode = mode;
 
 }
 
@@ -159,20 +202,57 @@ function closetimecontainer(event){
 function customtimedone(){
 
   let input = document.getElementById("customtimeinp");
-  let timevalue = parseInt(input.value == "" ? 15 : input.value) * 1000;
+
+  let timevalue = null
+
+  if(input.value == ""){
+    switchtime("timed")
+    timevalue = 15;
+  }
+  else{
+    timevalue = parseInt(input.value);
+  }
+
 
   document.getElementById("customtimecontainer").style.display = "none"
 
-  if(optiontimenames.indexOf(timevalue) != -1){
-    let name = optiontimebuttons[optiontimenames.indexOf(timevalue)];
-    let elem = document.getElementsByClassName(name)[0];
-    settime(elem, timevalue);
+
+
+  if(problemmode == "timed"){
+
+
+    console.log("YO2", timevalue);
+
+
+    timevalue *= 1000;
+
+    if(optiontimenames.indexOf(timevalue) != -1){
+      let name = optiontimebuttons[optiontimenames.indexOf(timevalue)];
+      let elem = document.getElementsByClassName(name)[0];
+      settime(elem, timevalue);
+    }
+    else{
+      let elem = document.getElementsByClassName("customtimebutton")[0];
+      settime(elem, timevalue);
+
+      let text = "custom\n" + (timevalue / 1000) +"s";
+
+      if(text.length > 11){
+        text = "custom"
+      }
+
+      elem.innerHTML = text;
+
+    }
   }
   else{
+
+    console.log("YO", timevalue);
+
     let elem = document.getElementsByClassName("customtimebutton")[0];
     settime(elem, timevalue);
 
-    let text = "custom\n" + (timevalue / 1000) +"s";
+    let text = "custom\n" + (timevalue);
 
     if(text.length > 11){
       text = "custom"
@@ -181,6 +261,9 @@ function customtimedone(){
     elem.innerHTML = text;
 
   }
+
+
+
 
 
 

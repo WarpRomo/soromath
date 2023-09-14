@@ -7,18 +7,14 @@ function settimer(){
 
   for(var i = 0; i < elements.length; i++){
 
-    if(teststarted == 0){
-      elements[i].style.opacity = 0.1;
+    if(teststarted == 0 || totalproblems != null){
+      elements[i].style.opacity = 0;
     }
     else{
       elements[i].style.opacity = "";
     }
 
-    if(window.getComputedStyle(elements[i]).display != "none"){
-
-
-
-
+    if(window.getComputedStyle(elements[i]).display != "none" && totalproblems == null){
 
 
       const ctx = elements[i].getContext("2d");
