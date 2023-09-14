@@ -58,7 +58,7 @@ function addpower(main=false,self=powerpreset,name=null){
   if(recentduplicate()) return;
 
   let problem = document.createElement("p");
-  problem.innerHTML = `${num1}^${num2}=`
+  problem.innerHTML = `${num1}^{${num2}}=`
   problem.classList.add("problem");
   problem.classList.add("powerproblem");
 
