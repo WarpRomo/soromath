@@ -12,12 +12,20 @@ let clockpreset = {
     preset: "easy",
     presets:{
       "easy":{
+        range: [10],
+        nonummode: false
+      },
+      "medium":{
+        range: [5],
+        nonummode: false
+      },
+      "hard":{
         range: [0],
         nonummode: false
       },
       "custom":{}
     },
-    range: [0],
+    range: [10],
     nonummode: false,
   },
   settingsgui: {
@@ -52,7 +60,7 @@ function basicpreset1input(self, range1label, changegui){
 
   modesettingssection.appendChild(presetLabel);
 
-  let radioPresets = ["easy", "custom"]
+  let radioPresets = ["easy", "medium", "hard", "custom"]
 
   let radioButtons = document.createElement("div");
 
