@@ -254,6 +254,8 @@ function removemodefocus(event){
 
   container.style.display = "none";
 
+  $(".modesettingsenter").removeClass("modesettingsenteropen")
+
   init();
 
 }
@@ -264,6 +266,11 @@ function showmodeselect(){
 
   container.style.display = "";
 
+  console.log("YO");
+
+
   init();
+
+  $(".modesettingsenter").addClass("modesettingsenteropen")
 
 }
