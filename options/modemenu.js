@@ -260,7 +260,7 @@ function removemodefocus(event){
 
   document.body.classList.remove("noscroll");
 
-  $(".modesettingsenter").removeClass("modesettingsenteropen")
+  //$(".modesettingsenter").removeClass("modesettingsenteropen")
 
 
 
@@ -279,6 +279,6 @@ function showmodeselect(){
 
   templates[currenttemplate].init()
 
-  $(".modesettingsenter").addClass("modesettingsenteropen")
+  //$(".modesettingsenter").addClass("modesettingsenteropen")
 
 }
