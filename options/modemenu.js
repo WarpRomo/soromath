@@ -243,7 +243,9 @@ function modeinit(){
 
 function removemodefocus(event){
 
-  if(event.target.id != "modeselect" && event.target.id != "modecontainer") return;
+  console.log(event.target);
+
+  if(event.target.id != "modecontainer") return;
 
   if(modesettingopen != null){
     let modesettingsback = document.getElementById("modesettingsbutton");
@@ -253,6 +255,8 @@ function removemodefocus(event){
   let container = document.getElementById("modecontainer");
 
   container.style.display = "none";
+
+  document.body.classList.remove("noscroll");
 
   $(".modesettingsenter").removeClass("modesettingsenteropen")
 
@@ -267,6 +271,9 @@ function showmodeselect(){
   container.style.display = "";
 
   console.log("YO");
+
+
+  document.body.classList.add("noscroll");
 
 
   init();

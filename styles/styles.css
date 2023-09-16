@@ -9,11 +9,38 @@
   --font_family: "Monospace";
 }
 
+html{
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--window_border) var(--window_background);
+}
+
+html::-webkit-scrollbar{
+background-color: var(--window_background);
+}
+
+html::-webkit-scrollbar-thumb{
+background-color: var(--window_border);
+}
+
+
 body{
   background-color: var(--background);
   padding-bottom: 500px;
   margin: 0;
   transition: opacity 0.4s;
+  scrollbar-color: var(--window_border) var(--window_background);
+}
+
+body::-webkit-scrollbar{
+  background-color: var(--window_background);
+}
+
+body::-webkit-scrollbar-thumb{
+  background-color: var(--window_border);
+}
+
+.noscroll{
+  overflow: hidden;
 }
 
 #iconlogo{

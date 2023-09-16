@@ -110,6 +110,8 @@ function showthemeselect(){
 
   container.style.display = "";
 
+  document.body.classList.add("noscroll");
+
 }
 
 
@@ -643,6 +645,8 @@ function removethemefocus(event, me){
   if(themecustomizecontainer.style.display == ""){
     themesettingsbutton.click()
   }
+
+  document.body.classList.remove("noscroll");
 
   settheme(currenttheme);
   savethemelocal();
