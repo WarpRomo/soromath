@@ -50,6 +50,8 @@ function modeinit(){
     let buttonelem = document.createElement("button");
     let buttontext = document.createElement("p");
 
+    parentDiv.classList.add("modesettingsbuttonparent")
+
     buttonelems[keys[i]] = buttonelem;
 
     buttonelem.onclick = `setmode(${keys[i]})`;
@@ -147,8 +149,8 @@ function modeinit(){
 
       let settingsImage = document.createElement("img");
       settingsImage.src = "settings.png";
-      settingsImage.style.width = "100%";
-      settingsImage.style.height = "100%";
+      settingsImage.classList.add("modesettingsimage");
+
 
       settingsButton.appendChild(settingsImage);
 
@@ -219,7 +221,7 @@ function modeinit(){
 
       }
 
-      buttonelem.appendChild(settingsButton)
+      parentDiv.appendChild(settingsButton)
 
     }
 

@@ -51,7 +51,7 @@
   opacity: 1;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-color: var(--window_border) var(--window_background); 
+  scrollbar-color: var(--window_border) var(--window_background);
   top: 50%;
   transform: translateY(-50%);
 
@@ -77,9 +77,26 @@
 }
 
 .modesettingsenter{
-  width: 23px !important;
-  height: 23px !important;
-  margin-right: 11px !important;
+  width: 25px !important;
+  height: 25px !important;
+  /*margin-right: 11px !important;*/
+}
+
+.modesettingsenter > img{
+  transition: transform 1s;
+}
+
+.modesettingsenter:hover > img{
+  transform: rotate(180deg);
+}
+
+.modesettingsbuttonparent{
+  display: flex;
+}
+
+.modesettingsimage{
+  width: 23px;
+  height: 23px;
 }
 
 #modesettingsback > img{
