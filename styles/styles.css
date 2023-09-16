@@ -29,6 +29,7 @@ body{
   margin: 0;
   transition: opacity 0.4s;
   scrollbar-color: var(--window_border) var(--window_background);
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar{
