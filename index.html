@@ -202,9 +202,9 @@
 
           <p class="optiontext">Time</p>
           <div class="buttonrow">
-            <button class="zulubutton optionbutton textselected 15sbuttontime" id="timeselected" onclick="settime(this,15000)">15s</button>
-            <button class="zulubutton optionbutton 60sbuttontime" onclick="settime(this,60000)">60s</button>
-            <button class="zulubutton optionbutton 120sbuttontime" onclick="settime(this,120000)">120s</button>
+            <button class="zulubutton optionbutton textselected 15sbuttontime" id="timeselected" onclick="switchtime('timed'); settime(this,15000)">15s</button>
+            <button class="zulubutton optionbutton 60sbuttontime" onclick="switchtime('timed'); settime(this,60000)">60s</button>
+            <button class="zulubutton optionbutton 120sbuttontime" onclick="switchtime('timed'); settime(this,120000)">120s</button>
             <button class="zulubutton optionbutton customtimebutton" onclick="showcustomtime()">custom</button>
           </div>
         </div>
