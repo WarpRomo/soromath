@@ -82,21 +82,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /*box-shadow: -3px 0px 10px 0px var(--background)*/
+  box-shadow: -3px 0px 10px 0px var(--background)
 }
 
 .modesettingsenteropen > img{
-  /*transition: transform 1s;*/
-  /*transform: rotate(180deg);*/
+  transition: transform 1s;
+  transform: rotate(180deg);
 
 }
 
 .modesettingsenter > img{
-  /*transition: transform 1s;*/
+  transition: transform 1s;
 }
 
 .modesettingsenter:hover > img{
-  /*transform: rotate(0deg);*/
+  transform: rotate(0deg);
 }
 
 
