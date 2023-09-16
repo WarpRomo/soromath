@@ -91,6 +91,10 @@
   height: 90px;
 }
 
+.quadraticproblem{
+  height: 55px;
+}
+
 .clockproblem{
   margin-right:0px;
   height: var(--clock_size);

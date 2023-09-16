@@ -148,7 +148,7 @@ function modeinit(){
       settingsButton.classList.add("modesettingsenter");
 
       let settingsImage = document.createElement("img");
-      settingsImage.src = "settings.png";
+      settingsImage.src = "images/settings.png";
       settingsImage.classList.add("modesettingsimage");
 
 

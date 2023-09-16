@@ -12,7 +12,7 @@
   <meta property="og:title" content="soromath">
   <meta property="og:type" content="website">
   <meta property="og:description" content="Modernized mental math training.">
-  <meta property="og:image" content="icon.png">
+  <meta property="og:image" content="images/icon.png">
 
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -50,7 +50,7 @@
         onload="renderMathInElement(document.body);"></script>
   </head>
 
-  <script src="voice.js"></script>
+  <script src="template1eqs/voice.js"></script>
 
   <script src="flashanzanequation.js"></script>
 
@@ -60,6 +60,7 @@
   <script src="template1eqs/subtractionfuncs.js"></script>
   <script src="template1eqs/division.js"></script>
   <script src="template1eqs/fractionfuncs.js"></script>
+  <script src="template1eqs/quadraticeqs.js"></script>
   <script src="template1eqs/trigfuncs.js"></script>
   <script src="template1eqs/celctoffuncs.js"></script>
   <script src="template1eqs/ftocelcfuncs.js"></script>
@@ -75,9 +76,9 @@
   <script src="options/options.js"></script>
   <script src="options/modemenu.js"></script>
 
-  <script src="finishtest.js"></script>
-  <script src="cpmchart.js"></script>
-  <script src="timer.js"></script>
+  <script src="template1eqs/finishtest.js"></script>
+  <script src="template1eqs/cpmchart.js"></script>
+  <script src="template1eqs/timer.js"></script>
 
   <script src="flashprofile/flashprofile.js"></script>
   <script src="flashprofile/profilechart.js"></script>
@@ -93,24 +94,24 @@
   <!-- your content here... -->
 
   <div id="iconcontainer">
-    <img src="icon.png" id="iconlogo"></img>
+    <img src="images/icon.png" id="iconlogo"></img>
   </div>
 
   <div id = "tabbuttons">
 
     <button id="flashproblemsbutton" class="zulubutton tabbutton currenttab" onclick="switchtab('flashproblems')">
 
-      <img class="tabimg" src="flashproblems.png"></img>
+      <img class="tabimg" src="images/flashproblems.png"></img>
 
     </button>
     <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="switchtab('flashprofile'); profileinit()">
 
-      <img class="tabimg" src="flashprofile.png"></img>
+      <img class="tabimg" src="images/flashprofile.png"></img>
 
     </button>
     <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="openInNewTab('https://discord.gg/VRbbwbD9yv')">
 
-      <img class="tabimg" src="discord.png"></img>
+      <img class="tabimg" src="images/discord.png"></img>
 
     </button>
 
@@ -356,7 +357,7 @@
 
         </button>
 
-        <button id = "modesettingsback" class="zulubutton"><img src="settingsback.png"></img></button>
+        <button id = "modesettingsback" class="zulubutton"><img src="images/settingsback.png"></img></button>
 
 
       </div>

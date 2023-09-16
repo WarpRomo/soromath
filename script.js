@@ -34,6 +34,7 @@ let modes = {
   "percentages":percentagepreset,
   "fraction addition": fractionpreset,
   "exponents": powerpreset,
+  "quadratics": quadraticpreset,
   "Nth Roots": rootpreset,
   "linear equations": linearpreset,
   "trigonometry":trigpreset,

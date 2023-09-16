@@ -70,10 +70,7 @@ function addroot(main=false,self=rootpreset,name=null){
 
   console.log(problem);
 
-
-
   const macros = {};
-
   katex.render(problem.innerHTML, problem, {
     throwOnError: false,
     macros

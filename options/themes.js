@@ -295,7 +295,7 @@ function themeinit(){
     backbutton.classList.add("themeplus");
 
     let backimage = document.createElement("img");
-    backimage.src = "settingsback.png";
+    backimage.src = "images/settingsback.png";
 
     for(var i = 0; i < themecustompresets.length; i++){
       genpresetbutton(i);
@@ -404,7 +404,7 @@ function themeinit(){
 
 
       let cloneimage = document.createElement("img");
-      cloneimage.src = "plus.png";
+      cloneimage.src = "images/plus.png";
 
       clonebutton.appendChild(cloneimage);
 
@@ -540,7 +540,7 @@ function genpresetbutton(index){
 
 
   let changeimage = document.createElement("img");
-  changeimage.src = "settings.png";
+  changeimage.src = "images/settings.png";
 
   changebutton.appendChild(changeimage);
 
