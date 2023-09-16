@@ -79,7 +79,6 @@
 .modesettingsenter{
   width: 30px !important;
   height: 30px !important;
-  transition: box-shadow 0.4s;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,17 +86,17 @@
 }
 
 .modesettingsenteropen > img{
-  transition: transform 1s;
-  transform: rotate(180deg);
+  /*transition: transform 1s;*/
+  /*transform: rotate(180deg);*/
 
 }
 
 .modesettingsenter > img{
-  transition: transform 1s;
+  /*transition: transform 1s;*/
 }
 
 .modesettingsenter:hover > img{
-  transform: rotate(0deg);
+  /*transform: rotate(0deg);*/
 }
 
 
