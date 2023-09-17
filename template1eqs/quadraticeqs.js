@@ -56,8 +56,8 @@ function addquadratic(main=false,self=quadraticpreset,name=null){
 
     coeff1 = 1;
     coeff2 = 1;
-    root1 = 1;
-    root2 = 1;
+    root1 = 0;
+    root2 = 0;
 
     problemlist.push([name,[coeff1, coeff2, root1, root2]]);
   }
@@ -156,7 +156,10 @@ function quadraticvalidate(answer, input){
   }
 
   if(value == null) return false;
-  else return Math.abs(ans1 - value) < 0.00001 || Math.abs(ans2 - value) < 0.00001;
+  else if(Math.abs(ans1 - value) < 0.00001 || Math.abs(ans2 - value) < 0.00001) return true;
+
+  if(Math.abs(Math.abs(ans1) - Math.abs(value)) < 0.00001 || Math.abs(Math.abs(ans2) - Math.abs(value)) < 0.00001) return "fail"
+
   return false;
 
 }

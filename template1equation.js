@@ -179,7 +179,10 @@ function template1enter(e, press=false){
     }
 
 
-    if( !(correct || e.key == "Enter") ) return;
+    if( !(correct || e.key == "Enter" || correct == "fail") ) return;
+
+    if(correct == "fail") correct = false;
+
     if(!voicemodeenabled) input.value = "";
     else{
       setTimeout(() => {input.value=""}, 50);
