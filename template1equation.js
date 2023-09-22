@@ -121,6 +121,8 @@ function template1init(){
   }, currentheight == newheight ? 0 : 100);
 
   matchdifficulty();
+  console.log("save dat")
+  savedifficulty();
 
 }
 

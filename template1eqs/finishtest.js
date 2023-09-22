@@ -85,8 +85,30 @@ function finishtest(){
   let rawcpm = (60000 / teststarted) * (stats[0] + stats[1]);
 
 
-  document.getElementById("finishcpm").innerHTML = Math.floor(cpm) + " cpm";
-  document.getElementById("finishrawcpm").innerHTML = Math.floor(rawcpm) + " raw cpm";
+  let cpmstring = Math.floor(cpm);
+  let rawcpmstring = Math.floor(rawcpm);
+
+  if(cpm < 10){
+    cpmstring = Math.floor(cpm * 10) / 10;
+    rawcpmstring = Math.floor(cpm * 10) / 10;
+  }
+
+
+  if(cpm > 1 || cpm == 0){
+    document.getElementById("finishcpm").innerHTML = cpmstring + " cpm";
+    document.getElementById("finishrawcpm").innerHTML = rawcpmstring + " raw cpm";
+  }
+  else{
+    cpmstring = 1 / (cpm / 60);
+    rawcpmstring = 1 / (rawcpm / 60);
+
+    cpmstring = Math.floor(cpmstring * 10) / 10;
+    rawcpmstring = Math.floor(cpmstring * 10) / 10;
+
+    document.getElementById("finishcpm").innerHTML = cpmstring + " spc";
+    document.getElementById("finishrawcpm").innerHTML = rawcpmstring + " raw spc";
+  }
+
 
   let modestring = currentmode.join("<br>")
 

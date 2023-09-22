@@ -13,20 +13,24 @@ let clockpreset = {
     presets:{
       "easy":{
         range: [10],
-        nonummode: false
+        nonummode: false,
+        secondsmode: false
       },
       "medium":{
         range: [5],
-        nonummode: false
+        nonummode: false,
+        secondsmode: false
       },
       "hard":{
         range: [0],
-        nonummode: false
+        nonummode: false,
+        secondsmode: false
       },
       "custom":{}
     },
     range: [10],
     nonummode: false,
+    secondsmode: false
   },
   settingsgui: {
 
@@ -183,6 +187,8 @@ function basicpreset1input(self, range1label, changegui){
 
   }
 
+
+
   let notickmode = document.createElement("input");
   notickmode.setAttribute("type", "checkbox");
   notickmode.name = "nonummode";
@@ -210,7 +216,38 @@ function basicpreset1input(self, range1label, changegui){
   notickmode.classList.add("modesettingcheckboxinner")
   notickparent.classList.add("modesettingcheckbox")
 
+
+
+  let secondsmode = document.createElement("input");
+  secondsmode.setAttribute("type", "checkbox");
+  secondsmode.name = "secondsmode";
+
+  secondsmode.onclick = (event) => {
+    self.settings.secondsmode = event.target.checked;
+
+    console.log(self);
+
+    self.settingsgui.matchpreset(self)
+  }
+
+  self.settingsgui.secondsmode = secondsmode;
+  self.settingsgui.secondsmode.checked = self.settings.secondsmode;
+
+  let secondslabel = document.createElement("label");
+  secondslabel.setAttribute("for", "secondsmode");
+  secondslabel.innerHTML = "Seconds mode";
+
+  let secondsparent = document.createElement("div");
+  secondsparent.appendChild(secondsmode);
+  secondsparent.appendChild(secondslabel);
+
+  secondsmode.classList.add("modesettingcheckboxinner")
+  secondsparent.classList.add("modesettingcheckbox")
+
+
+
   modesettingssection.appendChild(notickparent);
+  modesettingssection.appendChild(secondsparent);
 
   self.settingsgui.matchpreset(self);
 
@@ -234,8 +271,10 @@ function setpreset1input(self, presetname){
   self.settingsgui.range[1].value = preset.range[0];
 
   self.settings.nonummode = preset.nonummode;
+  self.settings.secondsmode = preset.secondsmode;
 
   self.settingsgui.nonummode.checked = preset.nonummode;
+  self.settingsgui.secondsmode.checked = preset.nonummode;
 
   self.settings.preset = presetname
 
@@ -250,11 +289,11 @@ function addclock(main=false,self=clockpreset,name=null){
   let time = Math.random() * 12 + 1;
   let hour = Math.floor(time);
   let minute = Math.floor(time % 1 * 60);
-  let second = Math.random() * 60;
+  let second = self.settings.secondsmode ? Math.floor(Math.random() * 60) : 0;
 
 
 
-  if(main == false) problemlist.push([name, [hour, minute]]);
+  if(main == false) problemlist.push([name, [hour, minute, second]]);
   else{
 
     time = 12;
@@ -262,7 +301,7 @@ function addclock(main=false,self=clockpreset,name=null){
     minute = 0;
     second = 0;
 
-    problemlist.push([name, [hour, minute]]);
+    problemlist.push([name, [hour, minute, second]]);
 
   }
 
@@ -287,6 +326,8 @@ function addclock(main=false,self=clockpreset,name=null){
   ctx.arc(clocksize/2, clocksize/2, clock_radius, 0, 2 * Math.PI);
 
   let text_color = getComputedStyle(document.body).getPropertyValue('--text_color');
+  let text_select_color = getComputedStyle(document.body).getPropertyValue('--text_select_color');
+
 
   console.log(text_color);
 
@@ -296,12 +337,7 @@ function addclock(main=false,self=clockpreset,name=null){
 
   let circlesize = 0.07;
 
-  ctx.fillStyle = text_color;;
-
-  ctx.beginPath();
-  ctx.arc(clocksize/2, clocksize/2, clock_radius * circlesize, 0, 2 * Math.PI);
-  ctx.fill();
-
+  ctx.fillStyle = text_color;
 
   ctx.lineWidth = 1.5;
 
@@ -369,7 +405,25 @@ function addclock(main=false,self=clockpreset,name=null){
   let secondangle = (second / 60)  * 2 * Math.PI - Math.PI / 2;
 
 
+  if(self.settings.secondsmode){
+    console.log("yes");
+
+    ctx.strokeStyle = text_select_color;
+
+    ctx.lineWidth = secondwidth;
+    ctx.beginPath();
+    ctx.moveTo(clocksize/2 + secondsize * clock_radius * Math.cos(secondangle), clocksize/2 + secondsize * clock_radius * Math.sin(secondangle))
+    ctx.lineTo(clocksize/2, clocksize/2);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = text_color;
   ctx.fillStyle = text_color;
+
+  ctx.beginPath();
+  ctx.arc(clocksize/2, clocksize/2, clock_radius * circlesize, 0, 2 * Math.PI);
+  ctx.fill();
+
 
   ctx.lineWidth = hourwidth;
   ctx.beginPath();
@@ -383,11 +437,6 @@ function addclock(main=false,self=clockpreset,name=null){
   ctx.lineTo(clocksize/2, clocksize/2);
   ctx.stroke();
 
-  ctx.lineWidth = secondwidth;
-  ctx.beginPath();
-  ctx.moveTo(clocksize/2 + secondsize * clock_radius * Math.cos(secondangle), clocksize/2 + secondsize * clock_radius * Math.sin(secondangle))
-  ctx.lineTo(clocksize/2, clocksize/2);
-  ctx.stroke();
 
   if(main) problem.id = "mainproblem"
 
@@ -427,37 +476,41 @@ function clocktype(e){
 }
 
 function clockanswer(problem){
-  return [problem[0], problem[1]];
+  return problem;
 }
 
 function clockvalidate(answer, input){
 
   let values = input.split(":");
 
-  if(values.length != 2){
+  if(values.length < 2){
     values = input.split(" ");
-    if(values.length != 2) return false;
+    if(values.length < 2) return false;
   }
 
   let hour = values[0];
   let minute = values[1];
+  let second = values.length > 2 ? values[2] : 0;
 
-  if(parseInt(minute) < 10 && minute.length != 2) return false;
+  //console.log(second, values);
+
+  if( (parseInt(minute) < 10 && minute.length != 2) || (clockpreset.settings.secondsmode && parseInt(second) < 10 && second.length != 2) ) return false;
 
   hour = parseInt(hour);
   minute = parseInt(minute);
+  second = parseInt(second);
 
-  console.log(hour, minute, answer[0], answer[1]);
+  //console.log(hour, minute, second, answer[0], answer[1], answer[2]);
 
-  let tinput = hour + minute * 1/60;
-  let tanswer = answer[0] + answer[1] * 1/60;
+  let tinput = hour + minute * 1/60 + second * 1/3600;
+  let tanswer = answer[0] + answer[1] * 1/60 + answer[2] * 1/3600;
   let tdist = Math.abs(tinput - tanswer)
-
-
 
   if(Math.abs(tdist - 12) < tdist) tdist = Math.abs(tdist - 12);
 
   tdist *= 60;
+
+  //console.log(tdist);
 
   return tdist <= clockpreset.settings.range;
 

@@ -39,8 +39,16 @@ let modes = {
   "linear equations": linearpreset,
   "trigonometry":trigpreset,
   "clock to time": clockpreset,
-  "C° to F°": celctofpreset,
-  "F° to C°": ftocelcpreset,
+
+  "inches to cm": intocmpreset,
+  "cm to inches": cmtoinpreset,
+
+  "pounds to kg": lbtokgpreset,
+  "kg to pounds": kgtolbpreset,
+
+  "°C to °F": celctofpreset,
+  "°F to °C": ftocelcpreset,
+
   "month to number": monthnumpreset,
   "date to day of week": calendarpreset,
   "flash anzan": flashanzanpreset
@@ -82,7 +90,7 @@ function savedifficulty(){
 
   let difficultysettings = {};
 
-  let savekeys = ["range1", "range2", "range", "nonummode"]
+  let savekeys = ["range1", "range2", "range", "nonummode", "secondsmode"]
 
   let keys = Object.keys(modes);
 
@@ -101,6 +109,8 @@ function savedifficulty(){
       difficultysettings[keys[i]][keys2[j]] = value;
 
     }
+
+    console.log("SAVVVVVVVVVVED IT");
 
   }
 
@@ -162,10 +172,6 @@ function init(){
 
   document.getElementById("options").style.display = "";
 
-  settemplate(currenttemplate);
-
-  switchtab(currenttab);
-
 
   if(modeselect == null){
     modeselect = "yarr";
@@ -173,7 +179,9 @@ function init(){
     profilemodeinit();
     loaddifficulty();
   }
-  savedifficulty();
+  else{
+    savedifficulty();
+  }
 
   if(themeselect == null){
     themeselect = "yarr";
@@ -195,6 +203,9 @@ function init(){
   if(!voicemodeenabled){
     document.getElementById("voicesettings").disabled = true;
   }
+
+  settemplate(currenttemplate);
+  switchtab(currenttab);
 
   cpmtrack = [];
   rawcpmtrack = [];
