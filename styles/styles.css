@@ -27,7 +27,7 @@ body{
   background-color: var(--background);
   padding-bottom: 500px;
   margin: 0;
-  transition: opacity 0.4s;
+  transition: opacity 1.5s;
   scrollbar-color: var(--window_border) var(--window_background);
   overflow-x: hidden;
 }
@@ -47,6 +47,10 @@ body::-webkit-scrollbar-thumb{
 #iconlogo{
   -webkit-mask-image: linear-gradient(rgba(0, 255, 0, 1.0), transparent);
   background-color: var(--text_select_color);
+  opacity: 0;
+  transition: all 1s;
+  bottom: 30px;
+  position: relative;
 }
 
 #equations{

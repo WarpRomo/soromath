@@ -169,9 +169,18 @@ function switchtab(tab, doswitch=true){
 
 function init(){
 
+  setTimeout( () => {
+    document.body.style.opacity = "1";
 
-  document.body.style.opacity = "1";
+  }, 500)
 
+  setTimeout(() => {
+
+    document.getElementById("iconlogo").style.opacity = "1";
+    document.getElementById("iconlogo").style.bottom = "0px";
+
+
+  }, 800)
   let keys = Object.keys(modes);
 
   document.getElementById("options").style.display = "";
