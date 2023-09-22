@@ -71,7 +71,11 @@ function loaddifficulty(){
 
     let keys2 = Object.keys(difficultysettings[keys[i]]);
 
+    if(keys[i] in modes == false) continue;
+
     for(var j = 0; j < keys2.length; j++){
+
+      if(keys2[j] in modes[keys[i]] == false) continue;
 
       modes[keys[i]].settings[keys2[j]] = difficultysettings[keys[i]][keys2[j]];
 
