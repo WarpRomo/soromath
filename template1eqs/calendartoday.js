@@ -306,7 +306,15 @@ function calendarvalidate(answer, inputnumber){
 
   let input = inputnumber+"";
   input = input.toLowerCase();
+
+  if(input.length < answer.length){
+    if(input[0] != answer[0]) return "fail";
+    return false;
+  }
+
   if(input.startsWith(answer)) return true;
   else return "fail"
+
+
 
 }
