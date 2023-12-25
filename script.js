@@ -54,10 +54,11 @@ let modes = {
   "flash anzan": flashanzanpreset
 }
 
+let currentversion = 1;
 
 function loaddifficulty(){
 
-  if(localStorage["difficultysettings"] == undefined){
+  if(localStorage["difficultysettings"] == undefined || localStorage["currentversion"] != currentversion){
 
     console.log("Create new state");
 
@@ -128,6 +129,7 @@ function savedifficulty(){
   difficultysettings.problemmode = problemmode;
   difficultysettings.totaltime = totaltime;
   difficultysettings.totalproblems = totalproblems;
+  difficultysettings.currentversion = currentversion;
 
   localStorage["difficultysettings"] = JSON.stringify(difficultysettings);
 
