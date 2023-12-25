@@ -59,9 +59,13 @@ function loaddifficulty(){
 
   if(localStorage["difficultysettings"] == undefined){
 
+    console.log("Create new state");
+
     savedifficulty();
 
   }
+
+  console.log("Loading");
 
   let difficultysettings = JSON.parse(localStorage["difficultysettings"]);
 
@@ -69,24 +73,28 @@ function loaddifficulty(){
 
   for(var i = 0; i < keys.length; i++){
 
-    let keys2 = Object.keys(difficultysettings[keys[i]]);
+    if((keys[i] in modes) == false) continue;
 
-    if(keys[i] in modes == false) continue;
+    let keys2 = Object.keys(difficultysettings[keys[i]]);
 
     for(var j = 0; j < keys2.length; j++){
 
-      if(keys2[j] in modes[keys[i]] == false) continue;
+      if((keys2[j] in modes[keys[i]].settings) == false) continue;
 
       modes[keys[i]].settings[keys2[j]] = difficultysettings[keys[i]][keys2[j]];
 
     }
 
-    if("settingsgui" in modes[keys[i]]){
-      modes[keys[i]].settingsgui.init(modes[keys[i]])
-    }
+    //if("settingsgui" in modes[keys[i]]){
+    //  modes[keys[i]].settingsgui.init(modes[keys[i]])
+    //}
 
   }
 
+  currentmode = difficultysettings.currentmode;
+  problemmode = difficultysettings.problemmode;
+  totaltime = difficultysettings.totaltime;
+  totalproblems = difficultysettings.totalproblems;
 
 }
 
@@ -94,7 +102,7 @@ function savedifficulty(){
 
   let difficultysettings = {};
 
-  let savekeys = ["range1", "range2", "range", "nonummode", "secondsmode"]
+  let savekeys = ["range1", "range2", "range", "nonummode", "secondsmode", "preset"]
 
   let keys = Object.keys(modes);
 
@@ -114,9 +122,12 @@ function savedifficulty(){
 
     }
 
-    console.log("SAVVVVVVVVVVED IT");
-
   }
+
+  difficultysettings.currentmode = currentmode;
+  difficultysettings.problemmode = problemmode;
+  difficultysettings.totaltime = totaltime;
+  difficultysettings.totalproblems = totalproblems;
 
   localStorage["difficultysettings"] = JSON.stringify(difficultysettings);
 
@@ -181,16 +192,17 @@ function init(){
 
 
   }, 800)
-  let keys = Object.keys(modes);
 
   document.getElementById("options").style.display = "";
 
 
   if(modeselect == null){
     modeselect = "yarr";
+    console.log("do eet");
+    loaddifficulty();
+    console.log("heree");
     modeinit();
     profilemodeinit();
-    loaddifficulty();
   }
   else{
     savedifficulty();

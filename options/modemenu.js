@@ -237,6 +237,8 @@ function modeinit(){
 
   firstmodeinit = true;
 
+  customtimedone(false)
+
 
 }
 

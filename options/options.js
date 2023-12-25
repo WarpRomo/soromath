@@ -199,18 +199,26 @@ function closetimecontainer(event){
 
 }
 
-function customtimedone(){
+function customtimedone(userInput=true){
 
   let input = document.getElementById("customtimeinp");
 
   let timevalue = null
 
-  if(input.value == ""){
-    switchtime("timed")
-    timevalue = 15;
+  if(userInput){
+    if(input.value == ""){
+      switchtime("timed")
+      timevalue = 15;
+    }
+    else{
+      timevalue = parseInt(input.value);
+    }
   }
   else{
-    timevalue = parseInt(input.value);
+
+    if(problemmode == "timed") timevalue = totaltime / 1000;
+    else timevalue = totalproblems;
+
   }
 
 
@@ -219,9 +227,6 @@ function customtimedone(){
 
 
   if(problemmode == "timed"){
-
-
-    console.log("YO2", timevalue);
 
 
     timevalue *= 1000;
@@ -247,8 +252,6 @@ function customtimedone(){
   }
   else{
 
-    console.log("YO", timevalue);
-
     let elem = document.getElementsByClassName("customtimebutton")[0];
     settime(elem, timevalue);
 
@@ -261,10 +264,5 @@ function customtimedone(){
     elem.innerHTML = text;
 
   }
-
-
-
-
-
 
 }
