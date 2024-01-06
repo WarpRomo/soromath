@@ -13,27 +13,31 @@ let divisionpreset = {
     presets:{
       "easy":{
         range1: [1,9],
-        range2: [0,9]
+        range2: [0,9],
+        range3: []
       },
       "medium":{
         range1: [1,99],
-        range2: [0,99]
+        range2: [0,99],
+        range3: []
       },
       "hard":{
         range1: [1,999],
-        range2: [0,999]
+        range2: [0,999],
+        range3: []
       },
       "custom":{}
     },
     range1: [1,9],
     range2: [0,9],
+    range3: []
   },
   settingsgui: {
 
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("Divisor Range", "Answer Range"),
+    init: basicpresetgen("Divisor Range", "Answer Range", "Variable Range"),
     setpreset: setpreset,
     matchpreset: matchpreset,
 
@@ -45,6 +49,17 @@ function adddivision(main=false,self=divisionpreset,name=null){
 
   let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
   let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
+
+  if(self.settings.range3 != undefined && self.settings.range3.length != 0){
+
+    let range = self.settings.range3;
+
+    let val = Math.floor( Math.floor( Math.random() * range.length ) / 4 ) * 4;
+
+    num1 = Math.floor(Math.random() * (range[val+1] - range[val] + 1) + range[val] );
+    num2 = Math.floor(Math.random() * (range[val+3] - range[val+2] + 1) + range[val+2] );
+
+  }
 
   let temp = num1;
   num1 *= num2;
