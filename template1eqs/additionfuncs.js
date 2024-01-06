@@ -14,25 +14,30 @@ let additionpreset = {
     presets:{
       "easy":{
         range1: [0,9],
-        range2: [0,9]
+        range2: [0,9],
+        //range3: []
       },
       "medium":{
         range1: [0,99],
-        range2: [0,99]
+        range2: [0,99],
+        //range3: []
       },
       "hard":{
         range1: [0,999],
-        range2: [0,999]
+        range2: [0,999],
+        //range3: []
       },
       "custom":{}
     },
     range1: [0,9],
     range2: [0,9],
+    //range3: []
   },
   settingsgui: {
 
     range1: null,
     range2: null,
+    range3: null,
     doneinit: false,
     init: basicpresetgen("Number Range 1", "Number Range 2"),
     setpreset: setpreset,
@@ -42,11 +47,11 @@ let additionpreset = {
 
 }
 
-function basicpresetgen(range1label, range2label){
-  return (self, changegui=true) => {basicpreset(self, range1label, range2label, changegui)}
+function basicpresetgen(range1label, range2label, range3label=false){
+  return (self, changegui=true) => {basicpreset(self, range1label, range2label, range3label, changegui)}
 }
 
-function basicpreset(self, range1label, range2label, changegui){
+function basicpreset(self, range1label, range2label, range3label, changegui){
   let modesettingsbutton = document.getElementById("modesettingsbutton")
   let modesettingssection = document.getElementById("modesettingssection");
 
@@ -56,7 +61,7 @@ function basicpreset(self, range1label, range2label, changegui){
   }
 
   let presetLabel = document.createElement("p");
-  presetLabel.innerHTML = "Preset";
+  presetLabel.innerHTML = "&nbsp;";
   presetLabel.classList.add("settinglabel");
 
   modesettingssection.appendChild(presetLabel);
@@ -167,8 +172,8 @@ function basicpreset(self, range1label, range2label, changegui){
   range1[2].value = self.settings.range1[1];
   range1[1].oninput = () => { oninput(range1[1]) }
   range1[2].oninput = () => { oninput(range1[2]) }
-  range1[1].onblur = () => {self.settings.range1[0] = onblur(range1[1]); swap(range1[1], range1[2]); self.settingsgui.matchpreset(self) }
-  range1[2].onblur = () => {self.settings.range1[1] = onblur(range1[2]); swap(range1[1], range1[2]); self.settingsgui.matchpreset(self) }
+  range1[1].onblur = () => {self.settings.range1[0] = onblur(range1[1]); swap(range1[1], range1[2], "range1"); self.settingsgui.matchpreset(self) }
+  range1[2].onblur = () => {self.settings.range1[1] = onblur(range1[2]); swap(range1[1], range1[2], "range1"); self.settingsgui.matchpreset(self) }
   self.settingsgui.range1 = range1;
 
   modesettingssection.appendChild(numRange);
@@ -178,12 +183,96 @@ function basicpreset(self, range1label, range2label, changegui){
   range2[2].value = self.settings.range2[1];
   range2[1].oninput = () => { oninput(range2[1])}
   range2[2].oninput = () => { oninput(range2[2])}
-  range2[1].onblur = () => {self.settings.range2[0] = onblur(range2[1]); swap(range2[1], range2[2]); self.settingsgui.matchpreset(self) }
-  range2[2].onblur = () => {self.settings.range2[1] = onblur(range2[2]); swap(range2[1], range2[2]); self.settingsgui.matchpreset(self) }
+  range2[1].onblur = () => {self.settings.range2[0] = onblur(range2[1]); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
+  range2[2].onblur = () => {self.settings.range2[1] = onblur(range2[2]); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
   self.settingsgui.range2 = range2;
 
   modesettingssection.appendChild(numRange2);
   modesettingssection.appendChild(range2[0])
+
+  function makesingleinput(){
+    let parent = document.createElement("div");
+    parent.style.display = "flex";
+    parent.style.justifyContent = "center"
+
+    let input1 = document.createElement("input")
+
+    input1.style.margin = "7px";
+
+    input1.classList.add("numinput");
+    input1.classList.add("widenuminput");
+
+    parent.appendChild(input1);
+
+    return [parent, input1];
+  }
+
+  if(range3label != false){
+
+    let range3 = makesingleinput();
+
+    range3[1].value = self.settings.range3.join(",");
+
+    let numRange3 = document.createElement("p");
+    numRange3.innerHTML = "Variable";
+    numRange3.classList.add("settinglabel");
+    numRange3.style.marginTop = "20px";
+
+    modesettingssection.appendChild(numRange3);
+    modesettingssection.appendChild(range3[0])
+
+    self.settingsgui.range3 = range3;
+
+    range3[1].onblur = () => {onblurvariable(range3[1])};
+
+  }
+
+  function onblurvariable(input){
+
+    let allowed = "-0123456789,";
+    let chars = "";
+
+    for(var i = 0; i < input.value.length; i++){
+
+      if(allowed.indexOf(input.value[i]) != -1) chars += input.value[i];
+
+    }
+
+    chars = chars.split(",");
+    chars = chars.map(e => parseInt(e));
+    chars = chars.filter(e => e+""!="NaN");
+
+    if(chars.length % 4 != 0) chars = [];
+
+    for(var i = 0; i < chars.length; i+=4){
+      if(chars[i+2] > chars[i+3]) [chars[i+2], chars[i+3]] = [chars[i+3], chars[i+2]];
+      if(chars[i] > chars[i+1]) [chars[i], chars[i+1]] = [chars[i+1], chars[i]];
+    }
+
+    if(chars.length != 0){
+      range1[1].value = "";
+      range1[2].value = "";
+
+      range2[1].value = "";
+      range2[2].value = "";
+
+      input.value = chars.join(",");
+
+      self.settings.range1 = [null,null];
+      self.settings.range2 = [null,null];
+      self.settings.range3 = chars;
+
+      self.settingsgui.matchpreset(self)
+
+      return chars;
+    }
+
+    self.settingsgui.setpreset(self, "easy");
+
+    return chars;
+
+  }
+
 
   function oninput(input){
 
@@ -205,17 +294,41 @@ function basicpreset(self, range1label, range2label, changegui){
     if(parsed+"" == "NaN") parsed = 0;
     input.value = parsed;
 
+    if(range1[1].value == ""){
+      range1[1].value = 0;
+      self.settings.range1[0] = 0;
+    }
+    if(range1[2].value == ""){
+      range1[2].value = 0;
+      self.settings.range1[1] = 0;
+    }
+    if(range2[1].value == ""){
+      range2[1].value = 0;
+      self.settings.range2[0] = 0;
+    }
+    if(range2[2].value == ""){
+      range2[2].value = 0;
+      self.settings.range2[1] = 0;
+    }
+
+    if(self.settings.range3 != undefined){
+      self.settings.range3 = [];
+      self.settingsgui.range3[1].value = "";
+    }
+
     return parsed;
 
   }
 
-  function swap(e1, e2){
+  function swap(e1, e2, key){
 
     if(parseInt(e1.value) > parseInt(e2.value)){
 
       let temp = e1.value;
       e1.value = e2.value;
       e2.value = temp;
+
+      [self.settings[key][0], self.settings[key][1]] = [self.settings[key][1], self.settings[key][0]]
 
     }
 
@@ -293,13 +406,21 @@ function setpreset(self, presetname){
   self.settings.range1 = [...preset.range1];
   self.settings.range2 = [...preset.range2];
 
+
   self.settingsgui.range1[1].value = preset.range1[0];
   self.settingsgui.range1[2].value = preset.range1[1];
 
   self.settingsgui.range2[1].value = preset.range2[0];
   self.settingsgui.range2[2].value = preset.range2[1];
 
+  if(self.settings.range3 != undefined){
+    self.settings.range3 = [...preset.range3];
+    self.settingsgui.range3[1].value = preset.range3.join(",");
+  }
+
   self.settings.preset = presetname
+
+  console.log("yurrrrr");
 
   self.settingsgui.matchpreset(self);
 

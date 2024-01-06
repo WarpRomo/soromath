@@ -28,7 +28,7 @@ function initprofilechart(){
         tooltips: {
             callbacks: {
                 label: function(tooltipItem, data){
-                    var label = `CPM: ${tooltipItem.yLabel}\n`;
+                    var label = `CPM: ${Math.round(tooltipItem.yLabel)}\n`;
                     var date = new Date(tooltipItem.xLabel);
                     return [label, `Date: ${date.toLocaleString()}`];
                 }
@@ -87,7 +87,9 @@ function makeprofilechart(){
 
   let difficultychoice = difficulties[profiledifficultybuttons.indexOf(profiledifficulty)];
 
-  let timechoice = times[timebuttons.indexOf(profiletime)];
+  let timechoice = times[timebuttons.indexOf(profiletime)] || null;
+
+  let problemcount = profileproblemcount;
 
   let timedistance = millis[days.indexOf(currentday)];
 
@@ -112,13 +114,19 @@ function makeprofilechart(){
 
     }
 
-    if(completedtests[i].time != timechoice) continue L;
+    if(timechoice != null){
+        if(completedtests[i].time != timechoice) continue;
+    }
+    else{
+      if(completedtests[i].acc[0] + completedtests[i].acc[1] != problemcount) continue;
+    }
+
 
     if(completedtests[i].difficulty == undefined){
       completedtests[i].difficulty = 0;
     }
 
-    if(completedtests[i].difficulty != difficultychoice) continue L;
+    if(completedtests[i].difficulty != difficultychoice) continue;
 
     timelist.push(completedtests[i]);
 
@@ -173,7 +181,7 @@ function makeprofilechart(){
 
     profilecpmchart.update();
 
-    document.getElementById("cpmstat").innerHTML = `PB: ${pb} CPM`
+    document.getElementById("cpmstat").innerHTML = `PB: ${Math.round(pb)} CPM`
     document.getElementById("accstat").innerHTML = `Accuracy: ${totalacc}%`
     document.getElementById("testcountstat").innerHTML = `Test Count: ${testcount}`
   }

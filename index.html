@@ -121,6 +121,12 @@
       <img class="tabimg" src="images/discord.png"></img>
 
     </button>
+    <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="openInNewTab('https://github.com/WarpRomo/soromath')">
+
+      <img class="tabimg" src="images/github.png"></img>
+
+    </button>
+
 
   </div>
 
@@ -156,6 +162,16 @@
 
           </div>
         </div>
+
+        <div class="profileoption">
+          <p class="profilelabel">Problem-count</p>
+          <div id="profileproblems" class="profilesection">
+
+            <input class="numinput" id="profileproblemcount" onblur="setprofileproblemcount()" placeholder="unset"></button>
+
+          </div>
+        </div>
+
 
         <div class="profileoption">
           <p class="profilelabel">Mode</p>
@@ -467,10 +483,15 @@
 
       <div class = "flashsettingstext">
         <p class="flashlabel">Voice speed: </p>
-        <p id="flashdigittext" class="flashvalue"></p>
       </div>
 
       <input type="range" min="1" max="7" value="1" class="zuluslider voiceslider" id="voicespeedslider" oninput="getvoicesliders()">
+
+      <div class = "flashsettingstext">
+        <p class="flashlabel">Voice Volume: </p>
+      </div>
+
+      <input type="range" min="1" max="7" value="7" class="zuluslider voiceslider" id="voicevolumeslider" oninput="getvoicesliders()">
 
       <button class="zulubutton" id="voicetest" onclick="synthesisvoice('394 plus 921', voicerate)">Test voice</button>
 

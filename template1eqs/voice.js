@@ -1,6 +1,7 @@
 
 let voicemodeenabled = false;
 let voicerate = 1;
+let voicevolume = 1;
 
 
 function voicemodeclick(yarr=true){
@@ -66,11 +67,12 @@ function voiceinit(doinit=false){
 
 function getvoicesliders(){
   voicerate = 1 + document.getElementById("voicespeedslider").value / 3;
+  voicevolume = document.getElementById("voicevolumeslider").value / 7;
 }
 
 function setvoicesliders(doinit){
   document.getElementById("voicespeedslider").value = (voicerate - 1)*3;
-
+  document.getElementById("voicevolumeslider").volume = Math.round((voicevolume)*7);
 }
 
 function removevoicecontainer(event, bypass){
@@ -90,7 +92,7 @@ function showvoicecontainer(){
 }
 
 
-function synthesisvoice(text, rate=1.2){
+function synthesisvoice(text){
 
   let voices = synth.getVoices();
 
@@ -106,7 +108,10 @@ function synthesisvoice(text, rate=1.2){
 
   }
 
+  console.log(voicevolume);
+
   utterThis.rate = voicerate;
+  utterThis.volume = voicevolume;
 
 
   if (synth.speaking) {

@@ -6,6 +6,8 @@ let currentday = "alltime"
 let timebuttons = ["15sbutton", "60sbutton", "120sbutton"]
 let profiletime = "15sbutton"
 
+let profileproblemcount = 0;
+
 
 let currentprofilemode = ["addition"];
 
@@ -41,7 +43,52 @@ function profileinit(){
   setdaybutton();
   setprofiletimebutton();
   setprofiledifficultybutton();
+  initproblemcount();
   makeprofilechart();
+
+}
+
+function initproblemcount(){
+
+  console.log("yesss");
+
+  if(profileproblemcount > 1){
+    document.getElementById("profileproblemcount").value = profileproblemcount;
+  }
+}
+
+function setprofileproblemcount(val=false){
+
+  let allowed = "0123456789";
+
+  let chars = "";
+
+  let input = document.getElementById("profileproblemcount");
+
+  for(var i = 0; i < input.value.length; i++){
+
+    if(allowed.indexOf(input.value[i]) != -1) chars += input.value[i];
+
+  }
+
+  chars = parseInt(chars);
+
+  if(val != false) chars = val;
+
+  if(chars+"" == "NaN" || chars < 2){
+    profileproblemcount = 1;
+    input.value = "";
+    if(val == false) setprofiletimebutton('15sbutton');
+  }
+  else{
+    input.value = chars;
+    profileproblemcount = chars;
+    profiletime = 'lol';
+    setprofiletimebutton('');
+  }
+
+
+
 
 }
 
@@ -70,7 +117,10 @@ function setdaybutton(day=null){
 function setprofiletimebutton(time=null){
 
   let prevtime = profiletime;
+
   if(time != null) profiletime = time;
+  if(time != "" && time != null) setprofileproblemcount(1);
+
   if(profiletime != prevtime) makeprofilechart();
 
   for(var i = 0; i < timebuttons.length; i++){

@@ -13,27 +13,32 @@ let powerpreset = {
     presets:{
       "easy":{
         range1: [2,5],
-        range2: [1,3]
+        range2: [1,3],
+        range3: []
       },
       "medium":{
         range1: [2,9],
-        range2: [1,4]
+        range2: [1,4],
+        range3: []
       },
       "hard":{
         range1: [2,9],
-        range2: [1,5]
+        range2: [1,5],
+        range3: []
       },
       "custom":{}
     },
     range1: [2,5],
     range2: [1,3],
+    range3: []
   },
   settingsgui: {
 
     range1: null,
     range2: null,
+    range3: null,
     doneinit: false,
-    init: basicpresetgen("Base", "Exponent"),
+    init: basicpresetgen("Base", "Exponent", "Variable Range"),
     setpreset: setpreset,
     matchpreset: matchpreset,
 
@@ -45,6 +50,16 @@ function addpower(main=false,self=powerpreset,name=null){
   let num1 = Math.floor(Math.random() * (self.settings.range1[1] - self.settings.range1[0] + 1) + self.settings.range1[0]);
   let num2 = Math.floor(Math.random() * (self.settings.range2[1] - self.settings.range2[0] + 1) + self.settings.range2[0]);
 
+  if(self.settings.range3 != undefined && self.settings.range3.length != 0){
+
+    let range = self.settings.range3;
+
+    let val = Math.floor( Math.floor( Math.random() * range.length ) / 4 ) * 4;
+
+    num1 = Math.floor(Math.random() * (range[val+1] - range[val] + 1) + range[val] );
+    num2 = Math.floor(Math.random() * (range[val+3] - range[val+2] + 1) + range[val+2] );
+
+  }
 
   if(main == false) problemlist.push([name,[num1,num2]]);
   else{

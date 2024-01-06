@@ -56,7 +56,7 @@ function basicindpreset(self, range1label, range2label, changegui){
   }
 
   let presetLabel = document.createElement("p");
-  presetLabel.innerHTML = "Preset";
+  presetLabel.innerHTML = "&nbsp;";
   presetLabel.classList.add("settinglabel");
 
   modesettingssection.appendChild(presetLabel);

@@ -157,6 +157,7 @@ function modeinit(){
       settingsButton.onclick = () => {
 
         document.getElementById("modesettings").style.display = "";
+        document.getElementById("modesettings").scrollTop = 0;
 
         let modesettingscontainer = document.getElementById("modesettingsbuttoncontainer")
         let modesettingsback = document.getElementById("modesettingsback");
@@ -173,8 +174,6 @@ function modeinit(){
 
         let offset = buttonelem.offsetTop - modeselect.scrollTop;
 
-        //modesettingsbutton.innerHTML = buttonelem.innerHTML
-
         buttonelem.parentElement.style.opacity = 0;
         modesettingsbuttoncontainer.style.top = offset + "px";
 
@@ -189,7 +188,7 @@ function modeinit(){
 
         $(modesettingscontainer).animate({
 
-          top: (modesettingscontainer.parentElement.offsetHeight - buttonelem.offsetHeight - 10) + "px",
+          top: 0+"px"//(modesettingscontainer.parentElement.offsetHeight - buttonelem.offsetHeight - 10) + "px",
 
         }, animTime, "easeOutQuad")
 
@@ -197,7 +196,9 @@ function modeinit(){
 
           modesettingopen = null;
 
-          let offset = buttonelem.offsetTop - modeselect.scrollTop
+          let offset = buttonelem.offsetTop - modeselect.scrollTop + document.getElementById("modesettings").scrollTop;
+
+          console.log(offset);
 
           $(modesettingssection).animate({
 
