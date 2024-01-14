@@ -34,7 +34,7 @@ let lbtokgpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("Lbs. range", "Error Range"),
+    init: basicpresetgen("Lbs. range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 

@@ -34,7 +34,7 @@ let celctofpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("°C range", "Error Range"),
+    init: basicpresetgen("°C range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 

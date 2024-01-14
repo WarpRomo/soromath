@@ -34,7 +34,7 @@ let ftocelcpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("°F range", "Error Range"),
+    init: basicpresetgen("°F range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 

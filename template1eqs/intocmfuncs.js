@@ -34,7 +34,7 @@ let intocmpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("inches range", "Error Range"),
+    init: basicpresetgen("inches range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 

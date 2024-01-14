@@ -34,7 +34,7 @@ let cmtoinpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("cm range", "Error Range"),
+    init: basicpresetgen("cm range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 

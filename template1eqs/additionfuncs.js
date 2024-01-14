@@ -47,11 +47,11 @@ let additionpreset = {
 
 }
 
-function basicpresetgen(range1label, range2label, range3label=false){
-  return (self, changegui=true) => {basicpreset(self, range1label, range2label, range3label, changegui)}
+function basicpresetgen(range1label, range2label, range3label=false, secdecimal=false){
+  return (self, changegui=true) => {basicpreset(self, range1label, range2label, range3label, secdecimal, changegui)}
 }
 
-function basicpreset(self, range1label, range2label, range3label, changegui){
+function basicpreset(self, range1label, range2label, range3label, secdecimal, changegui){
   let modesettingsbutton = document.getElementById("modesettingsbutton")
   let modesettingssection = document.getElementById("modesettingssection");
 
@@ -181,10 +181,10 @@ function basicpreset(self, range1label, range2label, range3label, changegui){
 
   range2[1].value = self.settings.range2[0];
   range2[2].value = self.settings.range2[1];
-  range2[1].oninput = () => { oninput(range2[1])}
-  range2[2].oninput = () => { oninput(range2[2])}
-  range2[1].onblur = () => {self.settings.range2[0] = onblur(range2[1]); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
-  range2[2].onblur = () => {self.settings.range2[1] = onblur(range2[2]); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
+  range2[1].oninput = () => { oninput(range2[1], secdecimal)}
+  range2[2].oninput = () => { oninput(range2[2], secdecimal)}
+  range2[1].onblur = () => {self.settings.range2[0] = onblur(range2[1], secdecimal); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
+  range2[2].onblur = () => {self.settings.range2[1] = onblur(range2[2], secdecimal); swap(range2[1], range2[2], "range2"); self.settingsgui.matchpreset(self) }
   self.settingsgui.range2 = range2;
 
   modesettingssection.appendChild(numRange2);
@@ -274,9 +274,11 @@ function basicpreset(self, range1label, range2label, range3label, changegui){
   }
 
 
-  function oninput(input){
+  function oninput(input, secdecimal=false){
 
     let allowed = "-0123456789";
+    if(secdecimal) allowed += "."
+
     let chars = "";
 
     for(var i = 0; i < input.value.length; i++){
@@ -288,9 +290,11 @@ function basicpreset(self, range1label, range2label, range3label, changegui){
     return input.value;
 
   }
-  function onblur(input){
+  function onblur(input, secdecimal){
 
     let parsed = parseInt(input.value);
+    if(secdecimal) parsed = parseFloat(input.value);
+    
     if(parsed+"" == "NaN") parsed = 0;
     input.value = parsed;
 
@@ -322,7 +326,7 @@ function basicpreset(self, range1label, range2label, range3label, changegui){
 
   function swap(e1, e2, key){
 
-    if(parseInt(e1.value) > parseInt(e2.value)){
+    if(parseFloat(e1.value) > parseFloat(e2.value)){
 
       let temp = e1.value;
       e1.value = e2.value;

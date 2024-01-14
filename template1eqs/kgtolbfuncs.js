@@ -34,7 +34,7 @@ let kgtolbpreset = {
     range1: null,
     range2: null,
     doneinit: false,
-    init: basicpresetgen("kg range", "Error Range"),
+    init: basicpresetgen("kg range", "Error Range", false, true),
     setpreset: setpreset,
     matchpreset: matchpreset,
 
