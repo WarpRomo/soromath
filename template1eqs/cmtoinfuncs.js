@@ -55,7 +55,7 @@ function addcmtoin(main=false,self=cmtoinpreset,name=null){
   if(recentduplicate()) return;
 
   let problem = document.createElement("p");
-  problem.innerHTML = num1 + " in.";
+  problem.innerHTML = num1 + " cm.";
   problem.classList.add("problem");
   if(main) problem.id = "mainproblem"
 
