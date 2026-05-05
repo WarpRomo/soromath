@@ -45,7 +45,7 @@ function addmonthnum(main=false,difficulty=null,name=null){
 
 function monthnumspeech(problem){
 
-  return problem[0];
+  return problem[0] + " month number";
 
 }
 

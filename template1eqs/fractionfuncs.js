@@ -26,8 +26,8 @@ function addfraction(main=false,difficulty=0,name=null){
   if(main == false) problemlist.push([name, [frac1, frac2]]);
   else{
 
-    frac1 = [1,2]
-    frac2 = [1,2]
+    frac1 = [0,2]
+    frac2 = [0,2]
 
     problemlist.push([name, [frac1, frac2]]);
 

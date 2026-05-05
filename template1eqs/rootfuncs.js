@@ -65,8 +65,8 @@ function addroot(main=false,self=rootpreset,name=null){
   if(main == false) problemlist.push([name,[num1,num2]]);
   else{
 
-    num1 = 1;
-    num2 = 1;
+    num1 = 2;
+    num2 = 0;
     problemlist.push([name,[num1, num2]]);
 
   }

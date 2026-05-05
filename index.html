@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="styles/themeselect.css">
   <link rel="stylesheet" href="styles/finishscreen.css">
   <link rel="stylesheet" href="styles/voice.css">
+  <link rel="stylesheet" href="styles/generalsettings.css">
   <link rel="stylesheet" href="styles/flashprofile.css">
 
   <link rel="stylesheet" href="styles/flashanzan.css">
@@ -80,13 +81,22 @@
 
   <script src="template1eqs/intocmfuncs.js"></script>
   <script src="template1eqs/cmtoinfuncs.js"></script>
+  <script src="template1eqs/dectobinfuncs.js"></script>
+  <script src="template1eqs/bintodecfuncs.js"></script>
 
   <script src="template1eqs/percentagefuncs.js"></script>
   <script src="template1eqs/monthnumfuncs.js"></script>
+  <script src="template1eqs/monthkeyfuncs.js"></script>
+  <script src="template1eqs/centurykeyfuncs.js"></script>
+  <script src="template1eqs/leapyearkeyfuncs.js"></script>
+  <script src="template1eqs/centuryyearkeyfuncs.js"></script>
+  <script src="template1eqs/yearkeyfuncs.js"></script>
   <script src="template1eqs/powerfuncs.js"></script>
   <script src="template1eqs/rootfuncs.js"></script>
   <script src="template1eqs/linearsystem.js"></script>
   <script src="template1eqs/calendartoday.js"></script>
+  <script src="template1eqs/exceptdayfuncs.js"></script>
+  <script src="template1eqs/exceptyearfuncs.js"></script>
   <script src="template1eqs/clockfuncs.js"></script>
 
   <script src="options/themes.js"></script>
@@ -121,23 +131,81 @@
       <img class="tabimg" src="images/flashproblems.png"></img>
 
     </button>
+    <button id="generalsettingsbutton" class="zulubutton tabbutton" onclick="showgeneralsettings()">
+
+      <img class="tabimg" src="images/settings.png"></img>
+
+    </button>
     <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="switchtab('flashprofile'); profileinit()">
 
       <img class="tabimg" src="images/flashprofile.png"></img>
 
     </button>
-    <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="openInNewTab('https://discord.gg/VRbbwbD9yv')">
+    <button id="discordbutton" class="zulubutton tabbutton" onclick="openInNewTab('https://discord.gg/VRbbwbD9yv')">
 
       <img class="tabimg" src="images/discord.png"></img>
 
     </button>
-    <button id="flashprofilebutton" class="zulubutton tabbutton" onclick="openInNewTab('https://github.com/WarpRomo/soromath')">
+    <button id="githubbutton" class="zulubutton tabbutton" onclick="openInNewTab('https://github.com/WarpRomo/soromath')">
 
       <img class="tabimg" src="images/github.png"></img>
 
     </button>
 
 
+  </div>
+
+  <div id="generalsettings" style="display:none">
+    <div id="generalsettingsoptions">
+      <div id="generalsettingspanel" class="option">
+        <p class="profilelabel profiletitle">General Settings</p>
+
+        <div class="profileoption">
+          <div class="flashsettingstext generalsettingstoggle">
+            <label class="flashlabel" for="showlivecorrections">Show live corrections</label>
+            <input type="checkbox" id="showlivecorrections" onchange="setshowlivecorrections(this.checked)">
+          </div>
+        </div>
+
+        <div class="profileoption generalsettingsrow">
+          <p class="profilelabel">Date Order</p>
+          <select class="numinput generalsettingsselect" id="generaldateorder" onchange="setgeneraldateorder(this.value)">
+            <option value="DMY">Day Month Year</option>
+            <option value="MDY">Month Day Year</option>
+            <option value="YMD">Year Month Day</option>
+          </select>
+        </div>
+
+        <div class="profileoption generalsettingsrow">
+          <p class="profilelabel">Month Format</p>
+          <select class="numinput generalsettingsselect" id="generalmonthformat" onchange="setgeneralmonthformat(this.value)">
+            <option value="numeric2">01</option>
+            <option value="numeric">1</option>
+            <option value="short">Jan</option>
+            <option value="long">January</option>
+          </select>
+        </div>
+
+        <div class="profileoption generalsettingsrow">
+          <p class="profilelabel">Separator</p>
+          <select class="numinput generalsettingsselect" id="generaldateseparator" onchange="setgeneraldateseparator(this.value)">
+            <option value="/">/</option>
+            <option value="-">-</option>
+            <option value=".">.</option>
+            <option value="de">de</option>
+            <option value="space">space</option>
+          </select>
+        </div>
+
+        <div class="profileoption generalsettingsrow">
+          <p class="profilelabel">Month Language</p>
+          <select class="numinput generalsettingsselect" id="generalmonthlanguage" onchange="setgeneralmonthlanguage(this.value)">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -307,10 +375,10 @@
 
       <div class="equation" id="template1equation">
 
-        <p class="timercontainer">
+        <div class="timercontainer">
           <canvas class="timershow" style="opacity: 0.1"></canvas>
           <p id="voicemodetext" style="display: none">Type to begin...</p>
-        </p>
+        </div>
 
 
 
@@ -322,12 +390,12 @@
 
           <div class="inpandexample">
             <div class="numrestart">
-              <input class="numinput maininput" placeholder="Type here" id="template1input" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
+              <input class="numinput maininput" placeholder="Type here" id="template1input" inputmode="numeric" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" oninput = "template1type(event); template1enter(event)" onkeypress = "template1enter(event,true)"></input>
               <button id="voicerestart" class="zulubutton" onclick="revoiceproblem()" style="display: none">🗣️</button>
               <button id="restarttest" class="zulubutton" onclick="restarttest()">↻</button>
 
             </div>
-            <p class="inputexample">-0.3<br>2/sqrt(3)<br>-inf<br>12:00<br>wednesday<br>etc.</p>
+            <p id="lastcorrection" style="display:none"></p>
           </div>
 
         </div>
@@ -343,7 +411,7 @@
           <button id="flashstart" class="zulubutton" onclick="flashstart()">Start</button>
 
           <div id="flashinputrestart" style="display: none">
-            <input id="flashinput" placeholder="Type here" class="numinput" onkeydown="flashinput(event)" style="display: none"></button>
+            <input id="flashinput" placeholder="Type here" class="numinput" inputmode="numeric" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="flashinput(event)" style="display: none"></button>
             <button id="flashrestart" class="zulubutton" onclick="flashrestart()" style="display: none">↻</button>
           </div>
 
@@ -365,7 +433,10 @@
         <button id="nexttest" class="zulubutton" onclick="restarttest(); hidefinish()">Next test</button>
       </div>
 
-      <canvas id="cpmchart"></canvas>
+      <div id="finishright">
+        <canvas id="cpmchart"></canvas>
+        <div id="finishwronganswers"></div>
+      </div>
 
     </div>
     </div>
@@ -502,6 +573,21 @@
       </div>
 
       <input type="range" min="1" max="7" value="7" class="zuluslider voiceslider" id="voicevolumeslider" oninput="getvoicesliders()">
+
+      <div class = "flashsettingstext voicetogglesetting">
+        <label class="flashlabel" for="voiceshowprevious">Show previous questions in voice mode</label>
+        <input type="checkbox" id="voiceshowprevious" onchange="setvoiceshowprevious(this.checked)">
+      </div>
+
+        <div class="flashsettingstext voicetogglesetting">
+          <label class="flashlabel" for="voiceplaysoundcorrect">Play sound after correct answer</label>
+          <input type="checkbox" id="voiceplaysoundcorrect" onchange="setvoiceplaysoundcorrect(this.checked)">
+        </div>
+
+        <div class="flashsettingstext voicetogglesetting">
+          <label class="flashlabel" for="voiceplaysoundwrong">Play sound after incorrect answer</label>
+          <input type="checkbox" id="voiceplaysoundwrong" onchange="setvoiceplaysoundwrong(this.checked)">
+        </div>
 
       <button class="zulubutton" id="voicetest" onclick="synthesisvoice('394 plus 921', voicerate)">Test voice</button>
 

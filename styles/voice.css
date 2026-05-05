@@ -44,3 +44,17 @@
   margin-top: 40px;
   margin-bottom: 0px;
 }
+
+.voicetogglesetting{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 30px;
+  margin-top: 14px;
+}
+
+#voiceshowprevious{
+  width: 18px;
+  height: 18px;
+}

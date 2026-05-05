@@ -107,15 +107,13 @@ function quadratictype(e){
 
   let input = document.getElementsByClassName("maininput")[0];
 
-  let nonums = "";
-  let nums = "-0123456789/"
-
-  for(var i = 0; i < input.value.length; i++){
-    if(nums.indexOf(input.value[i]) == -1) continue;
-    nonums += input.value[i];
+  let allowed = "-0123456789/, "; // ahora permite espacio y coma
+  let filtered = "";
+  for (var i = 0; i < input.value.length; i++) {
+    if (allowed.indexOf(input.value[i]) == -1) continue;
+    filtered += input.value[i];
   }
-
-  input.value  = nonums;
+  input.value = filtered;
 
 
 }
@@ -129,37 +127,46 @@ function quadraticvalidate(answer, input){
   let ans1 = -answer[2] / answer[0];
   let ans2 = -answer[3] / answer[1];
 
-  let value = null;
+  // Accept both space or comma as separator
+  let parts = input.split(/[, ]+/).map(s => s.trim()).filter(Boolean);
 
-  if(input.includes("/")){
-
-    input = input.split("/");
-
-    if(input.length != 2){
-      value = null;
-    }
-    else{
-
-      if(parseInt(input[0])+"" != "NaN" && parseInt(input[1])+"" != "NaN"){
-        value = parseInt(input[0]) / parseInt(input[1]);
-      }
-
-    }
-
-  }
-  else{
-    let parsed = parseFloat(input);
-
-    if(parsed+"" != "NaN"){
-      value = parsed;
+  // Helper to parse value (support fractions)
+  function parseVal(val) {
+    if (val.includes("/")) {
+      let nums = val.split("/");
+      if (nums.length !== 2) return NaN;
+      let n = parseFloat(nums[0]);
+      let d = parseFloat(nums[1]);
+      if (isNaN(n) || isNaN(d) || d === 0) return NaN;
+      return n / d;
+    } else {
+      let parsed = parseFloat(val);
+      return isNaN(parsed) ? NaN : parsed;
     }
   }
 
-  if(value == null) return false;
-  else if(Math.abs(ans1 - value) < 0.00001 || Math.abs(ans2 - value) < 0.00001) return true;
+  // Double root: allow single input
+  if (Math.abs(ans1 - ans2) < 0.00001) {
+    if (parts.length === 1) {
+      let val = parseVal(parts[0]);
+      if (isNaN(val)) return false;
+      return Math.abs(val - ans1) < 0.00001;
+    }
+    if (parts.length === 2) {
+      let userVals = parts.map(parseVal);
+      if (userVals.some(isNaN)) return false;
+      return Math.abs(userVals[0] - ans1) < 0.00001 && Math.abs(userVals[1] - ans2) < 0.00001;
+    }
+    return false;
+  }
 
-  if(Math.abs(Math.abs(ans1) - Math.abs(value)) < 0.00001 || Math.abs(Math.abs(ans2) - Math.abs(value)) < 0.00001) return "fail"
-
-  return false;
+  // Distinct roots: require both
+  if (parts.length !== 2) return false;
+  let userVals = parts.map(parseVal);
+  if (userVals.some(isNaN)) return false;
+  let correct =
+    (Math.abs(userVals[0] - ans1) < 0.00001 && Math.abs(userVals[1] - ans2) < 0.00001) ||
+    (Math.abs(userVals[1] - ans1) < 0.00001 && Math.abs(userVals[0] - ans2) < 0.00001);
+  return correct;
 
 }

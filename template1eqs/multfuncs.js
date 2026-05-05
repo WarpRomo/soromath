@@ -64,8 +64,8 @@ function addmult(main=false,self=multpreset,name=null){
 
   if(main == false) problemlist.push([name, [num1,num2]]);
   else{
-     num1 = 1
-     num2 = 1
+     num1 = 0
+     num2 = 0
      problemlist.push([name, [num1,num2]]);
   }
 

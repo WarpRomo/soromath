@@ -1,0 +1,55 @@
+#generalsettings{
+  width: 100%;
+}
+
+#generalsettingsoptions{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#generalsettingspanel{
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.generalsettingstoggle{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#showlivecorrections{
+  width: 18px;
+  height: 18px;
+}
+
+.generalsettingsrow{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generalsettingsselect{
+  width: 220px !important;
+  margin-top: 6px;
+}
+
+@media screen and (max-width: 900px) {
+  #generalsettingspanel{
+    width: calc(100% - 20px);
+  }
+
+  .generalsettingsselect{
+    width: min(220px, 90%) !important;
+  }
+
+  .generalsettingstoggle{
+    width: min(450px, 90%);
+  }
+}

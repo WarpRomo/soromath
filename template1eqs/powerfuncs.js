@@ -65,7 +65,7 @@ function addpower(main=false,self=powerpreset,name=null){
   else{
 
     num1 = 0;
-    num2 = 0;
+    num2 = 1;
     problemlist.push([name,[num1, num2]]);
 
   }

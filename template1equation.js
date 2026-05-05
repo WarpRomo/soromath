@@ -4,6 +4,7 @@ let t1heighttrack = 0;
 let problemindex = 0;
 let problemlist = [];
 let stats = [0,0];
+let wronganswers = [];
 
 let totaltime = 15000;
 let totalproblems = null;
@@ -53,17 +54,12 @@ function template1init(){
 
 
   if(voicemodeenabled){
-    document.getElementById("voicemodetext").style.display = "";
-
     if (synth.speaking) {
       synth.cancel();
     }
 
     voiceinit();
 
-  }
-  else{
-    document.getElementById("voicemodetext").style.display = "none";
   }
 
   t1heighttrack = 0;
@@ -74,6 +70,7 @@ function template1init(){
   let input = document.getElementById("template1input")
 
   input.value = ""
+  template1clearcorrection();
 
   document.getElementById("difficultyoption").style.display = "";
 
@@ -96,27 +93,25 @@ function template1init(){
 
     problemlist = [];
 
-    for(var i = 0; i < 7; i++){
+    let numproblems = totalproblems != null ? totalproblems + 1 : 7;
+    for(var i = 0; i < numproblems; i++){
 
       let problemtype = currentmode[Math.floor(Math.random() * currentmode.length)];
 
-      if(totalproblems != null && problemlist.length == totalproblems) return;
+      if(totalproblems != null && problemlist.length == numproblems) return;
 
       if(i == 0) console.log(problemtype);
 
       let problem = addrandproblem();
 
       if(i == 0){
-
-
         let p1height = problem.getBoundingClientRect().height
         let inputheight = input.getBoundingClientRect().height
 
         t1heighttrack = (inputheight - p1height) / 2 - 2
         document.getElementById("template1problems").style.top = t1heighttrack + "px";
-
       }
-
+      if(i > 0) problem.classList.add("hiddenuntilstart");
     }
   }, currentheight == newheight ? 0 : 100);
 
@@ -132,6 +127,42 @@ function template1switch(){
 
 }
 
+function template1answertext(problemtype, answer, problem){
+  if("answerText" in modes[problemtype]){
+    return modes[problemtype].answerText(answer, problem);
+  }
+
+  return answer + "";
+}
+
+function template1problemtext(problemElement, problemtype){
+  let text = problemElement.textContent.trim();
+  if(text.length != 0) return text;
+  return problemtype;
+}
+
+function template1clearcorrection(){
+  let correction = document.getElementById("lastcorrection");
+  if(correction == null) return;
+
+  correction.style.display = "none";
+  correction.textContent = "";
+}
+
+function template1showcorrectanswer(answerText){
+  if(typeof showlivecorrections != "undefined" && !showlivecorrections){
+    template1clearcorrection();
+    return;
+  }
+
+  let correction = document.getElementById("lastcorrection");
+  if(correction == null) return;
+
+  correction.textContent = answerText;
+  correction.style.display = "";
+
+  setTimeout(() => { template1clearcorrection(); }, 900);
+}
 
 function template1type(e){
 
@@ -142,7 +173,7 @@ function template1type(e){
 
 function template1enter(e, press=false){
 
-    if(totalproblems != null && problemindex == totalproblems){
+    if(totalproblems != null && problemindex == totalproblems + 1){
       console.log("RETURN");
       return;
     }
@@ -167,16 +198,19 @@ function template1enter(e, press=false){
     let problem = problemlist[problemindex]
 
     let answer = modes[problemtype].getanswer(problem[1]);
+    let answerText = template1answertext(problemtype, answer, problem[1]);
     let correct = modes[problemtype].validate(answer, inputnumber);
 
 
     console.log(answer, correct)
 
+    if(problemindex == 0 && correct != true) return;
+
     if(voicemodeenabled && problemindex == 0){
 
       starttest();
-      correct = true;
-      document.getElementById("voicemodetext").style.display = "none";
+      let mask = document.getElementsByClassName("problemmask")[0]
+      mask.style.height = "1000px";
 
     }
 
@@ -198,44 +232,57 @@ function template1enter(e, press=false){
 
     }
 
-    if(correct){
+    if(problemindex == 0) {
+      // No contar la pregunta inicial para stats ni wronganswers, solo marcar como completada visualmente
+      problems.children[mainproblemindex].classList.add("completedproblem");
+      // Revelar todos los problemas siguientes
+      for(let i = 1; i < problems.children.length; i++){
+        problems.children[i].classList.remove("hiddenuntilstart");
+      }
+    }
+    else if(correct){
       problems.children[mainproblemindex].classList.add("rightanswer");
       problems.children[mainproblemindex].classList.add("completedproblem");
       stats[0]++;
       problemcomplete(true)
 
       if(voicemodeenabled){
-
         let correct = flashcorrect.cloneNode();
         correct.volume = 0.07
         correct.play()
-
       }
 
     }
     else{
-      problems.children[mainproblemindex].classList.add("wronganswer");
-      problems.children[mainproblemindex].classList.add("completedproblem");
+      let problemElement = problems.children[mainproblemindex];
+      let questionText = template1problemtext(problemElement, problemtype);
+
+      problemElement.classList.add("wronganswer");
+      problemElement.classList.add("completedproblem");
+      template1showcorrectanswer(answerText);
+      wronganswers.push({
+        mode: problemtype,
+        question: questionText,
+        input: inputnumber,
+        answer: answerText
+      });
       stats[1]++;
       problemcomplete(false);
 
       if(voicemodeenabled){
-
         let wrong = flashwrong.cloneNode()
         wrong.volume = 0.07
         wrong.play()
-
       }
 
     }
 
     let fadeoutelem = problems.children[mainproblemindex];
-
     setTimeout(() => {
       $(fadeoutelem).animate({ opacity: '0' }, {duration: 400, easing:"linear"});
     }, 500)
 
-    if(!(totalproblems != null && problemindex + 1 == totalproblems)){
+    if(!(totalproblems != null && problemindex + 1 == totalproblems + 1)){
       let height1 = problems.children[mainproblemindex].getBoundingClientRect().height
       let height2 = problems.children[mainproblemindex+1].getBoundingClientRect().height
 
@@ -255,9 +302,10 @@ function template1enter(e, press=false){
 
     problemindex++;
 
-    if( !(totalproblems != null && problemlist.length >= totalproblems) ){
+    if( !(totalproblems != null && problemlist.length >= totalproblems + 1) ){
 
-      addrandproblem();
+      let newproblem = addrandproblem();
+      if(problemindex == 0 && newproblem) newproblem.classList.add("hiddenuntilstart");
 
     }
 
@@ -278,11 +326,21 @@ function addrandproblem(){
 
   let problem = null;
 
+  if(Array.isArray(currentmode) == false || currentmode.length == 0){
+    currentmode = ["addition"];
+  }
+
   while(true){
 
     gentrials++;
 
     let nextproblem = currentmode[Math.floor(Math.random() * currentmode.length)];
+
+    if(modes[nextproblem] == undefined){
+      currentmode = ["addition"];
+      nextproblem = "addition";
+    }
+
     problem = modes[nextproblem].addproblem(problemlist.length == 0, modes[nextproblem], name=nextproblem);
 
 

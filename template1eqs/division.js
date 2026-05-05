@@ -67,7 +67,7 @@ function adddivision(main=false,self=divisionpreset,name=null){
 
   if(main == false) problemlist.push([name,[num1,num2]]);
   else{
-    num1 = 1
+    num1 = 0
     num2 = 1
     problemlist.push([name,[num1,num2]]);
   }

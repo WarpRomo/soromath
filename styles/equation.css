@@ -4,7 +4,6 @@
 
 
 #voicemodetext{
-
   font-family: var(--font_family);
   color: var(--text_color);
   font-size: 20px;
@@ -75,6 +74,22 @@
   justify-content: right;
 }
 
+.hiddenuntilstart{
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+#lastcorrection{
+  font-family: var(--font_family);
+  color: red;
+  font-size: 20px;
+  opacity: 0.8;
+  position: relative;
+  left: 50%;
+  margin-top: 40px;
+  text-align: left;
+}
+
 .trigproblem{
   height: 90px;
 }
@@ -102,6 +117,15 @@
   z-index: 1;
 }
 
+.binaryproblem sub{
+  font-size: 0.52em;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  position: relative;
+  top: 0.35em;
+}
+
 .clockproblem.rightanswer{
   filter: brightness(50%) sepia(100) saturate(100) hue-rotate(100deg)
 }
@@ -112,6 +136,10 @@
 
 #mainproblem{
   opacity: 1 !important;
+  position: relative;
+}
+
+.inpandexample{
   position: relative;
 }
 
@@ -135,6 +163,7 @@
 .timercontainer{
   text-align: center;
   margin-top: 40px;
+  margin-bottom: 1em;
 }
 
 .numrestart{
@@ -223,7 +252,6 @@
   padding-left: 10px;
   vertical-align: middle;
 }
-
 .numinput:hover{
   opacity: 0.8;
 }
@@ -231,18 +259,6 @@
 .numinput:focus{
   opacity: 1;
 }
-
-.inputexample{
-  font-family: var( --font_family);
-  color: var(--text_color);
-  font-size: 20px;
-  opacity: 0.25;
-  text-align: left;
-  position: relative;
-  left: 50%;
-  margin-top: 40px;
-}
-
 
 .wronganswer{
   color: red;

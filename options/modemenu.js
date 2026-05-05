@@ -257,8 +257,6 @@ function removemodefocus(event){
 
   let container = document.getElementById("modecontainer");
 
-  templates[currenttemplate].init()
-
   container.style.display = "none";
 
   document.body.classList.remove("noscroll");
@@ -280,8 +278,6 @@ function showmodeselect(){
 
   document.body.classList.add("noscroll");
 
-
-  templates[currenttemplate].init()
 
   setTimeout(() => {
     $(".modesettingsenter").addClass("modesettingsenteropen")

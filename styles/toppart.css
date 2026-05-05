@@ -22,6 +22,9 @@
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+  position: relative;
+  z-index: 30;
+  touch-action: manipulation;
 }
 
 .tabimg{

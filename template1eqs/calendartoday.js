@@ -7,6 +7,7 @@ let calendarpreset = {
   ontype: calendartype,
   getanswer: calendaranswer,
   validate: calendarvalidate,
+  answerText: calendarkeyanswertext,
   speechText: calendarspeech,
   name: "date to day of week",
   settings: {
@@ -33,6 +34,8 @@ let calendarpreset = {
   }
 
 }
+
+let calendarinitialdate = new Date(1970, 0, 4, 12, 0, 0, 0).getTime();
 
 
 function basicpresetgendate(range1label){
@@ -219,6 +222,75 @@ function setpresetdate(self, presetname){
 
 }
 
+function calendarresolvedsettings(settings){
+  if(settings != undefined && settings.dateOrder != undefined) return settings;
+
+  if(typeof calendarappsettings != "undefined") return calendarappsettings;
+
+  return {
+    dateOrder: "DMY",
+    monthFormat: "numeric2",
+    dateSeparator: "/",
+    monthLanguage: "en"
+  };
+}
+
+function calendardateseparator(settings=calendarresolvedsettings()){
+  settings = calendarresolvedsettings(settings);
+  if(settings.dateSeparator == "de") return " de ";
+  return settings.dateSeparator == "space" ? " " : settings.dateSeparator;
+}
+
+function calendarformatmonth(month, settings=calendarresolvedsettings()){
+  settings = calendarresolvedsettings(settings);
+
+  let monthnames = {
+    en: {
+      short: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      long: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    },
+    es: {
+      short: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+      long: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    }
+  };
+
+  let monthpart = month + 1;
+  if(settings.monthFormat == "numeric2") monthpart = (month + 1).toString().padStart(2, "0");
+  if(settings.monthFormat == "short" || settings.monthFormat == "long"){
+    let language = monthnames[settings.monthLanguage] == undefined ? "en" : settings.monthLanguage;
+    monthpart = monthnames[language][settings.monthFormat][month];
+  }
+
+  return monthpart;
+}
+
+function calendarformatmonthyear(month, year, settings=calendarresolvedsettings()){
+  settings = calendarresolvedsettings(settings);
+  let separator = calendardateseparator(settings);
+  let monthpart = calendarformatmonth(month, settings);
+
+  if(settings.dateOrder == "YMD") return [year, monthpart].join(separator);
+  return [monthpart, year].join(separator);
+}
+
+function calendarformatdate(date, settings=calendarresolvedsettings()){
+  settings = calendarresolvedsettings(settings);
+  let day = date.getDate();
+  let month = date.getMonth();
+  let year = date.getFullYear();
+  let separator = calendardateseparator(settings);
+  let monthpart = calendarformatmonth(month, settings);
+
+  let parts = {
+    D: day,
+    M: monthpart,
+    Y: year
+  };
+
+  return settings.dateOrder.split("").map(part => parts[part]).join(separator);
+}
+
 
 
 
@@ -238,7 +310,7 @@ function addcalendar(main=false,self=calendarpreset,name=null){
   }
   else{
 
-    num1 = 0;
+    num1 = calendarinitialdate;
     problemarr = [num1]
 
     problemlist.push([name,problemarr]);
@@ -251,7 +323,7 @@ function addcalendar(main=false,self=calendarpreset,name=null){
 
   let part = problemarr[0];
 
-  problem.innerHTML = new Date(part).toLocaleDateString();
+  problem.innerHTML = calendarformatdate(new Date(part));
   problem.classList.add("problem");
 
   if(main) problem.id = "mainproblem"
@@ -269,7 +341,7 @@ function addcalendar(main=false,self=calendarpreset,name=null){
 
 function calendarspeech(problem){
 
-  return problem[0];
+  return calendarformatdate(new Date(problem[0]));
 
 }
 
@@ -278,7 +350,7 @@ function calendartype(e){
   let input = document.getElementsByClassName("maininput")[0];
 
   let nonums = "";
-  let nums = "abcdefghijklmnopqrstuvwxyz"
+  let nums = "abcdefghijklmnopqrstuvwxyz0123456789"
 
   for(var i = 0; i < input.value.length; i++){
     if(nums.indexOf(input.value[i]) == -1) continue;
@@ -291,29 +363,87 @@ function calendartype(e){
 
 function calendaranswer(problem){
 
-  let answers = ["m", "tu", "w", "th", "f", "sa", "su"];
   const d = new Date(problem[0]);
   let day = d.getDay();
 
   day--;
-  if(day < 0) day = answers.length-1;
+  if(day < 0) day = 6;
 
-  return answers[day];
+  return day;
 
+}
+
+function dayofweekanswertext(answer){
+  let singlecharanswers = ["l", "m", "x", "j", "v", "s", "d"];
+  let numberanswer = answer + 1;
+  if(answer == 6) numberanswer = 0;
+  return singlecharanswers[answer] + " / " + numberanswer;
+}
+
+function calendarcenturykey(year){
+  let century = Math.floor(year / 100);
+  let centurymod = ((century % 4) + 4) % 4;
+  return 6 - 2 * centurymod;
+}
+
+function calendaryearkey(year){
+  let yearpart = ((year % 100) + 100) % 100;
+  return (yearpart + Math.floor(yearpart / 4)) % 7;
+}
+
+function calendarnumericanswer(answer){
+  if(answer == 6) return 0;
+  return answer + 1;
+}
+
+function calendarkeyanswertextfromdate(answer, date){
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let daykey = date.getDate() % 7;
+  let monthkey = monthkeyvalues[month];
+  let centurykey = calendarcenturykey(year);
+  let yearkey = calendaryearkey(year);
+  let leapkey = isLeapYear(year) && month < 2 ? -1 : 0;
+  let parts = [daykey, monthkey, centurykey, yearkey];
+
+  if(leapkey != 0) parts.push(leapkey);
+
+  return parts.join(" + ").replace(" + -", " -") + " = " + calendarnumericanswer(answer);
+}
+
+function calendarkeyanswertext(answer, problem){
+  return calendarkeyanswertextfromdate(answer, new Date(problem[0]));
+}
+
+function calendarexceptdayanswertext(answer, month, year){
+  let monthkey = monthkeyvalues[month];
+  let centurykey = calendarcenturykey(year);
+  let yearkey = calendaryearkey(year);
+  let leapkey = isLeapYear(year) && month < 2 ? -1 : 0;
+  let parts = [monthkey, centurykey, yearkey];
+
+  if(leapkey != 0) parts.push(leapkey);
+
+  return parts.join(" + ").replace(" + -", " -") + " = " + calendarnumericanswer(answer);
 }
 
 function calendarvalidate(answer, inputnumber){
 
-  let input = inputnumber+"";
-  input = input.toLowerCase();
+  let input = (inputnumber + "").toLowerCase().trim();
+  let singlecharanswers = ["l", "m", "x", "j", "v", "s", "d"];
 
-  if(input.length < answer.length){
-    if(input[0] != answer[0]) return "fail";
-    return false;
+  if(input.length == 0) return false;
+  if(input.length > 1) return "fail";
+
+  if(/^[0-6]$/.test(input)){
+    if(Number(input) == answer + 1) return true;
+    if(answer == 6 && input == "0") return true;
+    return "fail";
   }
 
-  if(input.startsWith(answer)) return true;
-  else return "fail"
+  if(singlecharanswers.indexOf(input) == -1) return "fail";
+  if(input == singlecharanswers[answer]) return true;
+  return "fail";
 
 
 
